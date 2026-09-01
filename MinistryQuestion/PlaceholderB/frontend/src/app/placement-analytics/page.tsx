@@ -1,11 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { COURSES_CATALOG } from "@/lib/intelligenceData";
+import { COURSES_CATALOG, CourseData } from "@/lib/intelligenceData";
 
 export default function PlacementAnalyticsPage() {
-  const courses = COURSES_CATALOG;
+  const [courses, setCourses] = useState<CourseData[]>(COURSES_CATALOG);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/courses")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((json) => {
+        if (!cancelled && Array.isArray(json?.courses)) setCourses(json.courses);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const totalEnrolled = courses.reduce((acc, c) => acc + c.enrolled, 0);
   const totalPlaced = courses.reduce((acc, c) => acc + c.placed, 0);

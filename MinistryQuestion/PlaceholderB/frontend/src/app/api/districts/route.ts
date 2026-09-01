@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
-import { DISTRICT_INTELLIGENCE_DATA } from "@/lib/intelligenceData";
+import { getLiveDataset } from "@/lib/live-data";
 
-export const revalidate = 60;
+export const revalidate = 604800;
 
 export async function GET() {
+  const live = await getLiveDataset();
   return NextResponse.json({
-    districts: DISTRICT_INTELLIGENCE_DATA,
-    total: DISTRICT_INTELLIGENCE_DATA.length
+    source: live.source,
+    generated_at: live.generated_at,
+    districts: live.districts,
+    total: live.districts.length
   });
 }

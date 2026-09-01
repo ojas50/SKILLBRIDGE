@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { SKILL_INTELLIGENCE_DATA, SkillItem } from "@/lib/intelligenceData";
 import EvidenceReasoningModal, { ReasoningChainData } from "@/components/EvidenceReasoningModal";
 import DataSourcesModal from "@/components/DataSourcesModal";
 
 export default function SkillMatrixPage() {
-  const [skills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
+  const [skills, setSkills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
   const [selectedSector, setSelectedSector] = useState("All");
   const [selectedDistrict, setSelectedDistrict] = useState("All");
   const [selectedProficiency, setSelectedProficiency] = useState("All");
@@ -20,6 +20,19 @@ export default function SkillMatrixPage() {
   const [isEvidenceModalOpen, setIsEvidenceModalOpen] = useState(false);
   const [activeReasoningData, setActiveReasoningData] = useState<ReasoningChainData | undefined>(undefined);
   const [isSourcesModalOpen, setIsSourcesModalOpen] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/skill-gaps")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((json) => {
+        if (!cancelled && Array.isArray(json?.skill_gaps)) setSkills(json.skill_gaps);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Filter skills
   const filteredSkills = skills.filter((item) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EMPLOYER_PARTNERS_DATA, EMPLOYER_SURVEY_SUMMARY, EmployerPartner } from "@/lib/intelligenceData";
 import EmployerModal from "@/components/EmployerModal";
 
@@ -8,6 +8,19 @@ export default function EmployersPage() {
   const [employers, setEmployers] = useState<EmployerPartner[]>(EMPLOYER_PARTNERS_DATA);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/employers")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((json) => {
+        if (!cancelled && Array.isArray(json?.employers)) setEmployers(json.employers);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Form state for Employer Feedback & Skill Request
   const [feedbackRole, setFeedbackRole] = useState("Cloud Solutions Architect");

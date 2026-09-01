@@ -1,13 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { DISTRICT_INTELLIGENCE_DATA, DistrictIntelligence } from "@/lib/intelligenceData";
 
 export default function DistrictPlansPage() {
-  const [districts] = useState<DistrictIntelligence[]>(DISTRICT_INTELLIGENCE_DATA);
+  const [districts, setDistricts] = useState<DistrictIntelligence[]>(DISTRICT_INTELLIGENCE_DATA);
   const [selectedDistrict, setSelectedDistrict] = useState<DistrictIntelligence>(DISTRICT_INTELLIGENCE_DATA[0]);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/districts")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((json) => {
+        if (!cancelled) {
+          if (Array.isArray(json?.districts) && json.districts.length > 0) {
+            setDistricts(json.districts);
+            setSelectedDistrict((prev) =>
+              json.districts.some((d: DistrictIntelligence) => d.id === prev.id)
+                ? json.districts.find((d: DistrictIntelligence) => d.id === prev.id)!
+                : json.districts[0]
+            );
+          }
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handlePrintBriefing = () => {
     window.print();

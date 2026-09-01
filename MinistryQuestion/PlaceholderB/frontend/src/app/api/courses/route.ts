@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
-import { COURSES_CATALOG } from "@/lib/intelligenceData";
+import { getLiveDataset } from "@/lib/live-data";
 
-export const revalidate = 60;
+export const revalidate = 604800;
 
 export async function GET() {
+  const live = await getLiveDataset();
   return NextResponse.json({
-    courses: COURSES_CATALOG,
-    total: COURSES_CATALOG.length
+    source: live.source,
+    generated_at: live.generated_at,
+    courses: live.courses,
+    total: live.courses.length
   });
 }

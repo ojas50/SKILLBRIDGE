@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import StatCard from "@/components/StatCard";
 import SkillGapBar from "@/components/SkillGapBar";
@@ -18,11 +18,28 @@ import EvidenceReasoningModal, { ReasoningChainData } from "@/components/Evidenc
 import ScoreExplainerModal from "@/components/ScoreExplainerModal";
 
 export default function Dashboard() {
-  const [skills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
-  const [courses] = useState<CourseData[]>(COURSES_CATALOG);
-  const [alerts] = useState<EarlyWarningAlert[]>(EARLY_WARNING_ALERTS);
-  const [districts] = useState<DistrictIntelligence[]>(DISTRICT_INTELLIGENCE_DATA);
+  const [skills, setSkills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
+  const [courses, setCourses] = useState<CourseData[]>(COURSES_CATALOG);
+  const [alerts, setAlerts] = useState<EarlyWarningAlert[]>(EARLY_WARNING_ALERTS);
+  const [districts, setDistricts] = useState<DistrictIntelligence[]>(DISTRICT_INTELLIGENCE_DATA);
   const [timePeriod, setTimePeriod] = useState("Q3 2026");
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/dashboard")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((json) => {
+        if (cancelled) return;
+        setSkills(json.skills ?? SKILL_INTELLIGENCE_DATA);
+        setCourses(json.courses ?? COURSES_CATALOG);
+        setAlerts(json.alerts ?? EARLY_WARNING_ALERTS);
+        setDistricts(json.districts ?? DISTRICT_INTELLIGENCE_DATA);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Evidence Modal & Score Explainer Modal
   const [isEvidenceModalOpen, setIsEvidenceModalOpen] = useState(false);

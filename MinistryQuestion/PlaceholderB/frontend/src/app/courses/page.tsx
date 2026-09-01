@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { COURSES_CATALOG, CourseData } from "@/lib/intelligenceData";
 import ScoreExplainerModal from "@/components/ScoreExplainerModal";
@@ -12,6 +12,19 @@ export default function CoursesPage() {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [explainingCourse, setExplainingCourse] = useState<CourseData | null>(null);
   const [inspectingCourse, setInspectingCourse] = useState<CourseData | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/courses")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((json) => {
+        if (!cancelled && Array.isArray(json?.courses)) setCourses(json.courses);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const filteredCourses = courses.filter((c) => {
     const matchesSearch =

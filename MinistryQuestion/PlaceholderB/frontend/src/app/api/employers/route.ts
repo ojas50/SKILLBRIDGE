@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
-import { EMPLOYER_PARTNERS_DATA, EMPLOYER_SURVEY_SUMMARY } from "@/lib/intelligenceData";
+import { getLiveDataset } from "@/lib/live-data";
 
-export const revalidate = 60;
+export const revalidate = 604800;
 
 export async function GET() {
+  const live = await getLiveDataset();
   return NextResponse.json({
-    employers: EMPLOYER_PARTNERS_DATA,
-    total: EMPLOYER_PARTNERS_DATA.length,
-    survey_summary: EMPLOYER_SURVEY_SUMMARY
+    source: live.source,
+    generated_at: live.generated_at,
+    employers: live.employers,
+    total: live.employers.length
   });
 }

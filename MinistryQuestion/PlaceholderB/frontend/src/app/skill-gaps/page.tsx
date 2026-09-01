@@ -1,16 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import SkillGapBar from "@/components/SkillGapBar";
 import CurriculumSimulator from "@/components/CurriculumSimulator";
-import { SKILL_INTELLIGENCE_DATA } from "@/lib/intelligenceData";
+import { SKILL_INTELLIGENCE_DATA, type SkillItem } from "@/lib/intelligenceData";
 
 export default function SkillGapsPage() {
+  const [skills, setSkills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
   const [activeTab, setActiveTab] = useState<"simulator" | "radar">("simulator");
   const [selectedSeverity, setSelectedSeverity] = useState("All");
 
-  const skillGaps = SKILL_INTELLIGENCE_DATA.map((s) => ({
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/skill-gaps")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((json) => {
+        if (!cancelled && Array.isArray(json?.skill_gaps)) setSkills(json.skill_gaps);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const skillGaps = skills.map((s) => ({
     id: s.id,
     skill: s.skill,
     demand: s.demandScore,

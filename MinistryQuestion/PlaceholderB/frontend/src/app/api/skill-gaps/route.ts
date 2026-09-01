@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
-import { SKILL_INTELLIGENCE_DATA } from "@/lib/intelligenceData";
+import { getLiveDataset } from "@/lib/live-data";
 
-export const revalidate = 60;
+export const revalidate = 604800;
 
 export async function GET() {
+  const live = await getLiveDataset();
   return NextResponse.json({
-    skill_gaps: SKILL_INTELLIGENCE_DATA,
-    total: SKILL_INTELLIGENCE_DATA.length
+    source: live.source,
+    generated_at: live.generated_at,
+    skill_gaps: live.skills,
+    total: live.skills.length
   });
 }
