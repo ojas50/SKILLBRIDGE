@@ -44,11 +44,6 @@ Traditional syllabus revision cycles take **3–5 years**. By the time updates s
 | **SIH Demo Mode** | Guided 10-step walkthrough of the full pipeline for live evaluation (2–3 min) |
 
 ---
-## Architecture
-┌─────────────────────────────────────────────────────┐ │ CLIENT (Next.js 14) │ │ ┌─────────┐ ┌──────────┐ ┌────────────────────┐ │ │ │ 11 Pages │ │ 12 UI │ │ 4 Modal Systems │ │ │ │ (SSR/CSR)│ │Components│ │ (Demo/Sources/ │ │ │ │ │ │ │ │ Evidence/Score) │ │ │ └────┬─────┘ └──────────┘ └────────────────────┘ │ │ │ │ │ ┌────▼──────────────────────────────────────────┐ │ │ │ lib/intelligenceData.ts │ │ │ │ (1705-line typed static catalog: 9 skills, │ │ │ │ 10 courses, 8 districts, 8 employers, │ │ │ │ 12 intelligence loop stages, policy data, │ │ │ │ career pathways, early warnings) │ │ │ └────┬──────────────────────────────────────────┘ │ │ │ (live hydration via useEffect) │ │ ┌────▼──────────────────────────────────────────┐ │ │ │ lib/live-data.ts │ │ │ │ Weekly deterministic drift + Remotive API │ │ │ │ signals → merged with static baseline │ │ │ └────┬──────────────────────────────────────────┘ │ │ │ │ │ ┌────▼──────────────────────────────────────────┐ │ │ │ /api/* Route Handlers (ISR) │ │ │ │ revalidate: 604800 (7 days) │ │ │ │ dashboard | courses | skill-gaps │ │ │ │ employers | districts │ │ │ └───────────────────────────────────────────────┘ │ │ │ │ Deployed: Vercel (Serverless Edge) │ │ Styling: Tailwind CSS + CSS Variables (Dark/Light) │ └─────────────────────────────────────────────────────┘
-
-
----
 
 ## The 12-Stage Intelligence Loop
 
