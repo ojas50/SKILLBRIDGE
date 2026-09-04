@@ -81,7 +81,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav Links */}
-            <nav className="hidden xl:flex items-center gap-0.5">
+            <nav className="hidden lg:flex items-center gap-0.5">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
@@ -154,7 +154,7 @@ export default function Navbar() {
             {/* Mobile menu trigger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="xl:hidden p-2 text-slate-400 hover:text-white focus:outline-none"
+              className="lg:hidden p-2 text-slate-400 hover:text-white focus:outline-none"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -170,7 +170,7 @@ export default function Navbar() {
 
         {/* Mobile menu drawer */}
         {isMobileMenuOpen && (
-          <div className="xl:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-2 pb-6 space-y-1">
+          <div className="lg:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-2 pb-6 space-y-1">
             <div className="grid grid-cols-2 gap-1 mb-3">
               {[...NAV_ITEMS, ...ADMIN_NAV_ITEMS].map((item) => (
                 <Link
