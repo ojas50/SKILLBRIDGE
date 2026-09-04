@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
+import AuthGate from "@/components/AuthGate";
+import { useAuth } from "@/lib/AuthContext";
 
 interface Company {
   name: string;
@@ -124,10 +126,48 @@ function ReadinessRing({ percent }: { percent: number }) {
 }
 
 export default function CareerReadinessPage() {
+  return (
+    <AuthGate>
+      <CareerReadinessInner />
+    </AuthGate>
+  );
+}
+
+function CareerReadinessInner() {
+  const { user } = useAuth();
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [selectedCompanies, setSelectedCompanies] = useState<Set<string>>(new Set());
   const [mySkills, setMySkills] = useState<Set<string>>(new Set());
   const [skillSearch, setSkillSearch] = useState("");
+  const [saved, setSaved] = useState(false);
+
+  const profileKey = user ? `skillbridge_profile_${user.email}` : null;
+
+  useEffect(() => {
+    if (!profileKey) return;
+    try {
+      const raw = localStorage.getItem(profileKey);
+      if (raw) {
+        const p = JSON.parse(raw);
+        if (p.skills) setMySkills(new Set(p.skills));
+        if (p.region) setSelectedRegion(p.region);
+        if (p.targetCompanies) setSelectedCompanies(new Set(p.targetCompanies));
+      }
+    } catch { /* ignore */ }
+  }, [profileKey]);
+
+  const persistProfile = useCallback(() => {
+    if (!profileKey) return;
+    const data = {
+      skills: Array.from(mySkills),
+      region: selectedRegion,
+      targetCompanies: Array.from(selectedCompanies),
+      readinessHistory: JSON.parse(localStorage.getItem(profileKey) || "{}").readinessHistory || [],
+    };
+    localStorage.setItem(profileKey, JSON.stringify(data));
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  }, [profileKey, mySkills, selectedRegion, selectedCompanies]);
 
   const region = REGIONS.find((r) => r.id === selectedRegion);
 
@@ -434,8 +474,15 @@ export default function CareerReadinessPage() {
             </div>
           )}
 
-          <div className="text-center pt-4">
-            <Link href="/courses" className="btn-glow text-sm py-3 px-8">
+          <div className="flex items-center justify-center gap-3 pt-4">
+            <button onClick={persistProfile} className={`text-sm py-3 px-6 rounded-xl font-semibold transition-all ${
+              saved
+                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                : "btn-secondary"
+            }`}>
+              {saved ? "✓ Saved" : "Save Profile"}
+            </button>
+            <Link href="/courses" className="btn-glow text-sm py-3 px-6">
               Browse All Courses
             </Link>
           </div>

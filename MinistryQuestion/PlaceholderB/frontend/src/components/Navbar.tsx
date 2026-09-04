@@ -8,9 +8,14 @@ import { useAuth } from "@/lib/AuthContext";
 
 const NAV_ITEMS = [
   { name: "Overview", href: "/" },
+  { name: "My Dashboard", href: "/my-dashboard" },
   { name: "My Readiness", href: "/career-readiness" },
-  { name: "Skill Matrix", href: "/skill-matrix" },
+  { name: "Wishlist", href: "/wishlist" },
   { name: "Courses", href: "/courses" },
+];
+
+const EXPLORE_ITEMS = [
+  { name: "Skill Matrix", href: "/skill-matrix" },
   { name: "Pathways", href: "/career-pathways" },
   { name: "Employers", href: "/employers" },
 ];
@@ -172,7 +177,7 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-2 pb-6 space-y-1">
             <div className="grid grid-cols-2 gap-1 mb-3">
-              {[...NAV_ITEMS, ...ADMIN_NAV_ITEMS].map((item) => (
+              {[...NAV_ITEMS, ...EXPLORE_ITEMS, ...ADMIN_NAV_ITEMS].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
