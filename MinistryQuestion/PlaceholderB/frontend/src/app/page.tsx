@@ -2,389 +2,205 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import StatCard from "@/components/StatCard";
-import IntelligenceLoop from "@/components/IntelligenceLoop";
 import SihDemoModal from "@/components/SihDemoModal";
-import DataSourcesModal from "@/components/DataSourcesModal";
 
 export default function Home() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
-  const [isDataSourcesModalOpen, setIsDataSourcesModalOpen] = useState(false);
+  const [showLoop, setShowLoop] = useState(false);
 
-  const problemToImpactFlow = [
-    {
-      step: "01",
-      phase: "PROBLEM",
-      title: "Rapid Industry Shifts vs Obsolete Curricula",
-      desc: "Technologies, job roles, and employer expectations evolve rapidly, while vocational syllabus revisions lag by 3–5 years.",
-      icon: "⚠️",
-      badgeColor: "bg-rose-500/20 text-rose-300 border-rose-500/30"
-    },
-    {
-      step: "02",
-      phase: "DETECTION",
-      title: "Real-Time Labour Signal Ingestion",
-      desc: "SkillBridge continuously aggregates 14,800+ recruiter postings, employer surveys, and regional industrial indices.",
-      icon: "📡",
-      badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30"
-    },
-    {
-      step: "03",
-      phase: "INTELLIGENCE",
-      title: "Automated Deficit & Gap Radar",
-      desc: "NLP engine extracts skills, maps demand-supply deficits, and computes explainable Course Modernization Scores (0–100).",
-      icon: "🧠",
-      badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30"
-    },
-    {
-      step: "04",
-      phase: "ACTION",
-      title: "Curriculum, Trainer & District Quotas",
-      desc: "Generates module upgrade plans, trainer upskilling blueprints, lab capex budgets, and district seat allocations.",
-      icon: "⚡",
-      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30"
-    },
-    {
-      step: "05",
-      phase: "IMPACT",
-      title: "Higher Placement & Employer Satisfaction",
-      desc: "Course alignment jumps to 87%, placement rate surges from 64% to 79%, and employer satisfaction climbs to 82%.",
-      icon: "🎯",
-      badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
-    }
+  const quickStats = [
+    { label: "Courses Tracked", value: "1,247", icon: "📚", color: "text-blue-400" },
+    { label: "Skill Gaps Found", value: "389", icon: "⚡", color: "text-rose-400" },
+    { label: "Placement Rate", value: "67.4%", icon: "🎯", color: "text-emerald-400" },
+    { label: "Hiring Partners", value: "856", icon: "🏢", color: "text-purple-400" },
   ];
 
-  const liveSignals = [
-    { title: "Generative AI & LLMs", growth: "+42% YoY", badge: "Critical Deficit (Gap +54)", color: "text-purple-400" },
-    { title: "Cloud Infrastructure & DevOps", growth: "+34% YoY", badge: "High Deficit (Gap +36)", color: "text-blue-400" },
-    { title: "Cybersecurity SOC", growth: "+29% YoY", badge: "Priority Ingestion", color: "text-emerald-400" },
-    { title: "Basic Computer Applications", growth: "-8% YoY", badge: "Oversupplied (-51% Gap)", color: "text-rose-400" },
+  const hotSkills = [
+    { name: "Generative AI", growth: "+42%", status: "critical" as const },
+    { name: "Cloud & DevOps", growth: "+34%", status: "high" as const },
+    { name: "Cybersecurity", growth: "+29%", status: "high" as const },
+    { name: "Full-Stack Dev", growth: "+22%", status: "moderate" as const },
+  ];
+
+  const studentModules = [
+    { name: "My Readiness", desc: "Check how ready you are for your dream company", href: "/career-readiness", icon: "🎯", highlight: true },
+    { name: "Career Pathways", desc: "See learning paths for your target role", href: "/career-pathways", icon: "🗺️" },
+    { name: "Courses", desc: "Browse courses ranked by industry alignment", href: "/courses", icon: "🎓" },
+    { name: "Skill Matrix", desc: "See which skills are in highest demand", href: "/skill-matrix", icon: "🔥" },
+  ];
+
+  const adminModules = [
+    { name: "Executive Cockpit", desc: "State-wide skill health overview", href: "/dashboard", icon: "📊" },
+    { name: "AI Curriculum Advisor", desc: "Upload syllabus for instant modernization plan", href: "/curriculum-advisor", icon: "🤖" },
+    { name: "Policy Decisions", desc: "Authorize updates and resource allocation", href: "/policy-decisions", icon: "🏛️" },
+    { name: "What-If Simulator", desc: "Model outcomes of policy changes", href: "/skill-gaps", icon: "⚡" },
+    { name: "District Plans", desc: "Regional training roadmaps", href: "/district-plans", icon: "📍" },
+    { name: "Placement Analytics", desc: "Track graduate employment outcomes", href: "/placement-analytics", icon: "📈" },
   ];
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-      {/* Top SIH Quick Banner */}
-      <div className="bg-gradient-to-r from-blue-950/80 via-indigo-950/90 to-purple-950/80 border border-blue-500/30 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
-        <div className="flex items-center gap-3">
-          <span className="w-10 h-10 rounded-xl bg-blue-600/30 border border-blue-400 flex items-center justify-center text-xl">
-            🚀
-          </span>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-blue-500/30 text-blue-200 border border-blue-400/40">
-                SIH EVALUATION READY
-              </span>
-              <span className="text-xs text-slate-400">Complete 10-Step Guided Walkthrough</span>
-            </div>
-            <p className="text-xs text-slate-300 mt-0.5">
-              Demonstrate the complete labour intelligence pipeline for the Pune IT/Cloud scenario in 2–3 minutes.
-            </p>
-          </div>
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      {/* Hero */}
+      <section className="relative text-center py-8">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none -z-10" />
+
+        <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 mb-4">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Live Intelligence Active
         </div>
 
-        <button
-          onClick={() => setIsDemoModalOpen(true)}
-          className="btn-glow text-xs py-2.5 px-6 font-black tracking-wide whitespace-nowrap shadow-lg shadow-blue-500/20"
-        >
-          <span>🚀 Launch SIH Demo Mode</span>
-        </button>
-      </div>
-
-      {/* Hero Section */}
-      <section className="relative pt-4 pb-10 text-center overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-600/15 blur-[140px] rounded-full pointer-events-none -z-10" />
-
-        <div className="inline-flex items-center gap-2 bg-blue-950/70 border border-blue-800/80 px-4 py-1.5 rounded-full text-xs font-semibold text-blue-300 mb-6 shadow-inner">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Labour-Market Intelligence & Continuous Curriculum-Alignment Engine</span>
-        </div>
-
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-5xl mx-auto leading-[1.1] mb-6">
-          Aligning State Vocational Training with <br className="hidden sm:inline" />
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-[1.1] mb-4">
+          Know Your{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400">
-            Real-Time Industry Demand
+            Career Readiness
           </span>
         </h1>
 
-        <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed mb-8 font-normal">
-          An AI-powered decision-support suite enabling state training directors to identify skill gaps, modernize curricula, upskill faculty, rebalance district quotas, and maximize graduate hiring outcomes.
+        <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed mb-6">
+          SkillBridge matches your skills against real employer demand. See how ready you are for the job you want — and exactly what to learn next.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
+          <Link href="/career-readiness" className="btn-glow text-sm py-3 px-6 font-bold">
+            Check My Readiness
+          </Link>
           <button
             onClick={() => setIsDemoModalOpen(true)}
-            className="btn-glow text-sm py-3 px-6 font-bold flex items-center gap-2"
+            className="btn-secondary text-sm py-3 px-5 flex items-center gap-2"
           >
-            <span>🚀 SIH Demo Mode (2 Min Tour)</span>
+            <span>🚀</span> Watch Demo
           </button>
-          <Link href="/dashboard" className="btn-secondary text-sm py-3 px-5">
-            <span>Executive Cockpit</span>
-          </Link>
-          <Link href="/curriculum-advisor" className="btn-secondary text-sm py-3 px-5">
-            <span>AI Syllabus Auditor</span>
-          </Link>
-          <Link href="/skill-matrix" className="px-5 py-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700 transition-all">
-            Skill Matrix ➔
-          </Link>
         </div>
       </section>
 
-      {/* Live Market Signals Ticker */}
-      <section>
-        <div className="glass-card p-4 border-slate-800/80">
-          <div className="flex items-center justify-between gap-4 mb-3 border-b border-slate-800/80 pb-2">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-              <span className="text-xs font-bold text-slate-200 tracking-wider uppercase">
-                Regional Industry Demand Signals (Q3 2026 Telemetry)
-              </span>
-            </div>
-            <button
-              onClick={() => setIsDataSourcesModalOpen(true)}
-              className="text-[10px] font-mono text-blue-400 hover:underline flex items-center gap-1"
-            >
-              <span>Methodology & Sources</span>
-              <span>ℹ️</span>
-            </button>
+      {/* Quick Stats */}
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {quickStats.map((s) => (
+          <div key={s.label} className="glass-card p-4 text-center">
+            <span className="text-xl mb-1 block">{s.icon}</span>
+            <span className={`text-2xl font-black ${s.color}`}>{s.value}</span>
+            <p className="text-[11px] text-slate-500 mt-0.5">{s.label}</p>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {liveSignals.map((sig) => (
-              <div key={sig.title} className="bg-slate-900/90 border border-slate-800/80 rounded-xl p-3">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="text-xs font-bold text-white truncate">{sig.title}</span>
-                  <span className={`text-[10px] font-mono font-bold ${sig.color}`}>{sig.growth}</span>
-                </div>
-                <span className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-medium">
-                  {sig.badge}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </section>
 
-      {/* 5-Stage Problem -> Solution -> Impact Visual Flow */}
-      <section className="space-y-6">
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 uppercase tracking-widest">
-            CORE VALUE PROPOSITION
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-white mt-3">
-            Problem ➔ Detection ➔ Intelligence ➔ Action ➔ Impact
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-2">
-            How SkillBridge solves the fundamental vocational mismatch in five clear steps.
-          </p>
+      {/* Hot Skills Ticker */}
+      <section className="glass-card p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+          <span className="text-xs font-bold text-slate-200 uppercase tracking-wider">Hot Skills Right Now</span>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {problemToImpactFlow.map((flow) => (
-            <div
-              key={flow.step}
-              className="glass-card p-5 relative flex flex-col justify-between hover:border-blue-500/40 transition-all group"
-            >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {hotSkills.map((s) => (
+            <div key={s.name} className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${flow.badgeColor}`}>
-                    {flow.phase}
-                  </span>
-                  <span className="text-2xl group-hover:scale-110 transition-transform">{flow.icon}</span>
-                </div>
-                <h3 className="text-sm font-bold text-white mb-2 leading-snug">{flow.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{flow.desc}</p>
+                <span className="text-xs font-bold text-white block">{s.name}</span>
+                <span className={`text-[10px] font-mono font-bold ${
+                  s.status === "critical" ? "text-rose-400" : s.status === "high" ? "text-amber-400" : "text-blue-400"
+                }`}>{s.growth} YoY</span>
               </div>
-              <div className="mt-4 pt-2 border-t border-slate-800/80 text-[10px] font-mono text-slate-500">
-                Step {flow.step} of 05
-              </div>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                s.status === "critical" ? "bg-rose-500/15 text-rose-300 border border-rose-500/30"
+                  : s.status === "high" ? "bg-amber-500/15 text-amber-300 border border-amber-500/30"
+                  : "bg-blue-500/15 text-blue-300 border border-blue-500/30"
+              }`}>{s.status === "critical" ? "Critical" : s.status === "high" ? "High" : "Moderate"}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Embedded Central Intelligence Loop Component */}
-      <section className="pt-4">
-        <IntelligenceLoop />
+      {/* For Students */}
+      <section className="space-y-4">
+        <div className="flex items-center gap-2">
+          <span className="text-lg">🎓</span>
+          <h2 className="text-xl font-bold text-white">For Students</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {studentModules.map((m) => (
+            <Link
+              key={m.href}
+              href={m.href}
+              className={`glass-card glass-card-interactive p-5 block group ${
+                m.highlight ? "border-blue-500/40 bg-blue-950/20" : ""
+              }`}
+            >
+              <span className="text-2xl block mb-2">{m.icon}</span>
+              <h3 className={`text-sm font-bold mb-1 ${m.highlight ? "text-blue-300" : "text-white group-hover:text-blue-400"} transition-colors`}>
+                {m.name}
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">{m.desc}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
-      {/* Platform Key Stats */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
-          label="Courses Tracked"
-          value="1,247"
-          change="+14% MoM"
-          isPositive={true}
-          subtitle="Active & pending vocational syllabus catalog"
-          icon="📚"
-          accentColor="blue"
-        />
-        <StatCard
-          label="Active Deficits Detected"
-          value="389"
-          change="8 Critical"
-          isPositive={false}
-          subtitle="Real-time demand vs trained supply bottlenecks"
-          icon="⚡"
-          accentColor="rose"
-        />
-        <StatCard
-          label="Verified Placement Rate"
-          value="67.4%"
-          change="+15.0% Post-AI"
-          isPositive={true}
-          subtitle="Post-curriculum modernization placements"
-          icon="🎯"
-          accentColor="emerald"
-        />
-        <StatCard
-          label="Corporate Hiring Partners"
-          value="856"
-          change="+48 Surveyed"
-          isPositive={true}
-          subtitle="TCS, Infosys, Wipro, L&T & Persistent"
-          icon="🏢"
-          accentColor="indigo"
-        />
+      {/* For Administrators */}
+      <section className="space-y-4">
+        <div className="flex items-center gap-2">
+          <span className="text-lg">🏛️</span>
+          <h2 className="text-xl font-bold text-white">For Administrators</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {adminModules.map((m) => (
+            <Link
+              key={m.href}
+              href={m.href}
+              className="glass-card glass-card-interactive p-5 block group"
+            >
+              <span className="text-xl block mb-2">{m.icon}</span>
+              <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors mb-1">{m.name}</h3>
+              <p className="text-xs text-slate-400">{m.desc}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
-      {/* Complete SIH Direct Access Launchpad (All 10 Core Modules) */}
-      <section className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-3">
-          <div>
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <span>🚀</span>
-              <span>SIH Complete Intelligence Launchpad</span>
-            </h3>
-            <p className="text-xs text-slate-400">
-              Direct access to all 10 specialized intelligence and policy-decision modules.
-            </p>
+      {/* How It Works - Collapsible */}
+      <section className="glass-card overflow-hidden">
+        <button
+          onClick={() => setShowLoop(!showLoop)}
+          className="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900/30 transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-lg">🔄</span>
+            <div>
+              <h2 className="text-lg font-bold text-white">How SkillBridge Works</h2>
+              <p className="text-xs text-slate-400">12-stage intelligence loop — click to explore</p>
+            </div>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link href="/dashboard" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">📊</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Executive Labour Cockpit
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Bird's-eye view of state skill health, live alerts, and regional placement radar.
-            </p>
-          </Link>
-
-          <Link href="/skill-matrix" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">🔥</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Skill Intelligence Matrix
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Granular demand vs supply differential heatmap, openings count, and salary indicators.
-            </p>
-          </Link>
-
-          <Link href="/curriculum-advisor" className="glass-card glass-card-interactive p-5 block group border-blue-500/40 bg-blue-950/20">
-            <div className="text-2xl mb-2">🤖</div>
-            <h4 className="text-sm font-bold text-blue-300 group-hover:text-blue-200 transition-colors">
-              AI Curriculum Advisor (Instant Audit)
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Upload any course syllabus to generate instant 4-stage modernization plans.
-            </p>
-          </Link>
-
-          <Link href="/courses" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">🎓</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Course Modernization Scores
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Audit course alignment scores (0–100) and trigger the Course Decision Engine.
-            </p>
-          </Link>
-
-          <Link href="/policy-decisions" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">🏛️</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Policy Decision Center
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Government cockpit to authorize syllabus updates, seat reductions, and lab grants.
-            </p>
-          </Link>
-
-          <Link href="/skill-gaps" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">⚡</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              What-If Policy Simulator
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Model mathematical outcomes of adjusting seats, trainers, and capex investments.
-            </p>
-          </Link>
-
-          <Link href="/employers" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">🏢</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Employer Validation Network
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Review recruiter survey consensus, requested competencies, and hiring pipelines.
-            </p>
-          </Link>
-
-          <Link href="/career-pathways" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">🗺️</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Career Pathways & Roadmaps
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Job Role ➔ Skill ➔ Course mapping with structured 8-stage learning paths.
-            </p>
-          </Link>
-
-          <Link href="/district-plans" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">📍</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              District Training Plans
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Decentralized training roadmaps calibrated to local industrial corridors.
-            </p>
-          </Link>
-
-          <Link href="/capacity-planner" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">👥</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Trainer & Equipment Planner
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Evaluate instructor shortages, virtual lab sandboxes, and Capex requirements.
-            </p>
-          </Link>
-
-          <Link href="/placement-analytics" className="glass-card glass-card-interactive p-5 block group">
-            <div className="text-2xl mb-2">🎯</div>
-            <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-              Placement Outcome Analytics
-            </h4>
-            <p className="text-xs text-slate-400 mt-1">
-              Feedback loop verifying graduate employment conversion and wage premiums.
-            </p>
-          </Link>
-        </div>
+          <svg
+            className={`w-5 h-5 text-slate-400 transition-transform ${showLoop ? "rotate-180" : ""}`}
+            fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        {showLoop && (
+          <div className="border-t border-slate-800 p-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {[
+                { num: "01", title: "Demand Detection", desc: "Aggregates 14,800+ live job postings from TCS, Infosys, Wipro, and 48+ hiring partners", icon: "📡" },
+                { num: "02", title: "Skill Extraction", desc: "NLP extracts 320+ competencies from unstructured job descriptions", icon: "🔬" },
+                { num: "03", title: "Gap Analysis", desc: "Maps demand vs trained supply across 12,400 students in 36 districts", icon: "⚖️" },
+                { num: "04", title: "Course Mapping", desc: "Links every skill gap to active courses, scores alignment 0–100", icon: "🗺️" },
+                { num: "05", title: "AI Recommendations", desc: "Generates module-by-module upgrade plans with lab hour estimates", icon: "🤖" },
+                { num: "06", title: "Continuous Updates", desc: "Quarterly data-driven micro-updates replace 3–5 year revision cycles", icon: "🔄" },
+              ].map((stage) => (
+                <div key={stage.num} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-mono font-bold text-blue-400">{stage.num}</span>
+                    <span className="text-lg">{stage.icon}</span>
+                  </div>
+                  <h3 className="text-sm font-bold text-white mb-1">{stage.title}</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">{stage.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
-      {/* SIH Demo Mode Modal */}
-      <SihDemoModal
-        isOpen={isDemoModalOpen}
-        onClose={() => setIsDemoModalOpen(false)}
-      />
-
-      {/* Data Sources Modal */}
-      <DataSourcesModal
-        isOpen={isDataSourcesModalOpen}
-        onClose={() => setIsDataSourcesModalOpen(false)}
-      />
+      <SihDemoModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
     </main>
   );
 }

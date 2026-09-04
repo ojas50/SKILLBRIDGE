@@ -4,22 +4,28 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import SihDemoModal from "@/components/SihDemoModal";
+import { useAuth } from "@/lib/AuthContext";
 
 const NAV_ITEMS = [
   { name: "Overview", href: "/" },
-  { name: "Cockpit", href: "/dashboard" },
+  { name: "My Readiness", href: "/career-readiness" },
   { name: "Skill Matrix", href: "/skill-matrix" },
-  { name: "Course Tracker", href: "/courses" },
-  { name: "Policy Decisions", href: "/policy-decisions" },
-  { name: "Simulator", href: "/skill-gaps" },
-  { name: "Employers", href: "/employers" },
+  { name: "Courses", href: "/courses" },
   { name: "Pathways", href: "/career-pathways" },
-  { name: "District Plans", href: "/district-plans" },
+  { name: "Employers", href: "/employers" },
+];
+
+const ADMIN_NAV_ITEMS = [
+  { name: "Cockpit", href: "/dashboard" },
+  { name: "Policy", href: "/policy-decisions" },
+  { name: "Simulator", href: "/skill-gaps" },
+  { name: "Districts", href: "/district-plans" },
   { name: "AI Advisor", href: "/curriculum-advisor" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
@@ -30,16 +36,14 @@ export default function Navbar() {
         <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border-b border-blue-900/40 text-[11px] px-4 sm:px-6 py-1 text-slate-300 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="font-bold text-white">
-              SkillBridge AI
-            </span>
+            <span className="font-bold text-white">SkillBridge AI</span>
             <span className="hidden md:inline text-slate-500">•</span>
             <span className="hidden md:inline text-blue-300 font-medium">
-              Labour-Market Intelligence &amp; Curriculum Alignment Platform
+              Labour-Market Intelligence &amp; Curriculum Alignment
             </span>
             <span className="hidden lg:inline text-slate-500">•</span>
             <span className="hidden lg:inline text-xs font-mono font-bold px-2 py-0.2 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
-              SIH 2026 Prototype
+              SIH 2026
             </span>
           </div>
           <div className="flex items-center gap-3 text-xs">
@@ -47,9 +51,9 @@ export default function Navbar() {
               onClick={() => setIsDemoModalOpen(true)}
               className="bg-blue-600/30 hover:bg-blue-600/50 border border-blue-400/50 text-blue-200 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold flex items-center gap-1 transition-all"
             >
-              <span>🚀 SIH Demo Mode</span>
+              <span>🚀 Demo Mode</span>
             </button>
-            <span className="hidden sm:inline text-slate-400 font-mono">Team: Syntax Squad</span>
+            <span className="hidden sm:inline text-slate-400 font-mono">Syntax Squad</span>
           </div>
         </div>
 
@@ -70,13 +74,9 @@ export default function Navbar() {
                   <span className="text-base font-black tracking-tight text-white group-hover:text-blue-400 transition-colors">
                     Skill<span className="text-blue-500">Bridge</span>
                   </span>
-                  <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded font-mono font-semibold">
-                    AI
-                  </span>
+                  <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded font-mono font-semibold">AI</span>
                 </div>
-                <p className="text-[9px] text-slate-400 leading-none">
-                  SIH Final-Round Prototype
-                </p>
+                <p className="text-[9px] text-slate-400 leading-none">SIH Final-Round Prototype</p>
               </div>
             </Link>
 
@@ -98,6 +98,23 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+              <span className="w-px h-4 bg-slate-800 mx-1"></span>
+              {ADMIN_NAV_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                      isActive
+                        ? "bg-blue-600/25 text-blue-400 border border-blue-500/30 shadow-sm"
+                        : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Right Action Buttons */}
@@ -106,15 +123,32 @@ export default function Navbar() {
                 onClick={() => setIsDemoModalOpen(true)}
                 className="btn-glow text-xs py-2 px-3.5 flex items-center gap-1.5 shadow-lg shadow-blue-500/20"
               >
-                <span>🚀 Demo Mode</span>
+                <span>🚀 Demo</span>
               </button>
 
-              <Link
-                href="/curriculum-advisor"
-                className="btn-secondary text-xs py-2 px-3 flex items-center gap-1"
-              >
-                <span>AI Audit</span>
-              </Link>
+              {user ? (
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <div className="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-[10px] font-bold text-blue-300">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-xs font-medium text-slate-300 max-w-[100px] truncate">{user.name}</span>
+                  </div>
+                  <button
+                    onClick={logout}
+                    className="text-xs text-slate-500 hover:text-rose-400 transition-colors px-2 py-1.5"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="btn-secondary text-xs py-2 px-3 flex items-center gap-1"
+                >
+                  <span>Sign In</span>
+                </Link>
+              )}
             </div>
 
             {/* Mobile menu trigger */}
@@ -138,7 +172,7 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <div className="xl:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-2 pb-6 space-y-1">
             <div className="grid grid-cols-2 gap-1 mb-3">
-              {NAV_ITEMS.map((item) => (
+              {[...NAV_ITEMS, ...ADMIN_NAV_ITEMS].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -162,16 +196,33 @@ export default function Navbar() {
                 }}
                 className="btn-glow w-full justify-center text-xs py-2.5"
               >
-                🚀 Launch SIH Demo Mode
+                🚀 Launch Demo Mode
               </button>
 
-              <Link
-                href="/curriculum-advisor"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-secondary w-full justify-center text-xs py-2"
-              >
-                Audit Course Syllabus
-              </Link>
+              {user ? (
+                <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-xs font-bold text-blue-300">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-xs font-medium text-slate-300">{user.name}</span>
+                  </div>
+                  <button
+                    onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                    className="text-xs text-rose-400 hover:text-rose-300"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="btn-secondary w-full justify-center text-xs py-2"
+                >
+                  Sign In
+                </Link>
+              )}
             </div>
           </div>
         )}
