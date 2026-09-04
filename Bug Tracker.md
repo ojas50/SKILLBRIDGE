@@ -10,6 +10,8 @@
 | BUG-006 | Fixed | Site-B / Frontend & Backend | Maharashtra skill development & state policy document mentions | Replaced with universal Directorate of Vocational Training / Technical Standards terminology and redeployed to Vercel |
 | BUG-007 | Fixed | Site-B / Dashboard | Dashboard displaying static figures rather than personalized user parameters | Implemented interactive Dashboard Precision Calibration Suite with region, industry sector, cohort scale, and focus skills inputs; redeployed live |
 | BUG-008 | Fixed | Site-B / Frontend | JSX unescaped entities in DataSourcesModal and missing Next.js Link in CurriculumSimulator | Fixed imports, escaped JSX entities, and verified full production build passing (15 static routes) |
+| BUG-009 | Fixed | Site-B / Frontend | Browser autofill shows white background on input fields, breaking dark theme | Added CSS overrides for -webkit-autofill to force dark background (#0b1120) and light text |
+| BUG-010 | Fixed | Site-B / Frontend | Navbar nav links hidden below 1280px (xl breakpoint), Sign In not discoverable | Changed nav breakpoint from xl to lg (1024px), improved mobile menu visibility |
 
 **Status values:** Open | In Progress | Fixed | Wontfix
 

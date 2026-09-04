@@ -134,3 +134,19 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
+
+/* Fix browser autofill white background on inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #0b1120 inset !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+  background-color: #0b1120 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
