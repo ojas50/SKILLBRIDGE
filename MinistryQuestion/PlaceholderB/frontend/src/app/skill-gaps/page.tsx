@@ -10,6 +10,12 @@ export default function SkillGapsPage() {
   const [skills, setSkills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
   const [activeTab, setActiveTab] = useState<"simulator" | "radar">("simulator");
   const [selectedSeverity, setSelectedSeverity] = useState("All");
+  const [simulateSkillId, setSimulateSkillId] = useState<number | null>(null);
+
+  const openSimulator = (skillId: number) => {
+    setSimulateSkillId(skillId);
+    setActiveTab("simulator");
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -121,7 +127,7 @@ export default function SkillGapsPage() {
       {/* Simulator or Radar View */}
       {activeTab === "simulator" ? (
         <div className="space-y-6">
-          <CurriculumSimulator />
+          <CurriculumSimulator defaultSkillId={simulateSkillId ?? undefined} />
         </div>
       ) : (
         <div className="space-y-6">
@@ -154,7 +160,7 @@ export default function SkillGapsPage() {
                 key={gap.id}
                 item={gap}
                 showRecommendation={true}
-                onSimulateClick={() => setActiveTab("simulator")}
+                onSimulateClick={openSimulator}
               />
             ))}
           </div>
