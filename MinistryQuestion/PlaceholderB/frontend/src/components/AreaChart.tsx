@@ -38,8 +38,8 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
           <stop offset="100%" stopColor="#a3e635" />
         </linearGradient>
         <linearGradient id="supplyLine" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#6366f1" stopOpacity="0.55" />
+          <stop offset="0%" stopColor="var(--chart-supply)" stopOpacity="0.7" />
+          <stop offset="100%" stopColor="var(--chart-supply-soft)" stopOpacity="0.7" />
         </linearGradient>
       </defs>
     </>
@@ -54,7 +54,7 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
         x2={W - padR}
         y1={gy}
         y2={gy}
-        stroke="rgba(148, 163, 184, 0.10)"
+        stroke="var(--chart-grid)"
         strokeDasharray="4 6"
       />
     );
