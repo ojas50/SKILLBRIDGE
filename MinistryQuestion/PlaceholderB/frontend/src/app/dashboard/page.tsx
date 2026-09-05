@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import StatCard from "@/components/StatCard";
+import FitonistKpiCard from "@/components/FitonistKpiCard";
+import AreaChart from "@/components/AreaChart";
 import SkillGapBar from "@/components/SkillGapBar";
 import {
   SKILL_INTELLIGENCE_DATA,
@@ -16,6 +17,17 @@ import {
 } from "@/lib/intelligenceData";
 import EvidenceReasoningModal, { ReasoningChainData } from "@/components/EvidenceReasoningModal";
 import ScoreExplainerModal from "@/components/ScoreExplainerModal";
+
+const PERIOD_BUMPS: Record<string, number> = {
+  "Q1 2026": -4,
+  "Q2 2026": -2,
+  "Q3 2026": 0,
+  "Full Year": 3,
+};
+
+function shortName(skill: string) {
+  return skill.split(" & ")[0].split(" (")[0];
+}
 
 export default function Dashboard() {
   const [skills, setSkills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
@@ -51,6 +63,18 @@ export default function Dashboard() {
   const criticalDeficitsCount = skills.filter((s) => s.priority === "CRITICAL").length;
   const totalOpenings = skills.reduce((acc, s) => acc + s.openings, 0);
 
+  const bump = PERIOD_BUMPS[timePeriod] ?? 0;
+  const chartBars = skills
+    .slice()
+    .filter((s) => s.priority !== "OVERSUPPLIED")
+    .sort((a, b) => b.demandScore - a.demandScore)
+    .slice(0, 6)
+    .map((s) => {
+      const demand = Math.min(99, Math.max(30, s.demandScore + bump));
+      const supply = Math.min(99, Math.max(25, s.supplyScore));
+      return { label: shortName(s.skill), demand, supply, skill: s.skill };
+    });
+
   const handleOpenAlertEvidence = (alert: EarlyWarningAlert) => {
     setActiveReasoningData({
       evidence: alert.evidence,
@@ -71,17 +95,18 @@ export default function Dashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
+            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-fit-cyan/15 text-fit-cyan border border-fit-cyan/30">
               EXECUTIVE COCKPIT
             </span>
             <span className="text-xs text-slate-500">•</span>
-            <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-xs text-fit-emerald font-mono flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-fit-emerald animate-pulse"></span>
               Live Telemetry Active
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white mt-1">
-            Executive Labour-Market Dashboard
+          <h1 className="text-3xl sm:text-4xl font-black mt-1">
+            <span className="text-fit-gradient">SkillBridge</span>{" "}
+            <span className="text-white">Labour-Market Intelligence</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
             Real-time state skill health, regional demand-supply differential radar, and early warning action alerts.
@@ -91,31 +116,31 @@ export default function Dashboard() {
         <div className="flex items-center gap-3 flex-wrap">
           <Link
             href="/policy-decisions"
-            className="px-4 py-2.5 rounded-xl text-xs font-bold text-blue-300 bg-blue-950/80 border border-blue-700/60 hover:bg-blue-900 transition-all flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-300 bg-slate-900/80 border border-slate-800 hover:border-slate-700 hover:text-white transition-all flex items-center gap-1.5"
           >
             <span>🏛️ Policy Decision Center</span>
           </Link>
 
-          <Link href="/curriculum-advisor" className="btn-glow text-xs py-2.5 px-4">
+          <Link href="/curriculum-advisor" className="btn-fit text-xs">
             <span>+ AI Syllabus Audit</span>
           </Link>
         </div>
       </div>
 
       {/* Top Status Bar with Time Period Filter */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900/80 border border-slate-800 rounded-2xl px-5 py-3 text-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-fit-surface/80 border border-slate-800 rounded-2xl px-5 py-3 text-xs">
         <div className="flex items-center gap-3">
-          <span className="px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 font-mono font-semibold border border-blue-500/30 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+          <span className="px-2.5 py-1 rounded-full bg-fit-cyan/15 text-fit-cyan font-mono font-semibold border border-fit-cyan/30 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-fit-cyan"></span>
             State Coverage: Maharashtra (All 36 Districts)
           </span>
-          <span className="text-slate-400 hidden sm:inline">•</span>
+          <span className="text-slate-500 hidden sm:inline">•</span>
           <span className="text-slate-300 font-medium">
             Active Cohort: <strong className="text-white font-mono">12,400</strong> Trainees
           </span>
-          <span className="text-slate-400 hidden sm:inline">•</span>
+          <span className="text-slate-500 hidden sm:inline">•</span>
           <span className="text-slate-300 font-medium">
-            Average Modernized Placement: <strong className="text-emerald-400 font-mono">79.0%</strong>
+            Average Modernized Placement: <strong className="text-fit-emerald font-mono">79.0%</strong>
           </span>
         </div>
 
@@ -126,7 +151,7 @@ export default function Dashboard() {
               onClick={() => setTimePeriod(period)}
               className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all ${
                 timePeriod === period
-                  ? "bg-blue-600 text-white shadow-sm"
+                  ? "bar-fit text-slate-950 shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -136,44 +161,69 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* KPI Cards Grid */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
+      {/* Fitonist KPI Cards Grid */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <FitonistKpiCard
           label="Courses Tracked"
-          value={totalCoursesTracked}
+          value={totalCoursesTracked.toLocaleString()}
           change="+14% MoM"
-          isPositive={true}
+          positive
           subtitle="Accredited vocational programs"
-          icon="📚"
-          accentColor="blue"
+          marker="📚"
         />
-        <StatCard
+        <FitonistKpiCard
           label="Active Deficits Detected"
           value={activeDeficitsCount}
-          change={`${criticalDeficitsCount} Critical Priorities`}
-          isPositive={false}
+          change={`${criticalDeficitsCount} critical`}
+          positive={false}
           subtitle="Identified competency shortages"
-          icon="⚡"
-          accentColor="rose"
+          marker="⚡"
         />
-        <StatCard
+        <FitonistKpiCard
           label="Verified Placement Rate"
           value="67.4%"
           change="+15% Post-Modernization"
-          isPositive={true}
+          positive
           subtitle="Graduate employment rate"
-          icon="🎯"
-          accentColor="emerald"
+          marker="🎯"
         />
-        <StatCard
+        <FitonistKpiCard
           label="Corporate Openings"
           value={totalOpenings.toLocaleString()}
-          change="48 Enterprise Partners"
-          isPositive={true}
+          change="48 partners"
+          positive
           subtitle="Active recruitment vacancies"
-          icon="🏢"
-          accentColor="indigo"
+          marker="🏢"
         />
+      </section>
+
+      {/* Market Pulse: gradient area chart */}
+      <section className="glass-card p-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-fit-glow pointer-events-none" />
+        <div className="relative">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+            <div>
+              <h2 className="text-lg font-bold text-white">
+                Market Demand &middot; Supply Radar{" "}
+                <span className="text-xs font-mono text-slate-500 ml-1">/ {timePeriod}</span>
+              </h2>
+              <p className="text-xs text-slate-400">
+                Signature gradient tracks demand momentum versus trained supply capacity across deficit skill clusters.
+              </p>
+            </div>
+            <Link
+              href="/skill-matrix"
+              className="text-xs text-fit-emerald hover:text-fit-lime font-semibold flex items-center gap-1"
+            >
+              Skill Matrix →
+            </Link>
+          </div>
+          <AreaChart
+            labels={chartBars.map((b) => b.label)}
+            demand={chartBars.map((b) => b.demand)}
+            supply={chartBars.map((b) => b.supply)}
+          />
+        </div>
       </section>
 
       {/* Main Grid: Top Skill Deficits vs Early Warning Radar */}
@@ -191,7 +241,7 @@ export default function Dashboard() {
             </div>
             <Link
               href="/skill-matrix"
-              className="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
+              className="text-xs text-fit-emerald hover:text-fit-lime font-semibold flex items-center gap-1"
             >
               Skill Matrix →
             </Link>
@@ -245,7 +295,7 @@ export default function Dashboard() {
                         ? "bg-amber-950/30 border-amber-800/40 text-amber-200 hover:border-amber-600"
                         : isCurr
                         ? "bg-yellow-950/30 border-yellow-800/40 text-yellow-200 hover:border-yellow-600"
-                        : "bg-blue-950/30 border-blue-800/40 text-blue-200 hover:border-blue-600"
+                        : "bg-fit-surface/80 border-slate-800/60 text-slate-200 hover:border-fit-cyan/50"
                     }`}
                   >
                     <div className="flex items-center justify-between font-bold text-[11px] mb-1">
@@ -277,7 +327,7 @@ export default function Dashboard() {
               State vocational tracks evaluated against 6-factor industry criteria.
             </p>
           </div>
-          <Link href="/courses" className="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+          <Link href="/courses" className="text-xs text-fit-emerald hover:text-fit-lime font-semibold">
             View All 10 Courses →
           </Link>
         </div>
@@ -287,7 +337,7 @@ export default function Dashboard() {
             <div
               key={c.id}
               onClick={() => setExplainingCourse(c)}
-              className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 cursor-pointer hover:border-slate-700 transition-colors space-y-2"
+              className="bg-fit-surface/80 border border-slate-800 rounded-xl p-4 cursor-pointer hover:border-slate-700 transition-colors space-y-2"
             >
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-mono text-slate-400">{c.code}</span>
@@ -307,8 +357,13 @@ export default function Dashboard() {
               </div>
               <h4 className="text-xs font-bold text-white line-clamp-1">{c.name}</h4>
               <div className="flex items-center justify-between text-[11px] font-mono border-t border-slate-800/80 pt-2 text-slate-400">
-                <span>Score: <strong className="text-white">{c.alignmentScore}%</strong></span>
-                <span className="text-emerald-400">Placement: {c.placementRate}%</span>
+                <span>
+                  Score: <strong className="text-fit-emerald">{c.alignmentScore}%</strong>
+                </span>
+                <span className="text-slate-400">Placement: {c.placementRate}%</span>
+              </div>
+              <div className="h-1 w-full rounded-full bg-slate-800 overflow-hidden">
+                <div className="bar-fit h-full rounded-full" style={{ width: `${c.alignmentScore}%` }} />
               </div>
             </div>
           ))}
@@ -326,7 +381,7 @@ export default function Dashboard() {
               Decentralized quotas across 8 core Maharashtra industrial corridors.
             </p>
           </div>
-          <Link href="/district-plans" className="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+          <Link href="/district-plans" className="text-xs text-fit-emerald hover:text-fit-lime font-semibold">
             Explore District Strategy →
           </Link>
         </div>
@@ -334,7 +389,7 @@ export default function Dashboard() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 uppercase tracking-wider text-[10px]">
+              <tr className="border-b border-slate-800 text-slate-500 uppercase tracking-wider text-[10px]">
                 <th className="pb-3 font-bold">District Hub</th>
                 <th className="pb-3 font-bold">Anchor Sectors</th>
                 <th className="pb-3 font-bold text-center">Vacancies</th>
@@ -348,9 +403,9 @@ export default function Dashboard() {
                 <tr key={d.id} className="hover:bg-slate-900/60 transition-colors">
                   <td className="py-3 font-bold text-white">{d.district}</td>
                   <td className="py-3 text-slate-300 text-[11px]">{d.majorIndustries.slice(0, 2).join(", ")}</td>
-                  <td className="py-3 text-center font-mono font-bold text-blue-400">{d.totalVacancies.toLocaleString()}</td>
+                  <td className="py-3 text-center font-mono font-bold text-fit-cyan">{d.totalVacancies.toLocaleString()}</td>
                   <td className="py-3 text-center font-mono text-slate-300">{d.activeTrainees.toLocaleString()}</td>
-                  <td className="py-3 text-center font-mono font-bold text-emerald-400">{d.placementRate}</td>
+                  <td className="py-3 text-center font-mono font-bold text-fit-emerald">{d.placementRate}</td>
                   <td className="py-3 text-slate-300 text-[11px]">{d.recommendedSeatAdjustment}</td>
                 </tr>
               ))}

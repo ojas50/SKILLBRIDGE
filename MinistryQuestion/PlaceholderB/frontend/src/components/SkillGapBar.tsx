@@ -98,16 +98,16 @@ export default function SkillGapBar({
         <div>
           <div className="flex justify-between text-[11px] text-slate-400 mb-1">
             <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+              <span className="w-2 h-2 rounded-full bg-fit-cyan"></span>
               Industry Demand Signal
             </span>
-            <span className="font-mono font-semibold text-blue-400">
+            <span className="font-mono font-semibold text-fit-cyan">
               {item.demand}%
             </span>
           </div>
           <div className="w-full bg-slate-900 rounded-full h-2 overflow-hidden p-[1px] border border-slate-800">
             <div
-              className="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full transition-all duration-500"
+              className="bar-fit h-full rounded-full transition-all duration-500"
               style={{ width: `${Math.min(100, item.demand)}%` }}
             />
           </div>
@@ -117,10 +117,10 @@ export default function SkillGapBar({
         <div>
           <div className="flex justify-between text-[11px] text-slate-400 mb-1">
             <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span className="w-2 h-2 rounded-full bg-fit-emerald"></span>
               Current Trained Supply
             </span>
-            <span className="font-mono font-semibold text-emerald-400">
+            <span className="font-mono font-semibold text-fit-emerald">
               {item.supply}%
             </span>
           </div>

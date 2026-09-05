@@ -15,6 +15,8 @@
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
+  /* Fitonist-inspired accent gradient (teal -> cyan -> emerald -> lime) */
+  --fit-gradient: linear-gradient(135deg, #22d3ee 0%, #34d399 45%, #a3e635 100%);
 }
 
 body {
@@ -54,12 +56,12 @@ body {
 
 /* Glowing Button utilities */
 .btn-glow {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
   color: #ffffff;
   font-weight: 600;
   padding: 0.65rem 1.4rem;
   border-radius: 0.65rem;
-  box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
@@ -67,8 +69,8 @@ body {
 }
 
 .btn-glow:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+  background: linear-gradient(135deg, #22d3ee 0%, #34d399 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
   transform: translateY(-1px);
 }
 
@@ -89,6 +91,41 @@ body {
   background: rgba(51, 65, 85, 0.9);
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Fitonist-inspired gradient text & accent utilities */
+.text-fit-gradient {
+  background: linear-gradient(135deg, #22d3ee 0%, #34d399 45%, #a3e635 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.btn-fit {
+  background: linear-gradient(135deg, #0ea5e9 0%, #10b981 50%, #84cc16 100%);
+  color: #04121a;
+  font-weight: 800;
+  padding: 0.65rem 1.4rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.45);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-fit:hover {
+  box-shadow: 0 10px 30px -4px rgba(16, 185, 129, 0.6);
+  transform: translateY(-1px);
+}
+
+.bar-fit {
+  background: linear-gradient(90deg, #22d3ee, #34d399 55%, #a3e635);
+}
+
+.ring-fit {
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.2), 0 10px 40px -10px rgba(52, 211, 153, 0.25);
 }
 
 /* Badge styling */
