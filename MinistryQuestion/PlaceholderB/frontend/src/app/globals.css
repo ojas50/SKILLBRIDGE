@@ -4,11 +4,13 @@
 
 :root {
   --foreground: #f1f5f9;
-  --background: #090d16;
-  --surface: #0f172a;
-  --surface-hover: #1e293b;
-  --border: #1e293b;
-  --border-highlight: #334155;
+  --background: #05070d;
+  --panel: #0b0f1a;
+  --panel-soft: #101626;
+  --hairline: #1e293b;
+  --navbar: rgba(5, 7, 13, 0.94);
+  --input-autofill-bg: #0b1120;
+  --input-autofill-text: #f1f5f9;
   --primary: #3b82f6;
   --primary-hover: #2563eb;
   --accent-cyan: #06b6d4;
@@ -19,26 +21,52 @@
   --fit-gradient: linear-gradient(135deg, #22d3ee 0%, #34d399 45%, #a3e635 100%);
 }
 
+html[data-theme="light"] {
+  --foreground: #0f172a;
+  --background: #f4f6fb;
+  --panel: #ffffff;
+  --panel-soft: #eef2f8;
+  --hairline: #d9e2ef;
+  --navbar: rgba(255, 255, 255, 0.92);
+  --input-autofill-bg: #ffffff;
+  --input-autofill-text: #0f172a;
+  color-scheme: light;
+}
+
+html {
+  color-scheme: dark;
+}
+
 body {
   color: var(--foreground);
   background-color: var(--background);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.06) 0px, transparent 50%);
   background-attachment: fixed;
   min-height: 100vh;
 }
 
+html[data-theme="light"] body {
+  background-image:
+    radial-gradient(at 0% 0%, rgba(34, 211, 238, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(52, 211, 153, 0.06) 0px, transparent 50%);
+}
+
 /* Custom Glassmorphic Card styling */
 .glass-card {
-  background: rgba(15, 23, 42, 0.75);
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid color-mix(in srgb, var(--hairline) 85%, transparent);
   border-radius: 1rem;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.35);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="light"] .glass-card {
+  box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.12);
 }
 
 .glass-card:hover {
@@ -75,9 +103,9 @@ body {
 }
 
 .btn-secondary {
-  background: rgba(30, 41, 59, 0.8);
-  color: #e2e8f0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+  color: var(--foreground);
+  border: 1px solid color-mix(in srgb, var(--foreground) 16%, transparent);
   padding: 0.65rem 1.25rem;
   border-radius: 0.65rem;
   font-weight: 500;
@@ -88,9 +116,8 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(51, 65, 85, 0.9);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--foreground) 16%, transparent);
+  border-color: color-mix(in srgb, var(--foreground) 30%, transparent);
 }
 
 /* Fitonist-inspired gradient text & accent utilities */
@@ -153,6 +180,94 @@ body {
   border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
+/* =========================================================
+   LIGHT MODE ("light theme") utility remaps.
+   Flips the app's fixed dark-neutral palette into light values,
+   so content surfaces, borders, and gray text adapt across all
+   pages without per-component edits. Branded grays like the
+   teal->lime fit accents, badges, and rose/amber alert chips are
+   intentionally left alone (they read well on both themes).
+   ========================================================= */
+html[data-theme="light"] .text-white,
+html[data-theme="light"] .hover\:text-white {
+  color: #0f172a !important;
+}
+
+html[data-theme="light"] .text-slate-100 { color: #0f172a; }
+html[data-theme="light"] .text-slate-200 { color: #1e293b; }
+html[data-theme="light"] .text-slate-300 { color: #334155; }
+html[data-theme="light"] .text-slate-400 { color: #526078; }
+html[data-theme="light"] .text-slate-500 { color: #667085; }
+html[data-theme="light"] .text-slate-600 { color: #475569; }
+
+html[data-theme="light"] .bg-slate-950,
+html[data-theme="light"] .bg-slate-950\/95,
+html[data-theme="light"] .bg-slate-950\/90,
+html[data-theme="light"] .bg-slate-950\/80,
+html[data-theme="light"] .bg-slate-950\/70 {
+  background-color: #f8fafc;
+}
+
+html[data-theme="light"] .bg-slate-900,
+html[data-theme="light"] .bg-slate-900\/80,
+html[data-theme="light"] .bg-slate-900\/70,
+html[data-theme="light"] .bg-slate-900\/60,
+html[data-theme="light"] .bg-slate-900\/50 {
+  background-color: #eef2f7;
+}
+
+html[data-theme="light"] .bg-slate-850,
+html[data-theme="light"] .bg-slate-800,
+html[data-theme="light"] .bg-slate-800\/80,
+html[data-theme="light"] .bg-slate-800\/50 {
+  background-color: #e2e8f0;
+}
+
+html[data-theme="light"] .hover\:bg-slate-900,
+html[data-theme="light"] .hover\:bg-slate-900\/60,
+html[data-theme="light"] .hover\:bg-slate-850,
+html[data-theme="light"] .hover\:bg-slate-800,
+html[data-theme="light"] .hover\:bg-slate-800\/50 {
+  background-color: #dce4f0;
+}
+
+html[data-theme="light"] .border-slate-900 { border-color: #ccd6e4; }
+html[data-theme="light"] .border-slate-800,
+html[data-theme="light"] .border-slate-800\/90,
+html[data-theme="light"] .border-slate-800\/80,
+html[data-theme="light"] .border-slate-800\/60 {
+  border-color: #ccd6e4;
+}
+html[data-theme="light"] .border-slate-700,
+html[data-theme="light"] .border-slate-700\/80 {
+  border-color: #d3dce8;
+}
+
+html[data-theme="light"] .divide-slate-800,
+html[data-theme="light"] .divide-slate-800\/60 {
+  border-color: #ccd6e4;
+}
+
+html[data-theme="light"] .bg-fit-surface\/80 {
+  background-color: rgba(248, 250, 252, 0.82);
+}
+
+/* =========================================================
+   always-dark — brand panels that stay dark in BOTH themes
+   (navbar top strip, footer). Re-asserted with !important to
+   beat the light remaps above.
+   ========================================================= */
+html[data-theme="light"] .always-dark {
+  background-color: #0b1120 !important;
+  background-image: linear-gradient(90deg, #172554, #1e293b 45%, #2e1065) !important;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] .always-dark [class*="text-white"] { color: #ffffff !important; }
+html[data-theme="light"] .always-dark [class*="text-slate-"] { color: #94a3b8 !important; }
+html[data-theme="light"] .always-dark [class*="border-slate-"] { border-color: #1e293b !important; }
+html[data-theme="light"] .always-dark [class*="bg-slate-"] { background-color: rgba(15, 23, 42, 0.62) !important; }
+
 /* Modern clean scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -160,16 +275,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: color-mix(in srgb, var(--foreground) 22%, transparent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: color-mix(in srgb, var(--foreground) 35%, transparent);
 }
 
 /* Fix browser autofill white background on inputs */
@@ -182,8 +297,8 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px #0b1120 inset !important;
-  -webkit-text-fill-color: #f1f5f9 !important;
-  background-color: #0b1120 !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--input-autofill-bg) inset !important;
+  -webkit-text-fill-color: var(--input-autofill-text) !important;
+  background-color: var(--input-autofill-bg) !important;
   transition: background-color 5000s ease-in-out 0s;
 }

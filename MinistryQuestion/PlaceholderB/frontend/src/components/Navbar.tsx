@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import SihDemoModal from "@/components/SihDemoModal";
 import { useAuth } from "@/lib/AuthContext";
+import { useTheme } from "@/lib/ThemeContext";
 
 const NAV_ITEMS = [
   { name: "Overview", href: "/" },
@@ -31,14 +32,15 @@ const ADMIN_NAV_ITEMS = [
 export default function Navbar() {
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-[#090d16]/95 backdrop-blur-md border-b border-slate-800/80">
+      <header className="sticky top-0 z-50 bg-[color:var(--navbar)] backdrop-blur-md border-b border-slate-800/80">
         {/* Top Status Banner */}
-        <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border-b border-blue-900/40 text-[11px] px-4 sm:px-6 py-1 text-slate-300 flex items-center justify-between">
+        <div className="always-dark bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border-b border-blue-900/40 text-[11px] px-4 sm:px-6 py-1 text-slate-300 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span className="font-bold text-white">SkillBridge AI</span>
@@ -125,6 +127,24 @@ export default function Navbar() {
             {/* Right Action Buttons */}
             <div className="hidden sm:flex items-center gap-2.5">
               <button
+                onClick={toggleTheme}
+                aria-label="Toggle light or dark theme"
+                className="p-2 rounded-xl bg-slate-850 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+                title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? (
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <circle cx="12" cy="12" r="4" />
+                    <path strokeLinecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.8A8.9 8.9 0 1111.2 3a7 7 0 009.8 9.8z" />
+                  </svg>
+                )}
+              </button>
+
+              <button
                 onClick={() => setIsDemoModalOpen(true)}
                 className="btn-glow text-xs py-2 px-3.5 flex items-center gap-1.5 shadow-lg shadow-blue-500/20"
               >
@@ -202,6 +222,13 @@ export default function Navbar() {
                 className="btn-glow w-full justify-center text-xs py-2.5"
               >
                 🚀 Launch Demo Mode
+              </button>
+
+              <button
+                onClick={toggleTheme}
+                className="btn-secondary w-full justify-center text-xs py-2"
+              >
+                {theme === "dark" ? "☀️ Switch to Light Mode" : "🌙 Switch to Dark Mode"}
               </button>
 
               {user ? (
