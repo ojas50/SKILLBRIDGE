@@ -156,19 +156,6 @@ function CareerReadinessInner() {
     } catch { /* ignore */ }
   }, [profileKey]);
 
-  const persistProfile = useCallback(() => {
-    if (!profileKey) return;
-    const data = {
-      skills: Array.from(mySkills),
-      region: selectedRegion,
-      targetCompanies: Array.from(selectedCompanies),
-      readinessHistory: JSON.parse(localStorage.getItem(profileKey) || "{}").readinessHistory || [],
-    };
-    localStorage.setItem(profileKey, JSON.stringify(data));
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
-  }, [profileKey, mySkills, selectedRegion, selectedCompanies]);
-
   const region = REGIONS.find((r) => r.id === selectedRegion);
 
   const filteredCompanies = useMemo(() => {
@@ -204,6 +191,37 @@ function CareerReadinessInner() {
     if (requiredSkills.size === 0) return 0;
     return Math.round((matchedSkills.matched.length / requiredSkills.size) * 100);
   }, [requiredSkills, matchedSkills]);
+
+  const persistProfile = useCallback(() => {
+    if (!profileKey) return;
+    let history: { date: string; percent: number }[] = [];
+    try {
+      const raw = localStorage.getItem(profileKey);
+      if (raw) {
+        const p = JSON.parse(raw);
+        history = Array.isArray(p?.readinessHistory) ? p.readinessHistory : [];
+      }
+    } catch {
+      history = [];
+    }
+    const today = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+    if (history.length > 0 && history[history.length - 1].date === today) {
+      history[history.length - 1] = { date: today, percent: readiness };
+    } else {
+      history.push({ date: today, percent: readiness });
+    }
+    localStorage.setItem(
+      profileKey,
+      JSON.stringify({
+        skills: Array.from(mySkills),
+        region: selectedRegion,
+        targetCompanies: Array.from(selectedCompanies),
+        readinessHistory: history,
+      })
+    );
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  }, [profileKey, mySkills, selectedRegion, selectedCompanies, readiness]);
 
   const suggestedCourses = useMemo(() => {
     const courseMap: Record<string, string> = {

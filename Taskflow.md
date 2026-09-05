@@ -75,3 +75,5 @@
 - Built Policy Decision Center (`/policy-decisions`) with one-click ministerial action authorizations and visual evidence chain inspection (`EvidenceReasoningModal.tsx`).
 - Created 🚀 SIH Demo Mode (`SihDemoModal.tsx`) with a 10-step guided tour walking judges through the realistic Pune IT/Cloud scenario in 2–3 minutes.
 - Added Data Sources & Methodology modal (`DataSourcesModal.tsx`) and verified production build passing (`npm run build`).
+- Fixed BUG-011: `persistProfile` on `/career-readiness` now appends today's readiness % to `readinessHistory` (replaces today's entry on repeat saves instead of duplicating) — My Dashboard "Readiness Over Time" chart and last-score readout now populate. Fix also moved the callback after the `readiness` memo (was referenced in deps before declaration).
+- Fixed BUG-012: unguarded `JSON.parse` in `persistProfile` is now try/catch-wrapped and shape-validated with `Array.isArray` — malformed stored profile JSON no longer crashes the page on Save.
