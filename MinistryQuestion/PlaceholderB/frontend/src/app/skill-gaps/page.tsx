@@ -127,7 +127,7 @@ export default function SkillGapsPage() {
       {/* Simulator or Radar View */}
       {activeTab === "simulator" ? (
         <div className="space-y-6">
-          <CurriculumSimulator defaultSkillId={simulateSkillId ?? undefined} />
+          <CurriculumSimulator skillGaps={skills} defaultSkillId={simulateSkillId ?? undefined} />
         </div>
       ) : (
         <div className="space-y-6">

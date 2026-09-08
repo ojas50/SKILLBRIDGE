@@ -5,14 +5,16 @@ import Link from "next/link";
 import { SKILL_INTELLIGENCE_DATA, SkillItem } from "@/lib/intelligenceData";
 
 interface CurriculumSimulatorProps {
-  skillGaps?: any[];
+  skillGaps?: SkillItem[];
   defaultSkillId?: number;
 }
 
 export default function CurriculumSimulator({
+  skillGaps,
   defaultSkillId
 }: CurriculumSimulatorProps) {
-  const skillsList: SkillItem[] = SKILL_INTELLIGENCE_DATA;
+  const skillsList: SkillItem[] =
+    skillGaps && skillGaps.length > 0 ? skillGaps : SKILL_INTELLIGENCE_DATA;
 
   // 9 Policy Parameters (Requirement #6)
   const [selectedSkillId, setSelectedSkillId] = useState<number>(defaultSkillId || skillsList[0].id);
