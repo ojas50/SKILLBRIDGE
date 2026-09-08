@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { EMPLOYER_PARTNERS_DATA, EMPLOYER_SURVEY_SUMMARY, EmployerPartner } from "@/lib/intelligenceData";
-import EmployerModal from "@/components/EmployerModal";
+import EmployerModal, { NewEmployerInput } from "@/components/EmployerModal";
 
 export default function EmployersPage() {
   const [employers, setEmployers] = useState<EmployerPartner[]>(EMPLOYER_PARTNERS_DATA);
@@ -45,21 +45,24 @@ export default function EmployersPage() {
     }, 2500);
   };
 
-  const handleEmployerAdded = (newEmp: any) => {
-    const formatted: EmployerPartner = {
-      id: employers.length + 1,
-      name: newEmp.name,
-      industry: newEmp.industry,
-      location: newEmp.location || "Maharashtra",
-      partnershipTier: "Tier 2 Gold",
-      openings: newEmp.openings || 50,
-      hired: 0,
-      satisfactionRate: 80,
-      skillsNeeded: newEmp.skills_needed || ["Cloud", "Python"],
-      validatedCoursesCount: 1,
-      topRequestedSkills: ["Next.js", "Docker"]
-    };
-    setEmployers([formatted, ...employers]);
+  const handleEmployerAdded = (newEmp: NewEmployerInput) => {
+    setEmployers((prev) => {
+      const nextId = prev.reduce((max, e) => Math.max(max, e.id), 0) + 1;
+      const formatted: EmployerPartner = {
+        id: nextId,
+        name: newEmp.name,
+        industry: newEmp.industry,
+        location: newEmp.location || "Maharashtra",
+        partnershipTier: "Tier 2 Gold",
+        openings: newEmp.openings || 50,
+        hired: 0,
+        satisfactionRate: 80,
+        skillsNeeded: newEmp.skills_needed || ["Cloud", "Python"],
+        validatedCoursesCount: 1,
+        topRequestedSkills: ["Next.js", "Docker"]
+      };
+      return [formatted, ...prev];
+    });
   };
 
   return (

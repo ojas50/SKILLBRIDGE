@@ -2,10 +2,18 @@
 
 import React, { useState } from "react";
 
+export interface NewEmployerInput {
+  name: string;
+  industry: string;
+  openings: number;
+  skills_needed: string[];
+  location?: string;
+}
+
 interface EmployerModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onEmployerAdded?: (employer: any) => void;
+  onEmployerAdded?: (employer: NewEmployerInput) => void;
 }
 
 export default function EmployerModal({
