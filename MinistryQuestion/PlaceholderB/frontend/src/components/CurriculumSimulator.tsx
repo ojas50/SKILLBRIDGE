@@ -4,6 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { SKILL_INTELLIGENCE_DATA, SkillItem } from "@/lib/intelligenceData";
 
+const DISTRICT_FACTORS: Record<string, { seatEfficiency: number; placementDelta: number }> = {
+  "Pune Hub": { seatEfficiency: 1, placementDelta: 0 },
+  "Mumbai Metropolitan": { seatEfficiency: 1.1, placementDelta: 2 },
+  "Nagpur MIHAN": { seatEfficiency: 0.85, placementDelta: -2 },
+  "Nashik Industrial": { seatEfficiency: 0.95, placementDelta: -1 },
+};
+
 interface CurriculumSimulatorProps {
   skillGaps?: SkillItem[];
   defaultSkillId?: number;
@@ -34,22 +41,28 @@ export default function CurriculumSimulator({
   const currentSkill = skillsList.find((s) => s.id === selectedSkillId) || skillsList[0];
 
   // Computational Math Model
+  const districtFactor = DISTRICT_FACTORS[selectedDistrict] ?? DISTRICT_FACTORS["Pune Hub"];
   const baseDeficit = currentSkill.gap; // e.g. 54
-  const seatImpact = (trainingSeats / 50) * 4.2;
+  const seatImpact = (trainingSeats / 50) * 4.2 * districtFactor.seatEfficiency;
   const trainerBonus = additionalTrainers * 0.9;
   const equipmentBonus = (equipmentInvestmentLakhs / 5) * 1.8;
   const modernBonus = mandateModernCurriculum ? 8.5 : 0;
   const newCourseBonus = launchNewCourse ? 5.0 : 0;
-  const totalSupplyBoost = Math.round(seatImpact + trainerBonus + equipmentBonus + modernBonus + newCourseBonus);
+  const durationBoost = Math.round((courseDurationMonths - 6) * 0.8);
+  const totalSupplyBoost = Math.round(seatImpact + trainerBonus + equipmentBonus + modernBonus + newCourseBonus + durationBoost);
 
   const projectedGap = Math.max(4, Math.round(baseDeficit - totalSupplyBoost * 0.7));
   const gapReductionPercent = Math.min(92, Math.round(((baseDeficit - projectedGap) / (baseDeficit || 1)) * 100));
 
   // Placement calculation
   const baselinePlacement = 67;
-  const placementSurge = Math.min(
-    28,
-    Math.round((trainingSeats / 100) * 2.5 + (mandateModernCurriculum ? 9 : 2) + (equipmentInvestmentLakhs > 10 ? 4 : 1))
+  const durationPlacementPenalty = courseDurationMonths >= 12 ? 3 : 0;
+  const placementSurge = Math.max(
+    0,
+    Math.min(
+      28,
+      Math.round((trainingSeats / 100) * 2.5 + (mandateModernCurriculum ? 9 : 2) + (equipmentInvestmentLakhs > 10 ? 4 : 1) + districtFactor.placementDelta - durationPlacementPenalty)
+    )
   );
   const projectedPlacementRate = Math.min(95, baselinePlacement + placementSurge);
 
@@ -131,6 +144,22 @@ export default function CurriculumSimulator({
               <option value="Mumbai Metropolitan">Mumbai BFSI & Cloud Corridor</option>
               <option value="Nagpur MIHAN">Nagpur MIHAN & Logistics Hub</option>
               <option value="Nashik Industrial">Nashik Smart Manufacturing Zone</option>
+            </select>
+          </div>
+
+          {/* 3. Program Duration */}
+          <div>
+            <label className="block text-[11px] font-bold text-slate-400 uppercase mb-1">
+              Program Duration / Time-to-Market
+            </label>
+            <select
+              value={courseDurationMonths}
+              onChange={(e) => setCourseDurationMonths(Number(e.target.value))}
+              className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 font-medium"
+            >
+              <option value={6}>6 Months — Accelerated Rapid Upskilling</option>
+              <option value={9}>9 Months — Standard Industry-Drive Cohort</option>
+              <option value={12}>12 Months — Deep Skilled Mastery Program</option>
             </select>
           </div>
 
