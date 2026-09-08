@@ -115,3 +115,4 @@
 - Fixed BUG-017: `/courses` search no longer assumes every row has skill arrays — `(c.activeSkills ?? [])` / `(c.missingSkills ?? [])` guards prevent a TypeError on malformed API data.
 - Fixed BUG-020: `/district-plans` copy-report now try/catches the clipboard call and falls back to a hidden-textarea `execCommand("copy")` — no unhandled rejection on non-secure contexts, and "Copied" only shows on success.
 - Fixed BUG-022: `/employers` newly registered pipelines get a unique id (`max(existing)+1` via functional update, no stale-closure dupes) and the modal payload is typed `NewEmployerInput` instead of `any`.
+- Fixed BUG-023: My Dashboard "Readiness Over Time" now renders with a single saved assessment (`length > 0`) instead of requiring 2+ history entries; light-mode contrast half of that bug is folded into BUG-021.

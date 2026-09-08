@@ -78,7 +78,7 @@ function DashboardContent() {
       </div>
 
       {/* Readiness History */}
-      {profile?.readinessHistory && profile.readinessHistory.length > 1 && (
+      {profile?.readinessHistory && profile.readinessHistory.length > 0 && (
         <div className="glass-card p-5">
           <h3 className="text-sm font-bold text-white mb-3">Readiness Over Time</h3>
           <div className="flex items-end gap-2 h-24">
