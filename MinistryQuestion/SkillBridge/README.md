@@ -2,7 +2,7 @@
 
 **Labour-Market Intelligence & Real-Time Curriculum Alignment Engine**  
 *Submitted for Smart India Hackathon (SIH 2026) — Government of Maharashtra (MSDSVE)*  
-*Team: Syntax Squad*
+*Originally an SIH 2026 submission — built and maintained solo*
 
 ---
 

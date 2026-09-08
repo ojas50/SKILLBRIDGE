@@ -135,7 +135,7 @@ export default function Footer() {
 
           {/* Copyright Row */}
           <div className="border-t border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-            <p>© 2026 SkillBridge AI • Smart India Hackathon Prototype • Team: Syntax Squad.</p>
+            <p>© 2026 SkillBridge AI • Smart India Hackathon Prototype • Originally an SIH 2026 submission</p>
             <div className="flex items-center gap-4">
               <span>Security Compliant Architecture</span>
               <span>•</span>

@@ -4,7 +4,7 @@
 
 SkillBridge is a single-site web application for the Smart India Hackathon (SIH 26134, Ministry): a labour-market intelligence & curriculum-alignment platform that lets state vocational training directors see live industry demand vs. trained supply, detect skill deficits, and model policy interventions.
 
-Team: Syntax Squad
+Team: Solo (originally a SIH 2026 group submission)
 
 ## Layout
 

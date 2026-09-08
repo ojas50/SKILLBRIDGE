@@ -60,7 +60,7 @@ export default function Navbar() {
             >
               <span>🚀 Demo Mode</span>
             </button>
-            <span className="hidden sm:inline text-slate-400 font-mono">Syntax Squad</span>
+            <span className="hidden sm:inline text-slate-400 font-mono">Personal Project</span>
           </div>
         </div>
 

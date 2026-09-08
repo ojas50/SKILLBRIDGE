@@ -109,6 +109,6 @@ frontend/
 ├── public/
 └── package.json
 Team
-Syntax Squad — Smart India Hackathon 2026
+Built and maintained solo — originally a Smart India Hackathon 2026 submission
 
 ## Architecture
