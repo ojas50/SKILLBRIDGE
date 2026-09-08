@@ -30,6 +30,39 @@
 - [x] Automated testing and compilation checks
 - [x] Documentation & run instructions
 
+### GREAT UI MAKEOVER — Pre-Work Plan (added 2026-09-08)
+
+> Goal: kill the "vibecoded" look (every page restyle-able in ONE pass, consistent tokens, no Tailwind hacks).
+> BLOCKED until ojas50 provides the change list / design direction.
+
+#### Phase 0 — Baseline & Decisions (do FIRST, do NOT touch paint yet)
+- [ ] Wait for ojas50's change list + lock ONE design direction/reference before any restyle
+- [ ] Clear the quick functional bugs so we don't restyle broken UX (BUG-016, BUG-017, BUG-020, BUG-022 are small wins; decide scope on BUG-014/015/018/019/021)
+- [ ] Baseline snapshot: `npm run build` green, screenshot ALL 18 routes in dark AND light, log console errors
+- [ ] Create `ui-makeover` git branch off main so main stays deployable
+
+#### Phase 1 — Design Tokens (the actual anti-vibecode foundation)
+- [ ] Single tokens file: CSS custom properties for brand/neutral/accent/success/warning/danger + semantic `--surface-*`, `--text-*`, `--border-*` + spacing / radius / shadow / typography scales
+- [ ] Delete the light-mode Tailwind-remap hack in globals.css → both themes flow through the same variables
+- [ ] Migrate arbitrary hardcoded colors (`bg-blue-950/40`, `text-cyan-400`, `#0b1120`, `--navbar`) in shared components to semantic tokens
+
+#### Phase 2 — Component Library (kill the repetition)
+- [ ] Inventory repeated atoms across pages (cards, buttons, chips, stat tiles, modals, inputs, switches, tabs, section headers) with usage counts
+- [ ] Extract shared primitives: Button, Card, Badge/Chip, StatTile, Modal, Field/Select/Switch, TabBar, SectionHeading — migrate pages progressively
+- [ ] Icon strategy: replace random emojis (📊🎯⚡🏛️…) with one consistent icon set (lucide-react or inline SVG components) — no icon lib installed today
+- [ ] Typography: define scale (display/heading/body/caption/mono) and map the current `text-xl/3xl …` mishmash
+
+#### Phase 3 — Quality Gates (before the paint job)
+- [ ] Responsive audit baseline: nav, tables, modals on mobile/desktop in both themes
+- [ ] Screenshot key pages for After-vs-Before comparison
+- [ ] Write a Style Guide page (tokens + component rules) so future changes stay consistent
+- [ ] Document a smoke-check routine (build + key flows) to run after every makeover step
+
+#### Phase 4 — The Makeover (BLOCKED: waiting on change list)
+- [ ] Apply ojas50's change list once provided
+- [ ] Restyle in ONE pass using tokens + shared components (pages after Phase 2 are thin shells)
+- [ ] QA: dark + light, all routes, mobile, build green → merge to main + redeploy
+
 ---
 
 ## Site-A — LearnPilot (SIH Student Innovation)
