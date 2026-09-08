@@ -30,8 +30,8 @@ export default function CoursesPage() {
     const matchesSearch =
       c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      c.activeSkills.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      c.missingSkills.some((m) => m.toLowerCase().includes(searchQuery.toLowerCase()));
+      (c.activeSkills ?? []).some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (c.missingSkills ?? []).some((m) => m.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const matchesStatus =
       selectedStatus === "All" ||
