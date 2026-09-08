@@ -4,8 +4,7 @@
 
 | Site  | Problem Statement | Frontend | Backend | Status    |
 |-------|-------------------|----------|---------|-----------|
-| Site-A | LearnPilot (Student Innovation) | Complete | Complete | Complete |
-| Site-B | SkillBridge (SIH 26134 - Ministry) | Complete | Complete | Complete |
+| SkillBridge | SIH 26134 - Ministry | Complete | Complete | Complete |
 
 ---
 
@@ -65,31 +64,11 @@
 
 ---
 
-## Site-A — LearnPilot (SIH Student Innovation)
-
-### Phase 1: Scaffold (DONE)
-- [x] Create folder structure
-- [x] Frontend boilerplate (Next.js 14+, Tailwind, TypeScript)
-- [x] Backend boilerplate (FastAPI, Pydantic, SQLite)
-- [x] README with run instructions
-
-### Phase 2: Core Features (DONE)
-- [x] Define data models and DB schema (Topics, Questions, Mastery progress)
-- [x] Backend API endpoints (`/api/dashboard`, `/api/questions`, `/api/submit-test`)
-- [x] Frontend pages and routing
-- [x] Diagnostic assessment & mastery tracking
-
-### Phase 3: Polish (DONE)
-- [x] UI/UX refinement & consistent theme
-- [x] Testing & validation
-
----
-
 ## Fixed so far
 
 - Fixed missing SQLite tables in `storage.py` and populated seed data for all 36 Maharashtra districts, MSDSVE courses, and employer partners.
 - Upgraded Next.js frontend with dark mode glassmorphism, dynamic capacity simulation calculations, and instant curriculum audit engine.
-- Configured and validated production build (`npm run build`) for both Site-A and Site-B; both apps are 100% Vercel-ready with zero errors.
+- Configured and validated production build (`npm run build`); the SkillBridge app is 100% Vercel-ready with zero errors.
 - Launched local frontend on `http://localhost:3000` connected with FastAPI SQLite backend on `http://localhost:8000`.
 - Deployed Site-B production build to Vercel live at `https://frontend-tau-weld-11.vercel.app`.
 - Purged all Hackathon and SIH Problem Statement #26134 text across headers, metadata, footers, copyable reports, and challenge modules; verified live production redeployment.

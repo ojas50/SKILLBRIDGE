@@ -81,7 +81,7 @@ SkillBridge operates as a closed-loop system:
 
 ```bash
 git clone https://github.com/ojas50/SKILLBRIDGE.git
-cd "Skill Bridge/MinistryQuestion/PlaceholderB/frontend"
+cd "Skill Bridge/MinistryQuestion/SkillBridge/frontend"
 npm install
 npm run dev
 frontend/
