@@ -296,7 +296,7 @@ export default function CoursesPage() {
             enrolled: inspectingCourse.enrolled,
             placement: inspectingCourse.placementRate,
             alignment: inspectingCourse.alignmentScore,
-            status: inspectingCourse.decisionStatus === "ALIGNED" ? "Aligned" : inspectingCourse.decisionStatus === "UPDATE REQUIRED" ? "Update Needed" : "Oversupplied",
+            status: inspectingCourse.decisionStatus === "ALIGNED" ? "Aligned" : inspectingCourse.decisionStatus === "UPDATE REQUIRED" ? "Update Needed" : inspectingCourse.decisionStatus === "EMERGING / HIGH PRIORITY" ? "Emerging" : "Oversupplied",
             skills: inspectingCourse.activeSkills,
             curriculum_summary: inspectingCourse.curriculumSummary,
             missing_skills: inspectingCourse.missingSkills,

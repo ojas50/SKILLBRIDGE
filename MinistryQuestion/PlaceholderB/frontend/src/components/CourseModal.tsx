@@ -120,6 +120,8 @@ export default function CourseModal({
                   ? "badge-aligned"
                   : course.status === "Update Needed"
                   ? "badge-update"
+                  : course.status === "Emerging"
+                  ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
                   : "badge-critical"
               }`}
             >
