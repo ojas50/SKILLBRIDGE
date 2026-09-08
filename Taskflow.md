@@ -113,3 +113,4 @@
 - Fixed BUG-013: clicking "Simulate" on a deficit radar card in `/skill-gaps` now pre-selects that skill in the What-If Policy Simulator (`simulateSkillId` passed through as `defaultSkillId`); simulator mounts fresh per radar→simulator switch so it honors the clicked skill.
 - Fixed BUG-016: Inspect modal on `/courses` no longer mislabels Emerging courses as Oversupplied — all 4 decisionStatus values map to real statuses and CourseModal got an "Emerging" purple badge branch.
 - Fixed BUG-017: `/courses` search no longer assumes every row has skill arrays — `(c.activeSkills ?? [])` / `(c.missingSkills ?? [])` guards prevent a TypeError on malformed API data.
+- Fixed BUG-020: `/district-plans` copy-report now try/catches the clipboard call and falls back to a hidden-textarea `execCommand("copy")` — no unhandled rejection on non-secure contexts, and "Copied" only shows on success.

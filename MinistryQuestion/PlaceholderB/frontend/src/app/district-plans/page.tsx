@@ -35,11 +35,28 @@ export default function DistrictPlansPage() {
     window.print();
   };
 
-  const handleCopyReport = () => {
+  const handleCopyReport = async () => {
     const reportText = `REGIONAL DISTRICT STRATEGIC TRAINING REPORT (2026)\nDistrict: ${selectedDistrict.district} (${selectedDistrict.regionCode})\nMajor Industries: ${selectedDistrict.majorIndustries.join(", ")}\nTotal Open Vacancies: ${selectedDistrict.totalVacancies.toLocaleString()}\nTop Roles: ${selectedDistrict.topRoles.join(", ")}\nTop Skills Demanded: ${selectedDistrict.topSkillsDemanded.join(", ")}\nCritical Skill Gap: ${selectedDistrict.criticalSkillGap}\nRecommended Seat Action: ${selectedDistrict.recommendedSeatAdjustment}\nTrainer Upskilling Quota: ${selectedDistrict.trainerUpskillQuota} Faculty\nLab Sandboxes to Upgrade: ${selectedDistrict.labUpgradesRequired} Labs\nVerified Placement Rate: ${selectedDistrict.placementRate}\nActive Trainees: ${selectedDistrict.activeTrainees.toLocaleString()}\nGenerated via SkillBridge AI Decision Intelligence Suite.`;
-    navigator.clipboard.writeText(reportText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    let copiedOk = false;
+    try {
+      await navigator.clipboard.writeText(reportText);
+      copiedOk = true;
+    } catch {
+      try {
+        const textarea = document.createElement("textarea");
+        textarea.value = reportText;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        copiedOk = document.execCommand("copy");
+        document.body.removeChild(textarea);
+      } catch { /* clipboard unavailable */ }
+    }
+    if (copiedOk) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
   };
 
   return (
