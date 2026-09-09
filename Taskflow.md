@@ -36,7 +36,7 @@
 
 #### Phase 0 — Baseline & Decisions (do FIRST, do NOT touch paint yet)
 - [ ] Wait for ojas50's change list + lock ONE design direction/reference before any restyle
-- [ ] Clear the quick functional bugs so we don't restyle broken UX (BUG-016, BUG-017, BUG-020, BUG-022 are small wins; decide scope on BUG-014/015/018/019/021)
+- [x] Clear the quick functional bugs so we don't restyle broken UX (BUG-016, BUG-017, BUG-020, BUG-022 are small wins; decide scope on BUG-014/015/018/019/021)
 - [ ] Baseline snapshot: `npm run build` green, screenshot ALL 18 routes in dark AND light, log console errors
 - [ ] Create `ui-makeover` git branch off main so main stays deployable
 
@@ -97,3 +97,6 @@
 - Fixed BUG-023: My Dashboard "Readiness Over Time" now renders with a single saved assessment (`length > 0`) instead of requiring 2+ history entries; light-mode contrast half of that bug is folded into BUG-021.
 - Fixed BUG-015: What-If Policy Simulator now runs on the live `/api/skill-gaps` dataset via a typed `skillGaps` prop (fallback to static catalog when empty) — radar and simulator can no longer disagree.
 - Fixed BUG-014: all 9 simulator levers now affect outputs — district corridor gets `DISTRICT_FACTORS` (seat efficiency + placement delta) and Program Duration gained a 6/9/12-month control with supply boost + 12-month placement penalty.
+- Fixed BUG-018: `router.push()` moved out of render into `useEffect` on `/login` and `/register` (Next 14 side-effect-during-render anti-pattern gone); all auth awaits (login, register, Google, forgot-password) wrapped in try/catch/finally so a rejected promise shows an error instead of leaving the button stuck on "loading".
+- Fixed BUG-019: `getStoredUsers()` now validates `JSON.parse` output is an array of well-shaped users (malformed/legacy stored data returns `[]` instead of crashing `.find`); the restored-session `JSON.parse` is shape-checked (invalid sessions are dropped); `forgotPassword` no longer reveals whether an account exists (always returns success, communicated to the user via the existing "If an account exists…" copy) — hash algorithm stays demo-grade but is now documented as such.
+- Fixed BUG-021: light-theme contrast systemic pass via new globals.css remaps (scoped to `html[data-theme="light"]`) — accent 300/400/500 text and `fit-*` text flip to 700-level shades, colored `bg-*-950/900` chips become light tinted panels, `.badge-*` labels darken, `.text-fit-gradient` gets a darker palette, and the always-dark navbar/footer re-assert their bright accents. No JSX edits: 472+ touchpoints handled in one CSS block.
