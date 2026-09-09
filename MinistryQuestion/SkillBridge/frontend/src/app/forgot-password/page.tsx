@@ -15,12 +15,17 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const result = await forgotPassword(email);
-    setLoading(false);
-    if (result.success) {
-      setSuccess(true);
-    } else {
-      setError(result.error || "Something went wrong");
+    try {
+      const result = await forgotPassword(email);
+      if (result.success) {
+        setSuccess(true);
+      } else {
+        setError(result.error || "Something went wrong");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 

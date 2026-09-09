@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/AuthContext";
@@ -14,31 +14,44 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  if (user) {
-    router.push("/");
-    return null;
-  }
+  useEffect(() => {
+    if (user) router.push("/");
+  }, [user, router]);
+
+  if (user) return null;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const result = await login(email, password);
-    setLoading(false);
-    if (result.success) {
-      router.push("/");
-    } else {
-      setError(result.error || "Login failed");
+    try {
+      const result = await login(email, password);
+      if (result.success) {
+        router.push("/");
+      } else {
+        setError(result.error || "Login failed");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
   async function handleGoogle() {
     setError("");
     setLoading(true);
-    const result = await loginWithGoogle();
-    setLoading(false);
-    if (result.success) {
-      router.push("/");
+    try {
+      const result = await loginWithGoogle();
+      if (result.success) {
+        router.push("/");
+      } else {
+        setError(result.error || "Google sign-in failed");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
