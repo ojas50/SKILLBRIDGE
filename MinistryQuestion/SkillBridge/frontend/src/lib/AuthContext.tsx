@@ -32,6 +32,10 @@ interface StoredUser {
   avatar?: string;
 }
 
+// Demo-grade password hashing (prototype only, NOT cryptographically secure).
+// An XOR-shift string hash is deterministic so registered hashes survive reruns,
+// but it is trivially collidable — replace with a proper KDF (e.g. Web Crypto
+// SHA-256 with a per-user salt, or a server-side argon2/bcrypt) before real auth.
 function hashPassword(password: string): string {
   let hash = 0;
   for (let i = 0; i < password.length; i++) {
@@ -45,7 +49,17 @@ function hashPassword(password: string): string {
 function getStoredUsers(): StoredUser[] {
   try {
     const raw = localStorage.getItem(USERS_KEY);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(
+      (u): u is StoredUser =>
+        !!u &&
+        typeof u === "object" &&
+        typeof (u as StoredUser).name === "string" &&
+        typeof (u as StoredUser).email === "string" &&
+        typeof (u as StoredUser).passwordHash === "string"
+    );
   } catch {
     return [];
   }
@@ -63,11 +77,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
-        setUser(JSON.parse(raw));
+        const parsed: unknown = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && typeof (parsed as User).email === "string") {
+          setUser(parsed as User);
+          return;
+        }
       }
     } catch {
-      localStorage.removeItem(STORAGE_KEY);
+      // fall through to cleanup
     }
+    localStorage.removeItem(STORAGE_KEY);
     setIsLoading(false);
   }, []);
 
@@ -125,12 +144,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const forgotPassword = useCallback(async (email: string) => {
+    // Prototype: simulates dispatching a reset link — nothing is actually emailed.
+    // The response is identical for known and unknown addresses so the form cannot
+    // be used to enumerate which accounts exist.
+    void email;
     await new Promise((r) => setTimeout(r, 600));
-    const users = getStoredUsers();
-    const exists = users.some((u) => u.email.toLowerCase() === email.toLowerCase());
-    if (!exists) {
-      return { success: false, error: "No account found with this email" };
-    }
     return { success: true };
   }, []);
 
