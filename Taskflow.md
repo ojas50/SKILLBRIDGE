@@ -32,10 +32,10 @@
 ### GREAT UI MAKEOVER — Pre-Work Plan (added 2026-09-08)
 
 > Goal: kill the "vibecoded" look (every page restyle-able in ONE pass, consistent tokens, no Tailwind hacks).
-> BLOCKED until ojas50 provides the change list / design direction.
+> DIRECTION LOCKED 2026-09-10 (ojas50) → Naukri-inspired + custom palette (sun-yellow/neon-orange/platinum/deep-red/charcoal/cyan). See `Makeover_Spec.md`.
 
 #### Phase 0 — Baseline & Decisions (do FIRST, do NOT touch paint yet)
-- [ ] Wait for ojas50's change list + lock ONE design direction/reference before any restyle
+- [ ] Lock ONE design direction/reference before any restyle (DONE — Makeover_Spec.md v1, Naukri-insp. + custom palette)
 - [x] Clear the quick functional bugs so we don't restyle broken UX (BUG-016, BUG-017, BUG-020, BUG-022 are small wins; decide scope on BUG-014/015/018/019/021)
 - [ ] Baseline snapshot: `npm run build` green, screenshot ALL 18 routes in dark AND light, log console errors
 - [ ] Create `ui-makeover` git branch off main so main stays deployable
@@ -57,8 +57,8 @@
 - [ ] Write a Style Guide page (tokens + component rules) so future changes stay consistent
 - [ ] Document a smoke-check routine (build + key flows) to run after every makeover step
 
-#### Phase 4 — The Makeover (BLOCKED: waiting on change list)
-- [ ] Apply ojas50's change list once provided
+#### Phase 4 — The Makeover
+- [ ] Apply ojas50's change list (DOES NOT BLOCK — direction locked in Makeover_Spec.md)
 - [ ] Restyle in ONE pass using tokens + shared components (pages after Phase 2 are thin shells)
 - [ ] QA: dark + light, all routes, mobile, build green → merge to main + redeploy
 
