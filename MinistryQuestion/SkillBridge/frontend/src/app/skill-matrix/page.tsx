@@ -136,15 +136,20 @@ export default function SkillMatrixPage() {
       <div className="glass-card p-5 space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Search input */}
-          <div className="relative flex-1 max-w-md">
-            <input
-              type="text"
-              placeholder="Search skill, tool, or target job role (e.g. GenAI, Kubernetes, PLC, TypeScript)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
-            />
-            <span className="absolute left-3 top-2.5 text-slate-500 text-sm">🔍</span>
+          <div className="flex-1 max-w-md">
+            <label htmlFor="skill-matrix-search" className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              Search Skills
+            </label>
+            <div className="relative">
+              <input
+                id="skill-matrix-search"
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+              />
+              <span className="absolute left-3 top-2.5 text-slate-500 text-sm">🔍</span>
+            </div>
           </div>
 
           {/* View mode toggle */}

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  overflow-x: clip;
+}
+
 :root {
   --foreground: #f1f5f9;
   --background: #05070d;

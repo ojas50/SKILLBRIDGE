@@ -29,6 +29,57 @@ const ADMIN_NAV_ITEMS = [
   { name: "AI Advisor", href: "/curriculum-advisor" },
 ];
 
+function AdminDropdown({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const active = ADMIN_NAV_ITEMS.some((i) => i.href === pathname);
+  return (
+    <div
+      className="relative"
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
+      }}
+    >
+      <button
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-1 ${
+          active
+            ? "bg-blue-600/25 text-blue-400 border border-blue-500/30 shadow-sm"
+            : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+        }`}
+      >
+        Admin
+        <svg
+          className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full mt-1 w-44 py-1.5 rounded-xl bg-slate-900 border border-slate-800 shadow-xl shadow-black/40 z-50">
+          {ADMIN_NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className={`block px-3 py-2 text-xs font-semibold transition-colors ${
+                pathname === item.href
+                  ? "text-blue-400 bg-blue-600/15"
+                  : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const { user, logout } = useAuth();
@@ -39,31 +90,6 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-50 bg-[color:var(--navbar)] backdrop-blur-md border-b border-slate-800/80">
-        {/* Top Status Banner */}
-        <div className="always-dark bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border-b border-blue-900/40 text-[11px] px-4 sm:px-6 py-1 text-slate-300 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="font-bold text-white">SkillBridge AI</span>
-            <span className="hidden md:inline text-slate-500">•</span>
-            <span className="hidden md:inline text-blue-300 font-medium">
-              Labour-Market Intelligence &amp; Curriculum Alignment
-            </span>
-            <span className="hidden lg:inline text-slate-500">•</span>
-            <span className="hidden lg:inline text-xs font-mono font-bold px-2 py-0.2 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
-              SIH 2026
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-xs">
-            <button
-              onClick={() => setIsDemoModalOpen(true)}
-              className="bg-blue-600/30 hover:bg-blue-600/50 border border-blue-400/50 text-blue-200 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold flex items-center gap-1 transition-all"
-            >
-              <span>🚀 Demo Mode</span>
-            </button>
-            <span className="hidden sm:inline text-slate-400 font-mono">Personal Project</span>
-          </div>
-        </div>
-
         {/* Main Navbar */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -77,13 +103,9 @@ export default function Navbar() {
                 </div>
               </div>
               <div>
-                <div className="flex items-center gap-1">
-                  <span className="text-base font-black tracking-tight text-white group-hover:text-blue-400 transition-colors">
-                    Skill<span className="text-blue-500">Bridge</span>
-                  </span>
-                  <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded font-mono font-semibold">AI</span>
-                </div>
-                <p className="text-[9px] text-slate-400 leading-none">SIH Final-Round Prototype</p>
+                <span className="text-base font-black tracking-tight text-white group-hover:text-blue-400 transition-colors">
+                  Skill<span className="text-blue-500">Bridge</span>
+                </span>
               </div>
             </Link>
 
@@ -106,22 +128,7 @@ export default function Navbar() {
                 );
               })}
               <span className="w-px h-4 bg-slate-800 mx-1"></span>
-              {ADMIN_NAV_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                      isActive
-                        ? "bg-blue-600/25 text-blue-400 border border-blue-500/30 shadow-sm"
-                        : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
+              <AdminDropdown pathname={pathname} />
             </nav>
 
             {/* Right Action Buttons */}

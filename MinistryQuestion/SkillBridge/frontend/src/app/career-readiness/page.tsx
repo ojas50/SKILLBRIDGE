@@ -381,12 +381,15 @@ function CareerReadinessInner() {
             </div>
           )}
 
-          <div className="relative">
+          <div>
+            <label htmlFor="skill-add" className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              Add Skills
+            </label>
             <input
+              id="skill-add"
               type="text"
               value={skillSearch}
               onChange={(e) => setSkillSearch(e.target.value)}
-              placeholder="Search skills (e.g. Python, React, AWS...)"
               className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
             />
           </div>
