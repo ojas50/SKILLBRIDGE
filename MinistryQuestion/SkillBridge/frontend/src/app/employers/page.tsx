@@ -396,7 +396,6 @@ export default function EmployersPage() {
                     required
                     value={requestedSkillInput}
                     onChange={(e) => setRequestedSkillInput(e.target.value)}
-                    placeholder="e.g. Kubernetes, RAG Pipelines, Docker, Terraform"
                     className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
                   />
                 </div>

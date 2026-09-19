@@ -138,7 +138,6 @@ export default function EmployerModal({
                 required
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                placeholder="e.g., L&T Technology Services"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
               />
             </div>
@@ -186,7 +185,6 @@ export default function EmployerModal({
                 required
                 value={skillsInput}
                 onChange={(e) => setSkillsInput(e.target.value)}
-                placeholder="e.g. Cloud, Kubernetes, TypeScript, PyTorch"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
               />
             </div>
@@ -200,7 +198,6 @@ export default function EmployerModal({
                 required
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="e.g., Pune / Mumbai / Nagpur"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
               />
             </div>

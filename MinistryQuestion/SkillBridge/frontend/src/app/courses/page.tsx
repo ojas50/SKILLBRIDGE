@@ -88,15 +88,20 @@ export default function CoursesPage() {
       {/* Search & Filter Bar */}
       <div className="glass-card p-4 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search Input */}
-        <div className="relative w-full md:w-96">
-          <input
-            type="text"
-            placeholder="Search courses, codes or skills (e.g. Python, AWS, Next.js, K8s)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
-          />
-          <span className="absolute left-3 top-2.5 text-slate-500 text-sm">🔍</span>
+        <div className="w-full md:w-96">
+          <label htmlFor="course-search" className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            Search Courses
+          </label>
+          <div className="relative">
+            <input
+              id="course-search"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+            />
+            <span className="absolute left-3 top-2.5 text-slate-500 text-sm">🔍</span>
+          </div>
         </div>
 
         {/* Status Filter Tabs */}
