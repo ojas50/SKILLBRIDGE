@@ -64,6 +64,26 @@
 - [ ] Pain-inventory: grep counts for legacy colors/classes to delete (baseline numbers for the kill-list)
 - [ ] Install `lucide-react` + `next/font` @inter (dependency commit, no visual change)
 
+#### Phase 0.5 — Site Hygiene & Detail Pass (ojas50 list, 2026-09-19) — do alongside Phase 0/1
+- [ ] 1. Remove ALL emojis from rendered UI (the sweep IS Phase 3's GATE — run it early, don't wait)
+- [ ] 2. Find broken links: audit every `href` across all routes/menus/footer/cards; check real routes vs 404 (manual list incl. `/capacity-planner`, `/placement-analytics`, `/policy-decisions`, `/style-guide` placeholder)
+- [ ] 3. Mobile menu: polish the existing drawer — group items (Main / Explore / Admin), active states, close on route change, tap targets ≥44px
+- [ ] 4. Favicon: verify `app/favicon.ico` exists & matches brand (bolt in sun-yellow→neon-orange rounded square)
+- [ ] 5. Fix page titles: per-page `metadata.title` on ALL routes (currently shared layout title)
+- [ ] 6. Meta descriptions: per-page `metadata.description` (50–160 chars, sentence-case)
+- [ ] 7. Fix footer links: every footer link must target a real route; drop the dead ones
+- [ ] 8. Custom 404 page: `app/not-found.tsx` (charcoal canvas, platinum hairlines, neon-orange "Back Home")
+- [ ] 9. Copyright year: dynamic `new Date().getFullYear()` in footer — no hardcoded 2026
+- [ ] 10. Compress images: audit `public/` + bundled assets (logo, OG image); recompress/optimize; no >200KB assets
+- [ ] 11. Fix broken buttons: sweep buttons without `onClick`/`href`/type that render nothing when clicked
+- [ ] 12. Success messages: consistent success feedback after actions (save profile, register, add to wishlist, copy report, submit employer/validation)
+- [ ] 13. Error messages: consistent error UI (inline red text/StatusBadge deep-red), never silent failures or console-only
+- [ ] 14. Fix mobile overflow: 390px pass per page; wide tables scroll in-container, no 100vw+ elements, hero blobs don't stick out
+- [ ] 15. Logo clickable: verify EVERY brand instance links to `/` (Navbar ✔ already; check Footer + any route-local logos)
+- [ ] 16. Phone clickable in footer: `tel:+918530951108`
+- [ ] 17. Email clickable in footer: `mailto:ojaskhodaskar2026@gmail.com` (nav/footer contact too)
+- [ ] 18. Mobile optimise: end-to-end ≤390px QA on all 18 routes (layout, tap targets, readability, charts) — the Acceptance gate for Phase 0.5
+
 #### Phase 1 — Design Tokens (anti-vibecode foundation; visual change begins here)
 - [ ] Create `src/app/tokens.css`: full variable set for BOTH themes — six-color system + semantic
       `--surface-*` / `--text-*` / `--border-*` + radius / shadow / spacing / type scales; import from globals.css
