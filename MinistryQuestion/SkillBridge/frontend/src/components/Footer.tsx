@@ -31,6 +31,20 @@ export default function Footer() {
                 <span>Status: Prototype Intelligence Engine Active</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
               </div>
+              <div className="pt-1 space-y-1.5 text-[11px]">
+                <a
+                  href="tel:+918530951108"
+                  className="block font-mono text-slate-400 hover:text-blue-400 transition-colors"
+                >
+                  +91 85309 51108
+                </a>
+                <a
+                  href="mailto:ojaskhodaskar2026@gmail.com"
+                  className="block font-mono text-slate-400 hover:text-blue-400 transition-colors break-all"
+                >
+                  ojaskhodaskar2026@gmail.com
+                </a>
+              </div>
             </div>
 
             {/* Col 2: Intelligence & Gaps */}
@@ -135,7 +149,7 @@ export default function Footer() {
 
           {/* Copyright Row */}
           <div className="border-t border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-            <p>© 2026 SkillBridge AI • Smart India Hackathon Prototype • Originally an SIH 2026 submission</p>
+            <p>© {new Date().getFullYear()} SkillBridge AI • Smart India Hackathon Prototype • Originally an SIH 2026 submission</p>
             <div className="flex items-center gap-4">
               <span>Security Compliant Architecture</span>
               <span>•</span>
