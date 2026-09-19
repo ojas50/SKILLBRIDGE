@@ -58,8 +58,9 @@
 #### Phase 0 — Baseline & Scoping (tomorrow, do FIRST, do NOT touch paint)
 - [x] Lock design direction (DONE — Makeover_Spec.md v1, Naukri-insp. + custom palette)
 - [x] Clear the quick functional bugs (all 24 BUGs ✅ Fixed)
+- [x] User-requested removals (commit `3a16e30` on `ui-makeover`): SIH status banner, filler labels (AI chip / "SIH Final-Round Prototype" / "Personal Project"), all input `placeholder=`, admin nav group → "Admin" dropdown, `overflow-x: clip` guard
 - [ ] Baseline snapshot: `npm run build` green, screenshot ALL 18 routes in dark AND light, log console errors
-- [ ] Create `ui-makeover` git branch off main (main stays deployable)
+- [x] Create `ui-makeover` git branch off main (main stays deployable)
 - [ ] Pain-inventory: grep counts for legacy colors/classes to delete (baseline numbers for the kill-list)
 - [ ] Install `lucide-react` + `next/font` @inter (dependency commit, no visual change)
 
