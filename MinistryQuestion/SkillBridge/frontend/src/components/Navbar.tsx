@@ -202,44 +202,57 @@ export default function Navbar() {
 
         {/* Mobile menu drawer */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-2 pb-6 space-y-1">
-            <div className="grid grid-cols-2 gap-1 mb-3">
-              {[...NAV_ITEMS, ...EXPLORE_ITEMS, ...ADMIN_NAV_ITEMS].map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-xs font-medium ${
-                    pathname === item.href
-                      ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                      : "text-slate-300 hover:bg-slate-900"
-                  }`}
-                >
-                  {item.name}
-                </Link>
+          <div className="lg:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-2 pb-6">
+            <div className="space-y-3 pb-4 mb-2 border-b border-slate-800">
+              {[
+                { label: "Main", items: NAV_ITEMS },
+                { label: "Explore", items: EXPLORE_ITEMS },
+                { label: "Admin", items: ADMIN_NAV_ITEMS },
+              ].map((group) => (
+                <div key={group.label}>
+                  <p className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500 px-1 mb-1">
+                    {group.label}
+                  </p>
+                  <div className="grid grid-cols-2 gap-1">
+                    {group.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center min-h-[44px] px-3 py-2 rounded-md text-xs font-medium ${
+                          pathname === item.href
+                            ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
+                            : "text-slate-300 hover:bg-slate-900"
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
 
-            <div className="pt-2 flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsDemoModalOpen(true);
                 }}
-                className="btn-glow w-full justify-center text-xs py-2.5"
+                className="btn-glow w-full justify-center text-xs min-h-[44px]"
               >
                 🚀 Launch Demo Mode
               </button>
 
               <button
                 onClick={toggleTheme}
-                className="btn-secondary w-full justify-center text-xs py-2"
+                className="btn-secondary w-full justify-center text-xs min-h-[44px]"
               >
                 {theme === "dark" ? "☀️ Switch to Light Mode" : "🌙 Switch to Dark Mode"}
               </button>
 
               {user ? (
-                <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-900 border border-slate-800">
+                <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 min-h-[44px]">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-xs font-bold text-blue-300">
                       {user.name.charAt(0).toUpperCase()}
@@ -257,7 +270,7 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="btn-secondary w-full justify-center text-xs py-2"
+                  className="btn-secondary w-full justify-center text-xs min-h-[44px]"
                 >
                   Sign In
                 </Link>

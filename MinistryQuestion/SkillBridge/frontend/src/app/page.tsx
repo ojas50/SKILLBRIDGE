@@ -12,7 +12,7 @@ export default function Home() {
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
       {/* Hero */}
       <section className="relative text-center py-6">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[200px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none -z-10" />
 
         <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full text-[11px] font-semibold text-emerald-400 mb-3">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
