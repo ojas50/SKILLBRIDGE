@@ -3,15 +3,16 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SetPageTitle } from "@/components/SetPageTitle";
 import { AuthProvider } from "@/lib/AuthContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SkillBridge AI — Labour-Market Intelligence & Curriculum Alignment Platform",
+  title: "SkillBridge — Know Your Career Readiness",
   description:
-    "Labour-market demand forecasting, automated curriculum gap detection, and district-level strategic training intelligence.",
+    "See how your skills match real employer demand, and exactly what to learn next.",
 };
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem('skillbridge_theme');document.documentElement.dataset.theme=(t==='light'?'light':'dark');}catch(e){document.documentElement.dataset.theme='dark';}})();`;
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased min-h-screen flex flex-col justify-between`}>
         <ThemeProvider>
           <AuthProvider>
+            <SetPageTitle />
             <div>
               <Navbar />
               {children}
