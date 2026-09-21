@@ -76,7 +76,6 @@ SkillBridge operates as a closed-loop system:
 | UI | Glassmorphism dark theme, fully responsive |
 
 ---
-
 ## Getting Started
 
 ```bash
