@@ -28,18 +28,12 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
     <>
       <defs>
         <linearGradient id="fitArea" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.35" />
-          <stop offset="55%" stopColor="#34d399" stopOpacity="0.30" />
-          <stop offset="100%" stopColor="#a3e635" stopOpacity="0.30" />
+          <stop offset="0%" stopColor="var(--sb-cyan)" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="var(--sb-cyan)" stopOpacity="0.04" />
         </linearGradient>
-        <linearGradient id="fitLine" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#22d3ee" />
-          <stop offset="55%" stopColor="#34d399" />
-          <stop offset="100%" stopColor="#a3e635" />
-        </linearGradient>
-        <linearGradient id="supplyLine" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="var(--chart-supply)" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="var(--chart-supply-soft)" stopOpacity="0.7" />
+        <linearGradient id="supplyArea" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="var(--sb-sun)" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="var(--sb-sun)" stopOpacity="0.03" />
         </linearGradient>
       </defs>
     </>
@@ -74,17 +68,16 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
         {/* supply area (subtle, behind) */}
         <polygon
           points={`${padL},${H - padB} ${pts(supply)} ${x(supply.length - 1)},${H - padB}`}
-          fill="url(#supplyLine)"
-          opacity="0.10"
+          fill="url(#supplyArea)"
         />
         <polyline
           points={pts(supply)}
           fill="none"
-          stroke="url(#supplyLine)"
+          stroke="var(--sb-sun)"
           strokeWidth="2"
           strokeDasharray="5 5"
         />
-        {/* demand area (signature gradient) */}
+        {/* demand area (signature cyan series) */}
         <polygon
           points={`${padL},${H - padB} ${pts(demand)} ${x(demand.length - 1)},${H - padB}`}
           fill="url(#fitArea)"
@@ -92,7 +85,7 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
         <polyline
           points={pts(demand)}
           fill="none"
-          stroke="url(#fitLine)"
+          stroke="var(--sb-cyan)"
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -104,25 +97,25 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
             cx={x(i)}
             cy={y(d)}
             r={i === demand.length - 1 ? 4.5 : 2.5}
-            fill="#a3e635"
-            opacity={i === demand.length - 1 ? 1 : 0.7}
+            fill="var(--sb-cyan)"
+            opacity={i === demand.length - 1 ? 1 : 0.55}
           />
         ))}
         {/* x labels (drawn in normal flow, not affected by preserveAspectRatio stretch) */}
       </svg>
       <div className="mt-2 grid gap-2 px-1" style={{ gridTemplateColumns: `repeat(${labels.length}, 1fr)` }}>
         {labels.map((l) => (
-          <span key={l} className="text-center text-[10px] font-mono text-slate-500">
+          <span key={l} className="text-center text-[10px] font-mono text-ink-faint">
             {l}
           </span>
         ))}
       </div>
-      <div className="mt-4 flex items-center gap-5 text-[11px] text-slate-400">
+      <div className="mt-4 flex items-center gap-5 text-[11px] text-ink-muted">
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1 w-5 rounded-full bar-fit" /> Demand Score
+          <span className="h-1 w-5 rounded-full bg-cyan-accent" /> Demand Score
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1 w-5 rounded-full bg-slate-500/80" /> Trained Supply
+          <span className="h-1 w-5 rounded-full bg-sun" /> Trained Supply
         </span>
       </div>
     </div>
