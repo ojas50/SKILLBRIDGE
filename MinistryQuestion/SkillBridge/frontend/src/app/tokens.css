@@ -1,0 +1,65 @@
+/* =========================================================
+   SkillBridge Design Tokens — single source of truth.
+   6-color system (sun-yellow / neon-orange / platinum /
+   deep-red / charcoal / cyan) + semantic surfaces.
+   Imported BEFORE globals.css in layout.tsx.
+   ========================================================= */
+
+:root {
+  /* palette */
+  --sb-sun: #ffc400;
+  --sb-sun-strong: #b45309; /* sun-yellow text on light surfaces */
+  --sb-neon: #ff6d00;
+  --sb-neon-cta: #c2410c; /* light-theme primary CTA bg (white text, AA) */
+  --sb-neon-cta-dark: #d85400; /* dark-theme primary CTA bg (white text) */
+  --sb-platinum: #e5e4e2;
+  --sb-crimson: #dc2626; /* dark-theme critical */
+  --sb-crimson-strong: #b71c1c; /* light-theme critical (AA) */
+  --sb-charcoal: #242424; /* light-theme body text */
+  --sb-cyan: #00e5ff;
+  --sb-cyan-strong: #0e7490; /* cyan text on light surfaces */
+
+  /* dark-theme surfaces */
+  --sb-canvas: #141414;
+  --sb-surface: #1f1f1f;
+  --sb-surface-raised: #2a2a2a;
+  --sb-hairline: rgba(229, 228, 226, 0.14);
+
+  /* dark-theme text */
+  --sb-ink: #f1f5f9;
+  --sb-ink-muted: #94a3b8;
+  --sb-ink-faint: #64748b;
+
+  /* themed action pills */
+  --sb-cta-bg: var(--sb-neon-cta-dark);
+  --sb-cta-bg-hover: #e8620f;
+  --sb-cta-text: #ffffff;
+  --sb-fit-bg: #00e5ff;
+  --sb-fit-text: #141414;
+  --sb-fit-gradient: linear-gradient(135deg, var(--sb-cyan) 0%, var(--sb-sun) 100%);
+
+  --sb-focus-ring: rgba(0, 229, 255, 0.5);
+}
+
+html[data-theme="light"] {
+  --sb-crimson: var(--sb-crimson-strong);
+
+  --sb-canvas: #f6f6f4;
+  --sb-surface: #ffffff;
+  --sb-surface-raised: #ffffff;
+  --sb-hairline: #e5e4e2;
+
+  --sb-ink: var(--sb-charcoal);
+  --sb-ink-muted: #52616e;
+  --sb-ink-faint: #6b7280;
+
+  --sb-cta-bg: var(--sb-neon-cta);
+  --sb-cta-bg-hover: #a9340a;
+  --sb-cta-text: #ffffff;
+  --sb-fit-bg: var(--sb-cyan-strong);
+  --sb-fit-text: #ffffff;
+  --sb-fit-gradient: linear-gradient(135deg, var(--sb-cyan-strong) 0%, var(--sb-sun-strong) 100%);
+
+  --sb-focus-ring: rgba(14, 116, 144, 0.45);
+  color-scheme: light;
+}

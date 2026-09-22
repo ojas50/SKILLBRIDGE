@@ -44,8 +44,8 @@ function AdminDropdown({ pathname }: { pathname: string }) {
         aria-expanded={open}
         className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-1 ${
           active
-            ? "bg-blue-600/25 text-blue-400 border border-blue-500/30 shadow-sm"
-            : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+            ? "bg-sun text-charcoal shadow-sm"
+            : "text-ink-muted hover:text-ink hover:bg-line"
         }`}
       >
         Admin
@@ -59,7 +59,7 @@ function AdminDropdown({ pathname }: { pathname: string }) {
         </svg>
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-1 w-44 py-1.5 rounded-xl bg-slate-900 border border-slate-800 shadow-xl shadow-black/40 z-50">
+        <div className="absolute right-0 top-full mt-1 w-44 py-1.5 rounded-xl bg-raised border border-line shadow-xl shadow-black/40 z-50">
           {ADMIN_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -67,8 +67,8 @@ function AdminDropdown({ pathname }: { pathname: string }) {
               onClick={() => setOpen(false)}
               className={`block px-3 py-2 text-xs font-semibold transition-colors ${
                 pathname === item.href
-                  ? "text-blue-400 bg-blue-600/15"
-                  : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+                  ? "text-charcoal bg-sun"
+                  : "text-ink-muted hover:text-ink hover:bg-line"
               }`}
             >
               {item.name}
@@ -89,22 +89,22 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-[color:var(--navbar)] backdrop-blur-md border-b border-slate-800/80">
+      <header className="sticky top-0 z-50 bg-[var(--navbar)] backdrop-blur-md border-b border-line">
         {/* Main Navbar */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Brand Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 via-indigo-600 to-cyan-400 p-[1px] shadow-lg shadow-blue-500/20">
-                <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <svg className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0" aria-label="SkillBridge home">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sun to-neon p-[1px] shadow-lg shadow-black/20">
+                <div className="w-full h-full bg-canvas rounded-[10px] flex items-center justify-center">
+                  <svg className="w-4 h-4 text-charcoal group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
               </div>
               <div>
-                <span className="text-base font-black tracking-tight text-white group-hover:text-blue-400 transition-colors">
-                  Skill<span className="text-blue-500">Bridge</span>
+                <span className="text-base font-black tracking-tight text-ink group-hover:text-neon transition-colors">
+                  Skill<span className="text-neon">Bridge</span>
                 </span>
               </div>
             </Link>
@@ -119,15 +119,15 @@ export default function Navbar() {
                     href={item.href}
                     className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
                       isActive
-                        ? "bg-blue-600/25 text-blue-400 border border-blue-500/30 shadow-sm"
-                        : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+                        ? "bg-sun text-charcoal shadow-sm"
+                        : "text-ink-muted hover:text-ink hover:bg-line"
                     }`}
                   >
                     {item.name}
                   </Link>
                 );
               })}
-              <span className="w-px h-4 bg-slate-800 mx-1"></span>
+              <span className="w-px h-4 bg-line mx-1"></span>
               <AdminDropdown pathname={pathname} />
             </nav>
 
@@ -136,7 +136,7 @@ export default function Navbar() {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle light or dark theme"
-                className="p-2 rounded-xl bg-slate-850 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+                className="p-2 rounded-xl bg-transparent border border-line text-ink-muted hover:text-ink hover:border-platinum/40 transition-colors"
                 title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (
@@ -153,22 +153,22 @@ export default function Navbar() {
 
               <button
                 onClick={() => setIsDemoModalOpen(true)}
-                className="btn-glow text-xs py-2 px-3.5 flex items-center gap-1.5 shadow-lg shadow-blue-500/20"
+                className="btn-glow text-xs py-2 px-3.5 flex items-center gap-1.5 shadow-lg shadow-black/20"
               >
                 <span>🚀 Demo</span>
               </button>
 
               {user ? (
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800">
-                    <div className="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-[10px] font-bold text-blue-300">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-raised border border-line">
+                    <div className="w-6 h-6 rounded-full bg-sun border border-platinum/30 flex items-center justify-center text-[10px] font-bold text-charcoal">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
-                    <span className="text-xs font-medium text-slate-300 max-w-[100px] truncate">{user.name}</span>
+                    <span className="text-xs font-medium text-ink max-w-[100px] truncate">{user.name}</span>
                   </div>
                   <button
                     onClick={logout}
-                    className="text-xs text-slate-500 hover:text-rose-400 transition-colors px-2 py-1.5"
+                    className="text-xs text-crimson hover:opacity-80 transition-opacity px-2 py-1.5"
                   >
                     Logout
                   </button>
@@ -186,7 +186,7 @@ export default function Navbar() {
             {/* Mobile menu trigger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-slate-400 hover:text-white focus:outline-none"
+              className="lg:hidden p-2 text-ink-muted hover:text-ink focus:outline-none"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -202,15 +202,15 @@ export default function Navbar() {
 
         {/* Mobile menu drawer */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-800 bg-slate-950/95 px-4 pt-2 pb-6">
-            <div className="space-y-3 pb-4 mb-2 border-b border-slate-800">
+          <div className="lg:hidden border-t border-line bg-canvas px-4 pt-2 pb-6">
+            <div className="space-y-3 pb-4 mb-2 border-b border-line">
               {[
                 { label: "Main", items: NAV_ITEMS },
                 { label: "Explore", items: EXPLORE_ITEMS },
                 { label: "Admin", items: ADMIN_NAV_ITEMS },
               ].map((group) => (
                 <div key={group.label}>
-                  <p className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500 px-1 mb-1">
+                  <p className="text-[10px] font-mono font-semibold uppercase tracking-wider text-ink-faint px-1 mb-1">
                     {group.label}
                   </p>
                   <div className="grid grid-cols-2 gap-1">
@@ -221,8 +221,8 @@ export default function Navbar() {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center min-h-[44px] px-3 py-2 rounded-md text-xs font-medium ${
                           pathname === item.href
-                            ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                            : "text-slate-300 hover:bg-slate-900"
+                            ? "bg-sun text-charcoal"
+                            : "text-ink-muted hover:bg-line"
                         }`}
                       >
                         {item.name}
@@ -252,16 +252,16 @@ export default function Navbar() {
               </button>
 
               {user ? (
-                <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 min-h-[44px]">
+                <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-raised border border-line min-h-[44px]">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-xs font-bold text-blue-300">
+                    <div className="w-7 h-7 rounded-full bg-sun border border-platinum/30 flex items-center justify-center text-xs font-bold text-charcoal">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
-                    <span className="text-xs font-medium text-slate-300">{user.name}</span>
+                    <span className="text-xs font-medium text-ink">{user.name}</span>
                   </div>
                   <button
                     onClick={() => { logout(); setIsMobileMenuOpen(false); }}
-                    className="text-xs text-rose-400 hover:text-rose-300"
+                    className="text-xs text-crimson hover:opacity-80"
                   >
                     Logout
                   </button>

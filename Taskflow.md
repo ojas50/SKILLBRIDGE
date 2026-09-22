@@ -85,17 +85,18 @@
 - [ ] 18. Mobile optimise: static pass done (item 14); DEVICE QA at ≤390px on all 18 routes still pending (real-device sweep)
 
 #### Phase 1 — Design Tokens (anti-vibecode foundation; visual change begins here)
-- [ ] Create `src/app/tokens.css`: full variable set for BOTH themes — six-color system + semantic
-      `--surface-*` / `--text-*` / `--border-*` + radius / shadow / spacing / type scales; import from globals.css
-- [ ] Trim `tailwind.config.ts`: DELETE `brand.*`, `cyber.*`, `fit.*` groups; map the six colors +
-      strong-text shades into `colors` (see CONTRACT below); keep slate only if remapped to charcoal/platinum
-- [ ] Delete the light-mode Tailwind-remap block + all `always-dark` rules in globals.css → both themes
-      flow through tokens (dark re-assertions obsolete)
-- [ ] Replace legacy tokens: `--chart-grid/--chart-supply/--chart-supply-soft`, `--accent-*`, `--fit-gradient`,
-      `--navbar`, `--panel*`, autofill vars → new palette values (per CONTRACT)
-- [ ] Kill-list sweep on shared components (Navbar, Footer, AreaChart first): no `bg-*-950`, `text-*-(300|400|500)`,
-      `blue-*`, `emerald-*`, `teal-*`, `lime-*`, `indigo-*`, `purple-*`, `rose-*`, old `cyan-*` remains only as new-cyan
-- [ ] **GATE: build green; both themes load with ZERO legacy paint left (spot-check dashboard + courses + login)**
+- [x] Create `src/app/tokens.css`: DONE — full var set for BOTH themes (`--sb-*` prefixed): six-color system +
+      semantic surfaces/text/hairlines + themed CTA pills + fit gradients + focus rings; imported in layout.tsx before globals.css
+- [x] Tailwind config: ADDED token color map (ink/ink-muted/ink-faint/canvas/surface/raised/line/sun/sun-strong/neon/
+      platinum/crimson/crimson-strong/charcoal/cyan-accent/cyan-strong → CSS vars, theme-aware). LEGACY brand/cyber/fit
+      groups KEPT for deployability — DELETE deferred to Phase 4 sweep (deleting now would silently break ~100s of classes)
+- [x] globals.css: revalued ALL legacy vars (`--background/--foreground/--panel/--hairline/--navbar/--primary/--accent-*/--chart-*/--fit-gradient`)
+      to `--sb-*` tokens; body → flat canvas (radial gradients gone); glass-card → solid surface + platinum hairline;
+      btn-glow → neon-orange CTA (light `#C2410C`/dark `#D85400`, white text); btn-fit/bar-fit/ring-fit/text-fit-gradient →
+      cyan↔sun; badges theme-automatic via `--accent-*`
+- [x] always-dark block DELETED (Footer converted to tokens; navbar strip already gone) — light-mode Tailwind-remap block KEPT (still needed by pages until Phase 4)
+- [x] Kill-list sweep shared chrome: Navbar + Footer fully converted to token classes (zero `blue-*`/`slate-*`/legacy accents); AreaChart still pending
+- [ ] **GATE: build green; both themes load with ZERO legacy paint left (spot-check dashboard + courses + login)** — pages still legacy; gate opens after Phase 4
 
 #### CONTRACT — palette, shades, and the "proof" table (only source of truth)
 | Token           | Base hex   | Use on light (text/icon)            | Use on dark               | Verified contrast vs white |
