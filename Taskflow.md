@@ -115,13 +115,14 @@ the only ones allowed for text/buttons on light** — this is what keeps the pal
 
 #### Phase 2 — Component Library (kill the repetition; pages become thin shells)
 - [ ] Inventory repeated atoms across the 18 routes + 7 modals (cards, metric tiles, badges, buttons, inputs,
-      modals, tabs, section headers, tables) with usage counts → drive build order
-- [ ] Extract `src/components/ui/`: `Button` (primary=neon-orange, ghost, danger=deep-red), `Card`,
-      `MetricTile`, `StatusBadge`, `Tag` (tinted chips), `Modal`, `Field` (input/select), `TabBar`,
-      `SectionHeader`, `TableRow`, `EmptyState`, `StatDelta`
-- [ ] Migrate shared components (Navbar, Footer, modals) to ui-primitives FIRST — they touch every page
-- [ ] Migrate pages progressively (one commit per page or page-cluster; build green after each)
+      modals, tabs, section headers, tables) with usage counts → drive build order (formal pass still pending; driving on demand instead)
+- [x] Extract `src/components/ui/`: `Button` (primary/neon, default, ghost, danger), `Card`, `Tag` (tinted chips via
+      badge tokens), `SectionHeader` — done; `MetricTile`, `Modal`/`Field`/`TabBar`/`TableRow`/`EmptyState`/`StatDelta` still to extract
+- [x] Migrate shared components (Navbar, Footer) to ui-primitives FIRST — done (Phase 1/2); shared modals (SihDemoModal, DataSourcesModal) still pending
+- [x] Migrate pages progressively (one commit per page or page-cluster; build green after each) — home `/` converted
+      (hero + stats + hot skills + module grids + how-it-works); next: auth → login
 - [ ] Preserve ALL behavior/IDs/ARIA — visual-only migration; charts keep bespoke rendering but use palette tokens
+      (AreaChart already tokenized)
 
 #### Phase 3 — Icons, Type & Brand (the "creative, not vibecoded" pass)
 - [ ] **GATE: sweep ALL emojis to lucide-react** (📊→BarChart3/LineChart, 🚀→Rocket/Sparkles, 🏛️→Landmark,
