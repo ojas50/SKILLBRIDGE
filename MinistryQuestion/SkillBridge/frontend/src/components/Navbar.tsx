@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import SihDemoModal from "@/components/SihDemoModal";
+import { Button } from "@/components/ui";
 import { useAuth } from "@/lib/AuthContext";
 import { useTheme } from "@/lib/ThemeContext";
 
@@ -151,12 +152,14 @@ export default function Navbar() {
                 )}
               </button>
 
-              <button
+              <Button
+                variant="primary"
+                size="sm"
+                className="shadow-lg shadow-black/20"
                 onClick={() => setIsDemoModalOpen(true)}
-                className="btn-glow text-xs py-2 px-3.5 flex items-center gap-1.5 shadow-lg shadow-black/20"
               >
                 <span>🚀 Demo</span>
-              </button>
+              </Button>
 
               {user ? (
                 <div className="flex items-center gap-2">
@@ -174,12 +177,9 @@ export default function Navbar() {
                   </button>
                 </div>
               ) : (
-                <Link
-                  href="/login"
-                  className="btn-secondary text-xs py-2 px-3 flex items-center gap-1"
-                >
+                <Button variant="default" size="sm" href="/login">
                   <span>Sign In</span>
-                </Link>
+                </Button>
               )}
             </div>
 
@@ -234,22 +234,26 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <button
+              <Button
+                variant="primary"
+                size="sm"
+                className="w-full min-h-[44px]"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsDemoModalOpen(true);
                 }}
-                className="btn-glow w-full justify-center text-xs min-h-[44px]"
               >
                 🚀 Launch Demo Mode
-              </button>
+              </Button>
 
-              <button
+              <Button
+                variant="default"
+                size="sm"
+                className="w-full min-h-[44px]"
                 onClick={toggleTheme}
-                className="btn-secondary w-full justify-center text-xs min-h-[44px]"
               >
                 {theme === "dark" ? "☀️ Switch to Light Mode" : "🌙 Switch to Dark Mode"}
-              </button>
+              </Button>
 
               {user ? (
                 <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-raised border border-line min-h-[44px]">
@@ -267,13 +271,15 @@ export default function Navbar() {
                   </button>
                 </div>
               ) : (
-                <Link
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="w-full min-h-[44px]"
                   href="/login"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="btn-secondary w-full justify-center text-xs min-h-[44px]"
                 >
                   Sign In
-                </Link>
+                </Button>
               )}
             </div>
           </div>
