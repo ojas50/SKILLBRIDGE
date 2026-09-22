@@ -39,6 +39,8 @@
   --sb-fit-gradient: linear-gradient(135deg, var(--sb-cyan) 0%, var(--sb-sun) 100%);
 
   --sb-focus-ring: rgba(0, 229, 255, 0.5);
+
+  --sb-halo: color-mix(in srgb, var(--sb-neon) 12%, transparent);
 }
 
 html[data-theme="light"] {
@@ -61,5 +63,7 @@ html[data-theme="light"] {
   --sb-fit-gradient: linear-gradient(135deg, var(--sb-cyan-strong) 0%, var(--sb-sun-strong) 100%);
 
   --sb-focus-ring: rgba(14, 116, 144, 0.45);
+
+  --sb-halo: color-mix(in srgb, var(--sb-neon-cta) 11%, transparent);
   color-scheme: light;
 }
