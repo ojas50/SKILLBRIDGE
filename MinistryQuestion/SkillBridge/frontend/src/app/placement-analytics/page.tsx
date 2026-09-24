@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { COURSES_CATALOG, CourseData } from "@/lib/intelligenceData";
+import { ClipboardList, Zap, Check, GraduationCap } from "lucide-react";
 
 export default function PlacementAnalyticsPage() {
   const [courses, setCourses] = useState<CourseData[]>(COURSES_CATALOG);
@@ -35,7 +36,7 @@ export default function PlacementAnalyticsPage() {
             </span>
             <span className="text-xs text-slate-500">•</span>
             <span className="text-xs text-emerald-400 font-mono">
-              Training ➔ Placement Feedback Loop
+              Training → Placement Feedback Loop
             </span>
           </div>
           <h1 className="text-3xl font-black text-white mt-1">
@@ -50,7 +51,7 @@ export default function PlacementAnalyticsPage() {
           href="/policy-decisions"
           className="btn-glow text-xs py-2.5 px-4 self-start sm:self-auto"
         >
-          <span>📋 Policy Decision Center</span>
+          <span className="inline-flex items-center gap-1.5"><ClipboardList className="w-3.5 h-3.5" /> Policy Decision Center</span>
         </Link>
       </div>
 
@@ -58,10 +59,10 @@ export default function PlacementAnalyticsPage() {
       <div className="glass-card p-6 border-blue-500/40 relative overflow-hidden bg-gradient-to-r from-blue-950/40 via-indigo-950/40 to-slate-950/60 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div className="flex items-center gap-2">
-            <span className="text-xl">⚡</span>
+            <Zap className="w-5 h-5" />
             <div>
               <h2 className="text-lg font-black text-white">
-                Before ➔ After Policy Impact Simulator
+                Before → After Policy Impact Simulator
               </h2>
               <p className="text-xs text-slate-400">
                 Macro-level state vocational health transformation through targeted course modernization and seat rebalancing.
@@ -115,23 +116,23 @@ export default function PlacementAnalyticsPage() {
 
             <ul className="space-y-1.5 text-slate-200">
               <li className="flex items-center gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
+                <span className="text-blue-400 font-bold inline-flex"><Check className="w-3.5 h-3.5" /></span>
                 <span>Modernize <strong>8 vocational curricula</strong></span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
+                <span className="text-blue-400 font-bold inline-flex"><Check className="w-3.5 h-3.5" /></span>
                 <span>Launch <strong>3 emerging technology tracks</strong></span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
+                <span className="text-blue-400 font-bold inline-flex"><Check className="w-3.5 h-3.5" /></span>
                 <span>Upskill <strong>27 certified trainers</strong></span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
+                <span className="text-blue-400 font-bold inline-flex"><Check className="w-3.5 h-3.5" /></span>
                 <span>Upgrade <strong>14 virtual sandbox labs</strong></span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
+                <span className="text-blue-400 font-bold inline-flex"><Check className="w-3.5 h-3.5" /></span>
                 <span>Reallocate <strong>650 oversupplied seats</strong></span>
               </li>
             </ul>
@@ -173,7 +174,7 @@ export default function PlacementAnalyticsPage() {
         <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
           <div>
             <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <span>🎓</span> Course-by-Course Placement Outcome Register
+              <GraduationCap className="w-4 h-4" /> Course-by-Course Placement Outcome Register
             </h3>
             <p className="text-xs text-slate-400">
               Correlating curriculum modernization score directly against verified hiring velocity.
@@ -273,7 +274,7 @@ export default function PlacementAnalyticsPage() {
                       href="/courses"
                       className="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-blue-600/20 text-blue-300 hover:bg-blue-600 hover:text-white border border-blue-500/30 transition-all"
                     >
-                      Audit ➔
+                      Audit →
                     </Link>
                   </td>
                 </tr>

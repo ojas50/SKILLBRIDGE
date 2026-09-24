@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { COURSES_CATALOG, CourseData } from "@/lib/intelligenceData";
+import { ClipboardList, Users, AlertTriangle, Info, Check, Monitor } from "lucide-react";
 
 export default function CapacityPlannerPage() {
   const [courses, setCourses] = useState<CourseData[]>(COURSES_CATALOG);
@@ -59,7 +60,7 @@ export default function CapacityPlannerPage() {
           href="/policy-decisions"
           className="btn-glow text-xs py-2.5 px-4 self-start sm:self-auto"
         >
-          <span>📋 View Policy Decision Center</span>
+          <span className="inline-flex items-center gap-1.5"><ClipboardList className="w-3.5 h-3.5" /> View Policy Decision Center</span>
         </Link>
       </div>
 
@@ -179,7 +180,7 @@ export default function CapacityPlannerPage() {
                 <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                      <span>👥</span> Instructor Capacity
+                      <Users className="w-3.5 h-3.5" /> Instructor Capacity
                     </span>
                     <span className="text-xs font-mono text-slate-400">
                       Req: <strong className="text-white">{c.trainerRequirement.required}</strong> | Avail:{" "}
@@ -189,7 +190,7 @@ export default function CapacityPlannerPage() {
 
                   {hasTrainerGap && (
                     <div className="p-2 rounded-lg bg-amber-950/30 border border-amber-900/40 text-[11px] text-amber-200">
-                      ⚠️ <strong>Faculty Shortage: {c.trainerRequirement.gap} Certified Trainers needed.</strong>
+                      <AlertTriangle className="w-3 h-3 inline-block mr-1 -mt-0.5" /><strong>Faculty Shortage: {c.trainerRequirement.gap} Certified Trainers needed.</strong>
                       <div className="mt-1 flex flex-wrap gap-1">
                         {c.trainerRequirement.skillsNeeded.map((sn) => (
                           <span key={sn} className="bg-amber-900/40 text-amber-300 px-1.5 py-0.5 rounded font-mono text-[10px]">
@@ -202,13 +203,13 @@ export default function CapacityPlannerPage() {
 
                   {hasTrainerSurplus && (
                     <div className="p-2 rounded-lg bg-cyan-950/30 border border-cyan-900/40 text-[11px] text-cyan-200">
-                      ℹ️ <strong>Faculty Surplus: {Math.abs(c.trainerRequirement.gap)} traditional typing instructors available for digital upskilling.</strong>
+                      <Info className="w-3 h-3 inline-block mr-1 -mt-0.5" /><strong>Faculty Surplus: {Math.abs(c.trainerRequirement.gap)} traditional typing instructors available for digital upskilling.</strong>
                     </div>
                   )}
 
                   {!hasTrainerGap && !hasTrainerSurplus && (
                     <div className="p-2 rounded-lg bg-emerald-950/30 border border-emerald-900/40 text-[11px] text-emerald-200">
-                      ✓ Faculty capacity fully staffed for active cohort.
+                      <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />Faculty capacity fully staffed for active cohort.
                     </div>
                   )}
                 </div>
@@ -217,7 +218,7 @@ export default function CapacityPlannerPage() {
                 <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                      <span>🖥️</span> Equipment & Lab Sandbox
+                      <Monitor className="w-3.5 h-3.5" /> Equipment & Lab Sandbox
                     </span>
                     <span className="text-xs font-mono text-slate-400">
                       Readiness Score: <strong className="text-white">{c.scoreBreakdown.practicalLabReadiness}/10</strong>
@@ -230,11 +231,11 @@ export default function CapacityPlannerPage() {
                     </p>
                     {hasLabGap ? (
                       <div className="p-2 rounded-lg bg-rose-950/30 border border-rose-900/40 text-[11px] text-rose-200">
-                        ⚠️ <strong>Missing Hardware / Sandboxes:</strong> {c.equipmentRequirement.labGap.join(", ")}
+                        <AlertTriangle className="w-3 h-3 inline-block mr-1 -mt-0.5" /><strong>Missing Hardware / Sandboxes:</strong> {c.equipmentRequirement.labGap.join(", ")}
                       </div>
                     ) : (
                       <div className="p-2 rounded-lg bg-emerald-950/30 border border-emerald-900/40 text-[11px] text-emerald-200">
-                        ✓ All required virtual and physical lab sandboxes available.
+                        <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />All required virtual and physical lab sandboxes available.
                       </div>
                     )}
                   </div>
@@ -253,7 +254,7 @@ export default function CapacityPlannerPage() {
                   href="/curriculum-advisor"
                   className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition-all whitespace-nowrap self-start sm:self-auto"
                 >
-                  Audit Syllabus ➔
+                  Audit Syllabus →
                 </Link>
               </div>
             </div>
