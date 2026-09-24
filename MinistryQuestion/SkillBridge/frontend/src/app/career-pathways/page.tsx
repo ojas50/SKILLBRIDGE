@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { CAREER_PATHWAYS_DATA, CareerPathway } from "@/lib/intelligenceData";
+import { Bot, Check, AlertTriangle, Map, FlaskConical } from "lucide-react";
 
 export default function CareerPathwaysPage() {
   const [selectedPathway, setSelectedPathway] = useState<CareerPathway>(CAREER_PATHWAYS_DATA[0]);
@@ -19,7 +20,7 @@ export default function CareerPathwaysPage() {
             </span>
             <span className="text-xs text-slate-500">•</span>
             <span className="text-xs text-emerald-400 font-mono">
-              Job Role ➔ Skill ➔ Course Mapping
+              Job Role → Skill → Course Mapping
             </span>
           </div>
           <h1 className="text-3xl font-black text-white mt-1">
@@ -34,7 +35,7 @@ export default function CareerPathwaysPage() {
           href="/curriculum-advisor"
           className="btn-glow text-xs py-2.5 px-4 self-start sm:self-auto"
         >
-          <span>🤖 AI Syllabus Auditor</span>
+          <span className="inline-flex items-center gap-1.5"><Bot className="w-3.5 h-3.5" /> AI Syllabus Auditor</span>
         </Link>
       </div>
 
@@ -106,7 +107,7 @@ export default function CareerPathwaysPage() {
                     key={skill}
                     className="bg-slate-900 text-slate-200 border border-slate-700 px-2.5 py-1 rounded-lg text-xs font-medium"
                   >
-                    ✓ {skill}
+                    <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />{skill}
                   </span>
                 ))}
               </div>
@@ -141,7 +142,7 @@ export default function CareerPathwaysPage() {
             {/* Detected Skill Deficits */}
             <div className="p-4 rounded-xl bg-rose-950/30 border border-rose-900/40 space-y-2">
               <h4 className="text-xs font-bold text-rose-300 uppercase tracking-wider">
-                ⚠️ Critical Mismatch Deficits
+                <AlertTriangle className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" />Critical Mismatch Deficits
               </h4>
               <div className="space-y-2 text-xs">
                 {selectedPathway.skillGaps.map((sg) => (
@@ -166,7 +167,7 @@ export default function CareerPathwaysPage() {
             <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
               <div>
                 <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <span>🗺️</span> Recommended 8-Stage Progressive Learning Path
+                  <Map className="w-4 h-4" /> Recommended 8-Stage Progressive Learning Path
                 </h3>
                 <p className="text-xs text-slate-400">
                   Step-by-step modular progression from fundamentals to enterprise capstone.
@@ -222,7 +223,7 @@ export default function CareerPathwaysPage() {
                       </div>
 
                       <div className="text-[11px] text-emerald-300 font-medium pt-1 flex items-center gap-1.5">
-                        <span>🧪 Practical Project:</span>
+                        <span className="inline-flex items-center gap-1"><FlaskConical className="w-3.5 h-3.5" /> Practical Project:</span>
                         <span className="text-slate-200">{stage.practicalProject}</span>
                       </div>
                     </div>

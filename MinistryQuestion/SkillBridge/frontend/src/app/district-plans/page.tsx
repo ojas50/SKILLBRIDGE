@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { DISTRICT_INTELLIGENCE_DATA, DistrictIntelligence } from "@/lib/intelligenceData";
+import { Check, Printer } from "lucide-react";
 
 export default function DistrictPlansPage() {
   const [districts, setDistricts] = useState<DistrictIntelligence[]>(DISTRICT_INTELLIGENCE_DATA);
@@ -84,13 +85,19 @@ export default function DistrictPlansPage() {
             onClick={handleCopyReport}
             className="btn-secondary text-xs py-2 px-3.5"
           >
-            {copied ? "✓ Copied Briefing" : "Copy Briefing Text"}
+            {copied ? (
+              <span className="inline-flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5" /> Copied Briefing
+              </span>
+            ) : (
+              "Copy Briefing Text"
+            )}
           </button>
           <button
             onClick={handlePrintBriefing}
             className="btn-glow text-xs py-2 px-4"
           >
-            🖨️ Export PDF Briefing
+            <Printer className="w-3.5 h-3.5" /> Export PDF Briefing
           </button>
         </div>
       </div>
@@ -224,7 +231,7 @@ export default function DistrictPlansPage() {
                       key={skill}
                       className="bg-blue-950/70 text-blue-300 border border-blue-800 px-2 py-0.5 rounded text-[11px]"
                     >
-                      ✓ {skill}
+                      <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />{skill}
                     </span>
                   ))}
                 </div>
