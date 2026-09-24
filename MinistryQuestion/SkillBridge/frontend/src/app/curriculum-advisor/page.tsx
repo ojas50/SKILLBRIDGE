@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { COURSES_CATALOG, CourseData, CourseModuleAction } from "@/lib/intelligenceData";
 import EvidenceReasoningModal, { ReasoningChainData } from "@/components/EvidenceReasoningModal";
+import { Zap, Info, ClipboardList, Building2, Check, AlertTriangle, Wrench, ScrollText, Cloud, Users } from "lucide-react";
 
 interface ComprehensiveAuditResult {
   courseName: string;
@@ -290,7 +291,7 @@ export default function CurriculumAdvisorPage() {
             </>
           ) : (
             <>
-              <span>⚡</span>
+              <Zap className="w-4 h-4" />
               <span>Generate AI Curriculum Modernization Plan</span>
             </>
           )}
@@ -347,7 +348,7 @@ export default function CurriculumAdvisorPage() {
                   className="px-3.5 py-2 rounded-xl text-xs font-bold text-blue-300 bg-blue-900/40 hover:bg-blue-800/60 border border-blue-600/40 transition-all flex items-center gap-1.5"
                 >
                   <span>Why this score?</span>
-                  <span>ℹ️</span>
+                  <Info className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
@@ -363,7 +364,7 @@ export default function CurriculumAdvisorPage() {
             {/* Current Curriculum */}
             <div className="glass-card p-5 border-slate-800 space-y-3">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2">
-                <span>📋</span> Stage 1: Current Curriculum Baseline
+                <ClipboardList className="w-4 h-4" /> Stage 1: Current Curriculum Baseline
               </h3>
 
               <div className="space-y-2 text-xs">
@@ -407,7 +408,7 @@ export default function CurriculumAdvisorPage() {
             {/* Industry Requirements */}
             <div className="glass-card p-5 border-blue-500/30 space-y-3">
               <h3 className="text-xs font-bold text-blue-300 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2">
-                <span>🏢</span> Stage 2: Industry Requirements & Expectations
+                <Building2 className="w-4 h-4" /> Stage 2: Industry Requirements & Expectations
               </h3>
 
               <div className="space-y-2 text-xs">
@@ -416,7 +417,7 @@ export default function CurriculumAdvisorPage() {
                   <div className="flex flex-wrap gap-1 mt-1">
                     {result.industryRequirements.requiredSkills.map((s) => (
                       <span key={s} className="bg-blue-950/70 text-blue-300 px-2 py-0.5 rounded text-[11px] border border-blue-800/60">
-                        ✓ {s}
+                        <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />{s}
                       </span>
                     ))}
                   </div>
@@ -444,7 +445,7 @@ export default function CurriculumAdvisorPage() {
           {/* Section 2: Detected Gaps Table */}
           <div className="glass-card p-6">
             <h3 className="text-base font-bold text-white flex items-center gap-2 mb-4 border-b border-slate-800 pb-3">
-              <span>⚠️</span> Stage 3: Detected Curriculum Deficits
+              <AlertTriangle className="w-4 h-4 text-crimson" /> Stage 3: Detected Curriculum Deficits
             </h3>
 
             <div className="space-y-3">
@@ -480,7 +481,7 @@ export default function CurriculumAdvisorPage() {
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div>
                 <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <span>⚡</span> Stage 4: AI Curriculum Upgrade Plan (Module Actions)
+                  <Zap className="w-4 h-4" /> Stage 4: AI Curriculum Upgrade Plan (Module Actions)
                 </h3>
                 <p className="text-xs text-slate-400">
                   Granular restructuring blueprint for the state syllabus revision committee.
@@ -562,14 +563,14 @@ export default function CurriculumAdvisorPage() {
           {/* Section 4: Accompanying Recommendations (Certs, Tools, Cloud, Labs, Trainers) */}
           <div className="glass-card p-6 space-y-4">
             <h3 className="text-base font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
-              <span>🛠️</span> Required Ecosystem & Institutional Resources
+              <Wrench className="w-4 h-4" /> Required Ecosystem & Institutional Resources
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Certifications */}
               <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
                 <span className="text-xs font-bold text-blue-300 uppercase tracking-wider block">
-                  📜 Recognized Industry Certifications
+                  <ScrollText className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" />Recognized Industry Certifications
                 </span>
                 <ul className="text-xs text-slate-300 space-y-1">
                   {result.certifications.map((c) => (
@@ -584,7 +585,7 @@ export default function CurriculumAdvisorPage() {
               {/* Tools & Cloud Platforms */}
               <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
                 <span className="text-xs font-bold text-purple-300 uppercase tracking-wider block">
-                  ☁️ Tools & Cloud Platforms
+                  <Cloud className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" />Tools & Cloud Platforms
                 </span>
                 <div className="flex flex-wrap gap-1">
                   {[...result.tools, ...result.cloudPlatforms].map((t) => (
@@ -598,7 +599,7 @@ export default function CurriculumAdvisorPage() {
               {/* Lab & Trainer Requirements */}
               <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
                 <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider block">
-                  👥 Trainer & Lab Sandbox Planning
+                  <Users className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" />Trainer & Lab Sandbox Planning
                 </span>
                 <p className="text-[11px] text-slate-400">
                   Required Labs: <strong className="text-slate-200">{result.labEquipment.join(", ")}</strong>
