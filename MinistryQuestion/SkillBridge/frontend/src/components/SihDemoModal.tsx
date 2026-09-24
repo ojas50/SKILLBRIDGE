@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { Rocket, X, Check, Zap, Search, ArrowRight } from "lucide-react";
 
 interface SihDemoStep {
   stepNumber: number;
@@ -212,8 +213,8 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
         {/* Top Floating Badge Bar */}
         <div className="bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-950 p-5 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400 flex items-center justify-center text-lg">
-              🚀
+            <span className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400 flex items-center justify-center">
+              <Rocket className="w-4 h-4 text-white" />
             </span>
             <div>
               <div className="flex items-center gap-2">
@@ -233,7 +234,7 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
             onClick={onClose}
             className="text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 transition-colors"
           >
-            ✕
+            <X className="w-4 h-4" />
           </button>
         </div>
 
@@ -255,7 +256,7 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
                       : "bg-slate-900 text-slate-500 border border-slate-800 hover:text-slate-300"
                   }`}
                 >
-                  <span>{isPast ? "✓" : s.stepNumber}</span>
+                  <span className="inline-flex items-center">{isPast ? <Check className="w-3.5 h-3.5" /> : s.stepNumber}</span>
                   <span className="truncate max-w-[120px]">{s.title.split(". ")[1]}</span>
                 </button>
               );
@@ -312,7 +313,7 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 rounded-xl bg-blue-950/30 border border-blue-900/40 space-y-1">
               <span className="text-[11px] font-bold text-blue-300 uppercase tracking-wider block">
-                ⚡ SkillBridge Automated Action:
+                <Zap className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" />SkillBridge Automated Action:
               </span>
               <p className="text-xs text-slate-300 leading-relaxed">
                 {currentStep.systemActionTaken}
@@ -321,7 +322,7 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
 
             <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-900/40 space-y-1">
               <span className="text-[11px] font-bold text-emerald-300 uppercase tracking-wider block">
-                🔍 Verified Telemetry Evidence:
+                <Search className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" />Verified Telemetry Evidence:
               </span>
               <p className="text-xs text-slate-300 leading-relaxed italic">
                 "{currentStep.evidenceQuote}"
@@ -338,8 +339,8 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
               onClick={onClose}
               className="px-4 py-2 rounded-xl text-xs font-bold text-blue-300 bg-blue-950/60 border border-blue-800 hover:bg-blue-900/80 hover:text-white transition-all flex items-center gap-1.5"
             >
-              <span>🔍 Open {currentStep.targetModuleLabel}</span>
-              <span>➔</span>
+              <Search className="w-3.5 h-3.5" /> Open {currentStep.targetModuleLabel}
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -360,7 +361,7 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
                 className="btn-glow text-xs py-2.5 px-6 font-bold flex items-center gap-2"
               >
                 <span>Next Step ({activeStepIndex + 2}/10)</span>
-                <span>➔</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             ) : (
               <button
@@ -368,7 +369,7 @@ export default function SihDemoModal({ isOpen, onClose }: SihDemoModalProps) {
                 onClick={onClose}
                 className="px-6 py-2.5 rounded-xl text-xs font-black bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2"
               >
-                <span>✓ Complete Demo Walkthrough</span>
+                <><Check className="w-3.5 h-3.5" /> Complete Demo Walkthrough</>
               </button>
             )}
           </div>

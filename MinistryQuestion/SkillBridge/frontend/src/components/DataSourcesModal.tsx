@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { X, AlertTriangle } from "lucide-react";
 import { DATA_SOURCES_LIST, PROTOTYPE_DISCLAIMER_TEXT } from "@/lib/intelligenceData";
 
 interface DataSourcesModalProps {
@@ -17,9 +18,9 @@ export default function DataSourcesModal({ isOpen, onClose }: DataSourcesModalPr
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
-        >
-          ✕
+className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
+          >
+            <X className="w-4 h-4" />
         </button>
 
         {/* Header */}
@@ -41,7 +42,7 @@ export default function DataSourcesModal({ isOpen, onClose }: DataSourcesModalPr
 
         {/* Simulation Notice Alert */}
         <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-800/50 mb-6 flex items-start gap-3">
-          <span className="text-xl">⚠️</span>
+          <AlertTriangle className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
           <div>
             <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider">
               Prototype Evaluation Dataset Notice
