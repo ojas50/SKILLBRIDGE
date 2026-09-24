@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SKILL_INTELLIGENCE_DATA, SkillItem } from "@/lib/intelligenceData";
 import EvidenceReasoningModal, { ReasoningChainData } from "@/components/EvidenceReasoningModal";
 import DataSourcesModal from "@/components/DataSourcesModal";
+import { Zap, BarChart3, Search, ClipboardList, Flame, Info } from "lucide-react";
 
 export default function SkillMatrixPage() {
   const [skills, setSkills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
@@ -97,12 +98,12 @@ export default function SkillMatrixPage() {
             onClick={() => setIsSourcesModalOpen(true)}
             className="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 bg-slate-900 border border-slate-700 hover:text-white transition-all flex items-center gap-1.5"
           >
-            <span>ℹ️</span>
+            <span className="inline-flex items-center"><Info className="w-3.5 h-3.5" /></span>
             <span>Data Transparency</span>
           </button>
 
           <Link href="/skill-gaps" className="btn-glow text-xs py-2 px-3.5">
-            ⚡ What-If Policy Simulator
+            <Zap className="w-3.5 h-3.5" /> What-If Policy Simulator
           </Link>
         </div>
       </div>
@@ -110,7 +111,7 @@ export default function SkillMatrixPage() {
       {/* Simulated Prototype Banner */}
       <div className="p-3.5 rounded-2xl bg-blue-950/40 border border-blue-800/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5 text-slate-300">
-          <span className="text-base">📊</span>
+          <BarChart3 className="w-4 h-4 shrink-0" />
           <span>
             <strong className="text-white">Prototype Intelligence Engine:</strong> Metrics reflect synthesized regional job postings and employer survey forecasts for {timePeriod}.
           </span>
@@ -148,7 +149,7 @@ export default function SkillMatrixPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
               />
-              <span className="absolute left-3 top-2.5 text-slate-500 text-sm">🔍</span>
+              <span className="absolute left-3 top-2.5 text-slate-500"><Search className="w-3.5 h-3.5" /></span>
             </div>
           </div>
 
@@ -160,7 +161,7 @@ export default function SkillMatrixPage() {
                 viewMode === "table" ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"
               }`}
             >
-              📋 Intelligence Table
+              <span className="inline-flex items-center gap-1.5"><ClipboardList className="w-3.5 h-3.5" /> Intelligence Table</span>
             </button>
             <button
               onClick={() => setViewMode("heatmap")}
@@ -168,7 +169,7 @@ export default function SkillMatrixPage() {
                 viewMode === "heatmap" ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"
               }`}
             >
-              🔥 Deficit Heatmap
+              <span className="inline-flex items-center gap-1.5"><Flame className="w-3.5 h-3.5" /> Deficit Heatmap</span>
             </button>
           </div>
         </div>
@@ -235,10 +236,10 @@ export default function SkillMatrixPage() {
               className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"
             >
               <option value="All">All Priorities</option>
-              <option value="CRITICAL">🔴 CRITICAL</option>
-              <option value="HIGH">🟠 HIGH</option>
-              <option value="MEDIUM">🟡 MEDIUM</option>
-              <option value="OVERSUPPLIED">🔵 OVERSUPPLIED</option>
+              <option value="CRITICAL">CRITICAL</option>
+              <option value="HIGH">HIGH</option>
+              <option value="MEDIUM">MEDIUM</option>
+              <option value="OVERSUPPLIED">OVERSUPPLIED</option>
             </select>
           </div>
         </div>
@@ -427,7 +428,7 @@ export default function SkillMatrixPage() {
                       onClick={() => handleOpenReasoning(item)}
                       className="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-blue-600/20 text-blue-300 hover:bg-blue-600 hover:text-white border border-blue-500/30 transition-all"
                     >
-                      Explain ➔
+                      Explain →
                     </button>
                   </td>
                 </tr>
