@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { SKILL_INTELLIGENCE_DATA, SkillItem } from "@/lib/intelligenceData";
+import { Zap, ArrowRight } from "lucide-react";
 
 const DISTRICT_FACTORS: Record<string, { seatEfficiency: number; placementDelta: number }> = {
   "Pune Hub": { seatEfficiency: 1, placementDelta: 0 },
@@ -86,7 +87,7 @@ export default function CurriculumSimulator({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 text-base">⚡</span>
+            <span className="p-1.5 rounded-lg bg-blue-500/20 text-blue-400"><Zap className="w-4 h-4" /></span>
             <span className="text-xs font-mono font-bold text-blue-300 uppercase tracking-widest">
               WHAT-IF POLICY SIMULATOR v2.4
             </span>
@@ -280,7 +281,7 @@ export default function CurriculumSimulator({
             <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center space-y-1">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Skill Gap Deficit</span>
               <p className="text-xl font-black text-white">
-                <span className="line-through text-slate-500 text-sm">+{baseDeficit}%</span> ➔{" "}
+                <span className="line-through text-slate-500 text-sm">+{baseDeficit}%</span> →{" "}
                 <span className="text-emerald-400 font-mono">+{projectedGap}%</span>
               </p>
               <span className="text-[11px] font-mono font-bold text-emerald-400 block">
@@ -292,7 +293,7 @@ export default function CurriculumSimulator({
             <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center space-y-1">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Placement Rate</span>
               <p className="text-xl font-black text-white">
-                <span className="line-through text-slate-500 text-sm">{baselinePlacement}%</span> ➔{" "}
+                <span className="line-through text-slate-500 text-sm">{baselinePlacement}%</span> →{" "}
                 <span className="text-emerald-400 font-mono">{projectedPlacementRate}%</span>
               </p>
               <span className="text-[11px] font-mono font-bold text-emerald-400 block">
@@ -304,7 +305,7 @@ export default function CurriculumSimulator({
             <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center space-y-1">
               <span className="text-[10px] font-bold text-slate-400 uppercase">Recruiter Satisfaction</span>
               <p className="text-xl font-black text-white">
-                <span className="line-through text-slate-500 text-sm">{baselineSatisfaction}%</span> ➔{" "}
+                <span className="line-through text-slate-500 text-sm">{baselineSatisfaction}%</span> →{" "}
                 <span className="text-purple-400 font-mono">{projectedSatisfaction}%</span>
               </p>
               <span className="text-[11px] font-mono text-purple-300 block">
@@ -349,7 +350,7 @@ export default function CurriculumSimulator({
             className="btn-glow w-full justify-center text-xs py-3 font-bold flex items-center gap-2"
           >
             <span>Authorize Policy Intervention in Decision Center</span>
-            <span>➔</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>

@@ -169,7 +169,7 @@ export default function Dashboard() {
           change="+14% MoM"
           positive
           subtitle="Accredited vocational programs"
-          marker="📚"
+          marker="book"
         />
         <FitonistKpiCard
           label="Active Deficits Detected"
@@ -177,7 +177,7 @@ export default function Dashboard() {
           change={`${criticalDeficitsCount} critical`}
           positive={false}
           subtitle="Identified competency shortages"
-          marker="⚡"
+          marker="zap"
         />
         <FitonistKpiCard
           label="Verified Placement Rate"
@@ -185,7 +185,7 @@ export default function Dashboard() {
           change="+15% Post-Modernization"
           positive
           subtitle="Graduate employment rate"
-          marker="🎯"
+          marker="target"
         />
         <FitonistKpiCard
           label="Corporate Openings"
@@ -193,7 +193,7 @@ export default function Dashboard() {
           change="48 partners"
           positive
           subtitle="Active recruitment vacancies"
-          marker="🏢"
+          marker="building"
         />
       </section>
 

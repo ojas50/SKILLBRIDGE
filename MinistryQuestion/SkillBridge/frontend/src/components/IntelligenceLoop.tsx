@@ -2,6 +2,23 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import {
+  Factory,
+  Radio,
+  Microscope,
+  Scale,
+  Target,
+  Map,
+  Bot,
+  Users,
+  MapPin,
+  MessageSquare,
+  RefreshCw,
+  Search,
+  Zap,
+  ArrowRight,
+  type LucideIcon,
+} from "lucide-react";
 
 interface LoopStage {
   id: number;
@@ -9,7 +26,7 @@ interface LoopStage {
   title: string;
   shortDesc: string;
   category: "Demand Ingestion" | "AI Intelligence" | "Action & Planning" | "Feedback & Polish";
-  icon: string;
+  icon: LucideIcon;
   badge: string;
   route: string;
   metrics: { label: string; value: string; color?: string }[];
@@ -25,7 +42,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Industry Demand",
     shortDesc: "Aggregates macro industrial hiring growth, sector capital investments, and regional economic velocity.",
     category: "Demand Ingestion",
-    icon: "🏭",
+    icon: Factory,
     badge: "Macro Ingestion",
     route: "/dashboard",
     metrics: [
@@ -42,7 +59,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Job & Employer Signals",
     shortDesc: "Scrapes 14,800+ live recruiter postings and ingests structured surveys from 48+ hiring partners.",
     category: "Demand Ingestion",
-    icon: "📡",
+    icon: Radio,
     badge: "Telemetry Engine",
     route: "/employers",
     metrics: [
@@ -59,7 +76,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Skill Extraction",
     shortDesc: "NLP algorithms extract granular technical skills, proficiencies, tools, and certifications from job postings.",
     category: "Demand Ingestion",
-    icon: "🔬",
+    icon: Microscope,
     badge: "NLP Parsing",
     route: "/skill-matrix",
     metrics: [
@@ -76,7 +93,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Demand-Supply Analysis",
     shortDesc: "Cross-references industry demand against annual enrolled student cohorts across all 36 state districts.",
     category: "AI Intelligence",
-    icon: "⚖️",
+    icon: Scale,
     badge: "Differential Radar",
     route: "/skill-matrix",
     metrics: [
@@ -93,7 +110,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Skill Gap Detection",
     shortDesc: "Classifies deficits into Critical, High, Moderate, and Oversupplied severity bands.",
     category: "AI Intelligence",
-    icon: "🎯",
+    icon: Target,
     badge: "Gap Radar",
     route: "/skill-gaps",
     metrics: [
@@ -110,7 +127,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Course Mapping",
     shortDesc: "Maps every identified deficit directly to active courses and calculates Course Modernization Scores (0–100).",
     category: "AI Intelligence",
-    icon: "🗺️",
+    icon: Map,
     badge: "Catalog Linker",
     route: "/courses",
     metrics: [
@@ -127,7 +144,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "AI Curriculum Recommendation",
     shortDesc: "Generates module-by-module Keep / Modify / Remove / Add upgrade plans with lab hour requirements.",
     category: "AI Intelligence",
-    icon: "🤖",
+    icon: Bot,
     badge: "AI Syllabus Auditor",
     route: "/curriculum-advisor",
     metrics: [
@@ -144,7 +161,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Capacity & Trainer Planning",
     shortDesc: "Calculates trainer upskilling quotas, lab capex investments, and required software/equipment.",
     category: "Action & Planning",
-    icon: "👥",
+    icon: Users,
     badge: "Resource Planner",
     route: "/capacity-planner",
     metrics: [
@@ -161,7 +178,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "District Training Plan",
     shortDesc: "Decentralizes seat allocations and funding quotas tailored to local district industrial clusters.",
     category: "Action & Planning",
-    icon: "📍",
+    icon: MapPin,
     badge: "District Quotas",
     route: "/district-plans",
     metrics: [
@@ -178,7 +195,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Placement Tracking",
     shortDesc: "Tracks graduate employment, starting salaries, hiring roles, and time-to-hire in real-time.",
     category: "Feedback & Polish",
-    icon: "🎯",
+    icon: Target,
     badge: "Outcome Telemetry",
     route: "/placement-analytics",
     metrics: [
@@ -195,7 +212,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Employer Feedback",
     shortDesc: "Surveys hiring managers on graduate productivity, missing practical skills, and on-the-job readiness.",
     category: "Feedback & Polish",
-    icon: "💬",
+    icon: MessageSquare,
     badge: "Employer Validation",
     route: "/employers",
     metrics: [
@@ -212,7 +229,7 @@ const LOOP_STAGES: LoopStage[] = [
     title: "Continuous Curriculum Update",
     shortDesc: "Translates feedback into recurring quarterly course modernizations, eliminating multi-year syllabus lag.",
     category: "Feedback & Polish",
-    icon: "🔄",
+    icon: RefreshCw,
     badge: "Continuous Loop",
     route: "/policy-decisions",
     metrics: [
@@ -280,7 +297,7 @@ export default function IntelligenceLoop() {
                   <span className={`text-[10px] font-mono font-bold ${isActive ? "text-blue-300" : "text-slate-500"}`}>
                     {st.number}
                   </span>
-                  <span className="text-base group-hover:scale-110 transition-transform">{st.icon}</span>
+                  <st.icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 </div>
                 <p className={`text-[11px] font-bold leading-tight line-clamp-2 ${isActive ? "text-white" : "text-slate-400 group-hover:text-slate-200"}`}>
                   {st.title}
@@ -301,8 +318,8 @@ export default function IntelligenceLoop() {
           {/* Left Summary & Details (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="text-2xl p-2 rounded-xl bg-slate-900 border border-slate-800">
-                {activeStage.icon}
+              <span className="p-2 rounded-xl bg-slate-900 border border-slate-800 inline-flex">
+                <activeStage.icon className="w-6 h-6" />
               </span>
               <div>
                 <div className="flex items-center gap-2">
@@ -335,7 +352,7 @@ export default function IntelligenceLoop() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="p-3 rounded-xl bg-blue-950/30 border border-blue-900/40">
                 <span className="text-[10px] font-bold text-blue-300 uppercase tracking-wider block mb-1">
-                  🔍 Live Telemetry Signal:
+                  <Search className="w-3 h-3 inline-block mr-1 -mt-0.5" />Live Telemetry Signal:
                 </span>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   {activeStage.evidenceSample}
@@ -344,7 +361,7 @@ export default function IntelligenceLoop() {
 
               <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-900/40">
                 <span className="text-[10px] font-bold text-emerald-300 uppercase tracking-wider block mb-1">
-                  ⚡ Downstream Action Generated:
+                  <Zap className="w-3 h-3 inline-block mr-1 -mt-0.5" />Downstream Action Generated:
                 </span>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   {activeStage.actionItem}
@@ -384,7 +401,7 @@ export default function IntelligenceLoop() {
                 className="btn-glow w-full justify-center text-xs py-2.5 flex items-center gap-2"
               >
                 <span>Inspect {activeStage.title} Module</span>
-                <span>➔</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
               <div className="flex items-center justify-between gap-2 pt-2">
