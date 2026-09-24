@@ -4,6 +4,26 @@ import React, { useState } from "react";
 import Link from "next/link";
 import SihDemoModal from "@/components/SihDemoModal";
 import { Button, Tag, SectionHeader } from "@/components/ui";
+import {
+  Rocket,
+  BookOpen,
+  Zap,
+  Target,
+  Building2,
+  GraduationCap,
+  BarChart3,
+  Star,
+  Map,
+  Landmark,
+  Bot,
+  MapPin,
+  TrendingUp,
+  Repeat,
+  RefreshCw,
+  Radio,
+  Microscope,
+  Scale,
+} from "lucide-react";
 
 export default function Home() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
@@ -36,7 +56,7 @@ export default function Home() {
             Check My Readiness
           </Button>
           <Button variant="default" size="lg" onClick={() => setIsDemoModalOpen(true)}>
-            🚀 Watch Demo
+            <Rocket className="w-4 h-4" /> Watch Demo
           </Button>
         </div>
       </section>
@@ -44,13 +64,13 @@ export default function Home() {
       {/* Stats + Hot Skills inline */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-2">
         {[
-          { icon: "📚", value: "1,247", label: "Courses", color: "text-sun-strong" },
-          { icon: "⚡", value: "389", label: "Skill Gaps", color: "text-crimson" },
-          { icon: "🎯", value: "67.4%", label: "Placement", color: "text-cyan-accent" },
-          { icon: "🏢", value: "856", label: "Partners", color: "text-ink" },
+          { icon: BookOpen, value: "1,247", label: "Courses", color: "text-sun-strong" },
+          { icon: Zap, value: "389", label: "Skill Gaps", color: "text-crimson" },
+          { icon: Target, value: "67.4%", label: "Placement", color: "text-cyan-accent" },
+          { icon: Building2, value: "856", label: "Partners", color: "text-ink" },
         ].map((s) => (
           <div key={s.label} className="glass-card px-3 py-3 flex items-center gap-3">
-            <span className="text-lg">{s.icon}</span>
+            <s.icon className="w-5 h-5 text-ink-muted shrink-0" />
             <div>
               <span className={`text-lg font-black ${s.color} block leading-tight`}>{s.value}</span>
               <span className="text-[10px] text-ink-faint">{s.label}</span>
@@ -84,20 +104,20 @@ export default function Home() {
 
       {/* Student Modules */}
       <section>
-        <SectionHeader icon="🎓" title="For Students" className="mb-3" />
+        <SectionHeader icon={<GraduationCap className="w-5 h-5" />} title="For Students" className="mb-3" />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
           {[
-            { name: "My Readiness", desc: "Check readiness for your dream job", href: "/career-readiness", icon: "🎯", hot: true },
-            { name: "My Dashboard", desc: "Track your progress", href: "/my-dashboard", icon: "📊" },
-            { name: "Wishlist", desc: "Saved courses", href: "/wishlist", icon: "⭐" },
-            { name: "Career Paths", desc: "Learning roadmaps", href: "/career-pathways", icon: "🗺️" },
+            { name: "My Readiness", desc: "Check readiness for your dream job", href: "/career-readiness", icon: Target, hot: true },
+            { name: "My Dashboard", desc: "Track your progress", href: "/my-dashboard", icon: BarChart3 },
+            { name: "Wishlist", desc: "Saved courses", href: "/wishlist", icon: Star },
+            { name: "Career Paths", desc: "Learning roadmaps", href: "/career-pathways", icon: Map },
           ].map((m) => (
             <Link
               key={m.href}
               href={m.href}
               className={`glass-card glass-card-interactive p-3.5 block group ${m.hot ? "ring-fit" : ""}`}
             >
-              <span className="text-lg block mb-1">{m.icon}</span>
+              <m.icon className="w-5 h-5 block mb-1 text-ink-muted group-hover:text-neon transition-colors" />
               <h3 className={`text-xs font-bold transition-colors ${m.hot ? "text-cyan-accent" : "text-ink group-hover:text-neon"}`}>{m.name}</h3>
               <p className="text-[11px] text-ink-faint mt-0.5">{m.desc}</p>
             </Link>
@@ -107,18 +127,18 @@ export default function Home() {
 
       {/* Admin Modules */}
       <section>
-        <SectionHeader icon="🏛️" title="For Administrators" className="mb-3" />
+        <SectionHeader icon={<Landmark className="w-5 h-5" />} title="For Administrators" className="mb-3" />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
           {[
-            { name: "Cockpit", href: "/dashboard", icon: "📊" },
-            { name: "AI Advisor", href: "/curriculum-advisor", icon: "🤖" },
-            { name: "Policy", href: "/policy-decisions", icon: "🏛️" },
-            { name: "Simulator", href: "/skill-gaps", icon: "⚡" },
-            { name: "Districts", href: "/district-plans", icon: "📍" },
-            { name: "Placement", href: "/placement-analytics", icon: "📈" },
+            { name: "Cockpit", href: "/dashboard", icon: BarChart3 },
+            { name: "AI Advisor", href: "/curriculum-advisor", icon: Bot },
+            { name: "Policy", href: "/policy-decisions", icon: Landmark },
+            { name: "Simulator", href: "/skill-gaps", icon: Zap },
+            { name: "Districts", href: "/district-plans", icon: MapPin },
+            { name: "Placement", href: "/placement-analytics", icon: TrendingUp },
           ].map((m) => (
             <Link key={m.href} href={m.href} className="glass-card glass-card-interactive p-3 text-center group">
-              <span className="text-lg block">{m.icon}</span>
+              <m.icon className="w-5 h-5 mx-auto block text-ink-muted group-hover:text-neon transition-colors" />
               <span className="text-[11px] font-bold text-ink-muted group-hover:text-neon transition-colors">{m.name}</span>
             </Link>
           ))}
@@ -132,7 +152,7 @@ export default function Home() {
           className="w-full flex items-center justify-between p-4 text-left hover:bg-line transition-colors"
         >
           <div className="flex items-center gap-2">
-            <span>🔄</span>
+            <Repeat className="w-4 h-4 text-ink-muted" />
             <div>
               <span className="text-sm font-bold text-ink">How SkillBridge Works</span>
               <span className="text-[11px] text-ink-faint block">12-stage intelligence loop</span>
@@ -146,15 +166,15 @@ export default function Home() {
           <div className="border-t border-line p-4">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
               {[
-                { n: "01", t: "Demand Detection", i: "📡" },
-                { n: "02", t: "Skill Extraction", i: "🔬" },
-                { n: "03", t: "Gap Analysis", i: "⚖️" },
-                { n: "04", t: "Course Mapping", i: "🗺️" },
-                { n: "05", t: "AI Recommendations", i: "🤖" },
-                { n: "06", t: "Continuous Updates", i: "🔄" },
+                { n: "01", t: "Demand Detection", i: Radio },
+                { n: "02", t: "Skill Extraction", i: Microscope },
+                { n: "03", t: "Gap Analysis", i: Scale },
+                { n: "04", t: "Course Mapping", i: Map },
+                { n: "05", t: "AI Recommendations", i: Bot },
+                { n: "06", t: "Continuous Updates", i: RefreshCw },
               ].map((s) => (
                 <div key={s.n} className="p-3 rounded-lg bg-raised border border-line text-center">
-                  <span className="text-lg block">{s.i}</span>
+                  <s.i className="w-5 h-5 mx-auto block text-ink-muted" />
                   <span className="text-[10px] font-mono text-cyan-accent">{s.n}</span>
                   <p className="text-[11px] font-bold text-ink mt-0.5">{s.t}</p>
                 </div>
