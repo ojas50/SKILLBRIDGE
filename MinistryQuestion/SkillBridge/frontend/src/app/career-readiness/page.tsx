@@ -4,6 +4,17 @@ import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import AuthGate from "@/components/AuthGate";
 import { useAuth } from "@/lib/AuthContext";
+import {
+  Building2,
+  Waves,
+  Citrus,
+  Grape,
+  Factory,
+  Shirt,
+  Check,
+  MousePointerClick,
+  type LucideIcon,
+} from "lucide-react";
 
 interface Company {
   name: string;
@@ -17,7 +28,7 @@ interface Company {
 interface Region {
   id: string;
   name: string;
-  icon: string;
+  icon: LucideIcon;
   companies: Company[];
 }
 
@@ -25,7 +36,7 @@ const REGIONS: Region[] = [
   {
     id: "pune",
     name: "Pune",
-    icon: "🏙️",
+    icon: Building2,
     companies: [
       { name: "TCS", industry: "IT Services", skillsRequired: ["Python", "Java", "AWS", "SQL", "Communication"], openings: 120, avgSalary: "₹4.5 LPA", tier: "Top MNC" },
       { name: "Infosys", industry: "IT Services", skillsRequired: ["Python", "React", "Node.js", "Git", "Agile"], openings: 95, avgSalary: "₹4.2 LPA", tier: "Top MNC" },
@@ -38,7 +49,7 @@ const REGIONS: Region[] = [
   {
     id: "mumbai",
     name: "Mumbai",
-    icon: "🌊",
+    icon: Waves,
     companies: [
       { name: "TCS", industry: "IT Services", skillsRequired: ["Python", "Java", "AWS", "SQL", "Communication"], openings: 150, avgSalary: "₹4.8 LPA", tier: "Top MNC" },
       { name: "JP Morgan", industry: "BFSI / FinTech", skillsRequired: ["Python", "SQL", "Data Analysis", "Excel", "Risk Modeling"], openings: 40, avgSalary: "₹8.0 LPA", tier: "Top MNC" },
@@ -50,7 +61,7 @@ const REGIONS: Region[] = [
   {
     id: "nagpur",
     name: "Nagpur",
-    icon: "🍊",
+    icon: Citrus,
     companies: [
       { name: "TCS", industry: "IT Services", skillsRequired: ["Python", "Java", "SQL", "Communication", "Git"], openings: 45, avgSalary: "₹3.8 LPA", tier: "Top MNC" },
       { name: "Infosys", industry: "IT Services", skillsRequired: ["Python", "React", "SQL", "Agile", "Communication"], openings: 40, avgSalary: "₹3.8 LPA", tier: "Top MNC" },
@@ -60,7 +71,7 @@ const REGIONS: Region[] = [
   {
     id: "nashik",
     name: "Nashik",
-    icon: "🍇",
+    icon: Grape,
     companies: [
       { name: "Bosch India", industry: "Automotive / Manufacturing", skillsRequired: ["AutoCAD", "C++", "Embedded", "IoT", "Python"], openings: 30, avgSalary: "₹5.2 LPA", tier: "Mid-Tier" },
       { name: "TCS", industry: "IT Services", skillsRequired: ["Python", "Java", "SQL", "Communication", "Git"], openings: 35, avgSalary: "₹3.8 LPA", tier: "Top MNC" },
@@ -70,7 +81,7 @@ const REGIONS: Region[] = [
   {
     id: "aurangabad",
     name: "Aurangabad",
-    icon: "🏭",
+    icon: Factory,
     companies: [
       { name: "Bajaj Auto", industry: "Automotive", skillsRequired: ["AutoCAD", "SolidWorks", "Python", "Quality Analysis", "SQL"], openings: 25, avgSalary: "₹4.5 LPA", tier: "Mid-Tier" },
       { name: "TCS", industry: "IT Services", skillsRequired: ["Python", "Java", "SQL", "Communication", "Git"], openings: 20, avgSalary: "₹3.8 LPA", tier: "Top MNC" },
@@ -79,7 +90,7 @@ const REGIONS: Region[] = [
   {
     id: "solapur",
     name: "Solapur",
-    icon: "🧵",
+    icon: Shirt,
     companies: [
       { name: "TCS", industry: "IT Services", skillsRequired: ["Python", "Java", "SQL", "Communication", "Git"], openings: 15, avgSalary: "₹3.8 LPA", tier: "Top MNC" },
       { name: "TextileTech Solutions", industry: "Textile / IoT", skillsRequired: ["IoT", "Python", "Embedded", "Data Analysis", "Excel"], openings: 10, avgSalary: "₹3.5 LPA", tier: "Startup" },
@@ -284,7 +295,7 @@ function CareerReadinessInner() {
                   : "bg-slate-900/50 border-slate-800 hover:border-slate-700 hover:bg-slate-800/50"
               }`}
             >
-              <span className="text-2xl block mb-1">{r.icon}</span>
+              <r.icon className="w-6 h-6 block mx-auto mb-1" />
               <span className={`text-sm font-bold ${selectedRegion === r.id ? "text-blue-300" : "text-white"}`}>{r.name}</span>
               <span className="block text-[10px] text-slate-500 mt-0.5">{r.companies.length} companies</span>
             </button>
@@ -501,7 +512,13 @@ function CareerReadinessInner() {
                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                 : "btn-secondary"
             }`}>
-              {saved ? "✓ Saved" : "Save Profile"}
+              {saved ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <Check className="w-4 h-4" /> Saved
+                </span>
+              ) : (
+                "Save Profile"
+              )}
             </button>
             <Link href="/courses" className="btn-glow text-sm py-3 px-6">
               Browse All Courses
@@ -513,7 +530,7 @@ function CareerReadinessInner() {
       {/* Empty state */}
       {!region && (
         <div className="text-center py-16 space-y-3">
-          <span className="text-5xl">👆</span>
+          <MousePointerClick className="w-12 h-12 mx-auto text-ink-faint" />
           <p className="text-sm text-slate-400">Select a region above to get started</p>
         </div>
       )}

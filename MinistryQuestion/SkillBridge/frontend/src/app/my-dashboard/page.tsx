@@ -5,6 +5,7 @@ import Link from "next/link";
 import AuthGate from "@/components/AuthGate";
 import { useAuth } from "@/lib/AuthContext";
 import { COURSES_CATALOG, SKILL_INTELLIGENCE_DATA } from "@/lib/intelligenceData";
+import { Target, BookOpen, Map } from "lucide-react";
 
 interface SavedProfile {
   skills: string[];
@@ -152,17 +153,17 @@ function DashboardContent() {
       {/* Quick Actions */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <Link href="/career-readiness" className="glass-card glass-card-interactive p-4 text-center group">
-          <span className="text-xl block mb-1">🎯</span>
+          <Target className="w-5 h-5 block mx-auto mb-1" />
           <span className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Check Readiness</span>
           <p className="text-[11px] text-slate-500 mt-0.5">See how ready you are</p>
         </Link>
         <Link href="/wishlist" className="glass-card glass-card-interactive p-4 text-center group">
-          <span className="text-xl block mb-1">📚</span>
+          <BookOpen className="w-5 h-5 block mx-auto mb-1" />
           <span className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">My Wishlist</span>
           <p className="text-[11px] text-slate-500 mt-0.5">{profile?.targetCompanies?.length || 0} saved</p>
         </Link>
         <Link href="/career-pathways" className="glass-card glass-card-interactive p-4 text-center group">
-          <span className="text-xl block mb-1">🗺️</span>
+          <Map className="w-5 h-5 block mx-auto mb-1" />
           <span className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Career Paths</span>
           <p className="text-[11px] text-slate-500 mt-0.5">Explore learning roadmaps</p>
         </Link>

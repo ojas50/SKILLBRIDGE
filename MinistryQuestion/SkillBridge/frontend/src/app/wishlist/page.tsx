@@ -5,6 +5,7 @@ import Link from "next/link";
 import AuthGate from "@/components/AuthGate";
 import { useAuth } from "@/lib/AuthContext";
 import { COURSES_CATALOG } from "@/lib/intelligenceData";
+import { Star, BookOpen } from "lucide-react";
 
 function WishlistContent() {
   const { user } = useAuth();
@@ -76,7 +77,7 @@ function WishlistContent() {
                     : "bg-slate-900 border-slate-800 text-slate-600 hover:text-slate-400"
                 }`}
               >
-                {saved ? "★" : "☆"}
+                {saved ? <Star className="w-4 h-4 fill-current" /> : <Star className="w-4 h-4" />}
               </button>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
@@ -109,7 +110,7 @@ function WishlistContent() {
         })}
         {courses.length === 0 && (
           <div className="text-center py-12 space-y-2">
-            <span className="text-3xl">📚</span>
+            <BookOpen className="w-8 h-8 mx-auto text-ink-faint" />
             <p className="text-sm text-slate-400">
               {filter === "saved" ? "No courses saved yet. Browse and star courses to add them here." : "No courses match this filter."}
             </p>
