@@ -1,4 +1,7 @@
 import React from "react";
+import { BookOpen, Zap, Target, Building2, type LucideIcon } from "lucide-react";
+
+type MarkerKey = "book" | "zap" | "target" | "building";
 
 interface FitonistKpiCardProps {
   label: string;
@@ -6,7 +9,7 @@ interface FitonistKpiCardProps {
   change: string;
   positive?: boolean;
   subtitle: string;
-  marker: string;
+  marker: MarkerKey;
 }
 
 const accentAvatars: Record<string, string> = {
@@ -15,6 +18,13 @@ const accentAvatars: Record<string, string> = {
   lime: "bg-fit-lime/15 text-fit-lime border-fit-lime/30",
   rose: "bg-rose-500/15 text-rose-400 border-rose-500/30",
   indigo: "bg-indigo-500/15 text-indigo-400 border-indigo-500/30",
+};
+
+const markerIcons: Record<MarkerKey, LucideIcon> = {
+  book: BookOpen,
+  zap: Zap,
+  target: Target,
+  building: Building2,
 };
 
 export default function FitonistKpiCard({
@@ -26,11 +36,13 @@ export default function FitonistKpiCard({
   marker,
 }: FitonistKpiCardProps) {
   const markerTone =
-    accentAvatars.rose.includes(label.toLowerCase()) || marker === "⚡"
+    accentAvatars.rose.includes(label.toLowerCase()) || marker === "zap"
       ? accentAvatars.rose
-      : marker === "🏢"
+      : marker === "building"
       ? accentAvatars.indigo
-      : accentAvatars[["📚", "🎯"].includes(marker) ? "cyan" : "emerald"];
+      : accentAvatars[marker === "book" || marker === "target" ? "cyan" : "emerald"];
+
+  const MarkerIcon = markerIcons[marker];
 
   return (
     <div className="relative overflow-hidden rounded-2xl bg-fit-surface/80 border border-slate-800/80 p-5 ring-fit group hover:border-slate-700/80 transition-all">
@@ -42,9 +54,9 @@ export default function FitonistKpiCard({
           {label}
         </span>
         <span
-          className={`text-sm w-9 h-9 grid place-items-center rounded-xl border ${markerTone}`}
+          className={`w-9 h-9 grid place-items-center rounded-xl border ${markerTone}`}
         >
-          {marker}
+          <MarkerIcon className="w-4 h-4" />
         </span>
       </div>
 
