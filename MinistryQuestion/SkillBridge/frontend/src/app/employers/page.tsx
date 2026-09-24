@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { EMPLOYER_PARTNERS_DATA, EMPLOYER_SURVEY_SUMMARY, EmployerPartner } from "@/lib/intelligenceData";
 import EmployerModal, { NewEmployerInput } from "@/components/EmployerModal";
+import { PenLine, BarChart3, Check, AlertTriangle, Ban, Building2, X, CheckCircle2 } from "lucide-react";
 
 export default function EmployersPage() {
   const [employers, setEmployers] = useState<EmployerPartner[]>(EMPLOYER_PARTNERS_DATA);
@@ -92,7 +93,7 @@ export default function EmployersPage() {
             onClick={() => setIsFeedbackModalOpen(true)}
             className="px-4 py-2.5 rounded-xl text-xs font-bold text-blue-300 bg-blue-950/80 border border-blue-700/60 hover:bg-blue-900 transition-all flex items-center gap-1.5"
           >
-            <span>✍️ Submit Employer Validation</span>
+            <span className="inline-flex items-center gap-1.5"><PenLine className="w-3.5 h-3.5" /> Submit Employer Validation</span>
           </button>
 
           <button
@@ -109,7 +110,7 @@ export default function EmployersPage() {
         <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-base">📊</span>
+              <BarChart3 className="w-4 h-4 shrink-0" />
               <h2 className="text-base font-bold text-white">
                 Aggregated Recruiter Survey & Curriculum Endorsement Telemetry
               </h2>
@@ -134,7 +135,7 @@ export default function EmployersPage() {
             <div className="space-y-2">
               <div>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-slate-300">✓ Approved (Direct Job Readiness)</span>
+                  <span className="text-slate-300"><Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />Approved (Direct Job Readiness)</span>
                   <span className="text-emerald-400 font-mono font-bold">
                     {EMPLOYER_SURVEY_SUMMARY.averageCurriculumApprovalRate}%
                   </span>
@@ -149,7 +150,7 @@ export default function EmployersPage() {
 
               <div>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-slate-300">⚠️ Needs Module Modernization</span>
+                  <span className="text-slate-300"><AlertTriangle className="w-3 h-3 inline-block mr-1 -mt-0.5" />Needs Module Modernization</span>
                   <span className="text-amber-400 font-mono font-bold">
                     {EMPLOYER_SURVEY_SUMMARY.needsModificationRate}%
                   </span>
@@ -164,7 +165,7 @@ export default function EmployersPage() {
 
               <div>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-slate-300">🚫 Not Industrially Relevant</span>
+                  <span className="text-slate-300"><Ban className="w-3 h-3 inline-block mr-1 -mt-0.5" />Not Industrially Relevant</span>
                   <span className="text-rose-400 font-mono font-bold">
                     {EMPLOYER_SURVEY_SUMMARY.notRelevantRate}%
                   </span>
@@ -260,7 +261,7 @@ export default function EmployersPage() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-bold text-white flex items-center gap-2">
-            <span>🏢</span> Active Hiring Partners & Required Competency Profiles
+            <Building2 className="w-4 h-4" /> Active Hiring Partners & Required Competency Profiles
           </h3>
           <span className="text-xs text-slate-500 font-mono">
             {employers.length} Enterprise Networks
@@ -333,7 +334,7 @@ export default function EmployersPage() {
               onClick={() => setIsFeedbackModalOpen(false)}
               className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800"
             >
-              ✕
+              <X className="w-4 h-4" />
             </button>
 
             <div className="mb-5 border-b border-slate-800 pb-3">
@@ -347,7 +348,7 @@ export default function EmployersPage() {
 
             {feedbackSubmitted ? (
               <div className="p-6 text-center space-y-2 bg-emerald-950/40 border border-emerald-500/30 rounded-xl">
-                <span className="text-3xl">✅</span>
+                <CheckCircle2 className="w-8 h-8 mx-auto text-emerald-400" />
                 <h4 className="text-base font-bold text-white">Employer Feedback Submitted!</h4>
                 <p className="text-xs text-slate-300">
                   Your skill request and curriculum validation ratings have been fed directly into the State Curriculum Modernization Engine.
@@ -381,9 +382,9 @@ export default function EmployersPage() {
                     onChange={(e) => setFeedbackRating(e.target.value)}
                     className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500"
                   >
-                    <option value="Approved">✓ Approved (85%+ Job Readiness)</option>
-                    <option value="Needs Modernization">⚠️ Needs Modernization (Missing Modern Tools)</option>
-                    <option value="Obsolete">🚫 Severely Obsolete (Requires Total Redesign)</option>
+                    <option value="Approved">Approved (85%+ Job Readiness)</option>
+                    <option value="Needs Modernization">Needs Modernization (Missing Modern Tools)</option>
+                    <option value="Obsolete">Severely Obsolete (Requires Total Redesign)</option>
                   </select>
                 </div>
 
