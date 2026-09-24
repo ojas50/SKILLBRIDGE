@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { POLICY_DECISIONS_DATA, GovernmentPolicyAction } from "@/lib/intelligenceData";
 import EvidenceReasoningModal, { ReasoningChainData } from "@/components/EvidenceReasoningModal";
+import { Bot, Building2, Landmark, Zap, Search, Check, X } from "lucide-react";
 
 export default function PolicyDecisionsPage() {
   const [actions, setActions] = useState<GovernmentPolicyAction[]>(POLICY_DECISIONS_DATA);
@@ -21,7 +22,7 @@ export default function PolicyDecisionsPage() {
         if (a.id === actionId) {
           const newStatus = !a.approved;
           if (newStatus) {
-            setSuccessToast(`✓ Policy Action "${a.title}" authorized in Decision Support Suite!`);
+            setSuccessToast(`Policy Action "${a.title}" authorized in Decision Support Suite!`);
             setTimeout(() => setSuccessToast(null), 3500);
           }
           return { ...a, approved: newStatus };
@@ -60,10 +61,10 @@ export default function PolicyDecisionsPage() {
   ];
 
   const workflowStages = [
-    { step: "01", title: "AI Recommendation", desc: "Automated deficit & gap analysis", icon: "🤖", active: true },
-    { step: "02", title: "Employer Validation", desc: "Industry review & competency consensus", icon: "🏢", active: true },
-    { step: "03", title: "Administrator Approval", desc: "Human-in-the-loop policy sign-off", icon: "🏛️", active: true },
-    { step: "04", title: "Implementation", desc: "Seat quotas, syllabus & lab deployment", icon: "⚡", active: false },
+    { step: "01", title: "AI Recommendation", desc: "Automated deficit & gap analysis", icon: Bot, active: true },
+    { step: "02", title: "Employer Validation", desc: "Industry review & competency consensus", icon: Building2, active: true },
+    { step: "03", title: "Administrator Approval", desc: "Human-in-the-loop policy sign-off", icon: Landmark, active: true },
+    { step: "04", title: "Implementation", desc: "Seat quotas, syllabus & lab deployment", icon: Zap, active: false },
   ];
 
   return (
@@ -121,7 +122,7 @@ export default function PolicyDecisionsPage() {
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[10px] font-mono text-blue-400 font-bold">Step {wf.step}</span>
-                <span className="text-base">{wf.icon}</span>
+                <wf.icon className="w-4 h-4" />
               </div>
               <p className="font-bold text-white text-xs">{wf.title}</p>
               <p className="text-[11px] text-slate-400 mt-0.5">{wf.desc}</p>
@@ -134,11 +135,11 @@ export default function PolicyDecisionsPage() {
       {successToast && (
         <div className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-200 text-xs font-bold flex items-center justify-between shadow-xl animate-fadeIn">
           <div className="flex items-center gap-2.5">
-            <span className="text-lg">🏛️</span>
+            <Landmark className="w-5 h-5" />
             <span>{successToast}</span>
           </div>
           <button onClick={() => setSuccessToast(null)} className="text-emerald-400 hover:text-white">
-            ✕
+            <X className="w-3.5 h-3.5" />
           </button>
         </div>
       )}
@@ -201,7 +202,7 @@ export default function PolicyDecisionsPage() {
                   onClick={() => handleViewEvidence(action)}
                   className="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 bg-slate-900 border border-slate-700 hover:text-white transition-all flex items-center gap-1.5"
                 >
-                  <span>🔍 View Evidence</span>
+                  <span className="inline-flex items-center gap-1.5"><Search className="w-3.5 h-3.5" /> View Evidence</span>
                 </button>
 
                 <button
@@ -213,7 +214,17 @@ export default function PolicyDecisionsPage() {
                       : "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/30 ring-1 ring-blue-400"
                   }`}
                 >
-                  <span>{action.approved ? "✓ Authorized" : "⚡ Authorize Policy Action"}</span>
+                  <span className="inline-flex items-center gap-1.5">
+                    {action.approved ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" /> Authorized
+                      </>
+                    ) : (
+                      <>
+                        <Zap className="w-3.5 h-3.5" /> Authorize Policy Action
+                      </>
+                    )}
+                  </span>
                 </button>
               </div>
             </div>
