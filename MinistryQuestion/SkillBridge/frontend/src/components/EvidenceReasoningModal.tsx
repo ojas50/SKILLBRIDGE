@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Radio, Target, BookOpen, AlertTriangle, Zap, Users, TrendingUp, X } from "lucide-react";
 
 export interface ReasoningChainData {
   evidence: string;
@@ -44,7 +45,7 @@ export default function EvidenceReasoningModal({
       content: data.evidence,
       badge: "Labour Ingestion",
       color: "border-blue-500/40 bg-blue-950/30 text-blue-300",
-      icon: "📡"
+      icon: Radio
     },
     {
       step: "02",
@@ -52,7 +53,7 @@ export default function EvidenceReasoningModal({
       content: data.skillRequirement,
       badge: "Competency Spec",
       color: "border-indigo-500/40 bg-indigo-950/30 text-indigo-300",
-      icon: "🎯"
+      icon: Target
     },
     {
       step: "03",
@@ -60,7 +61,7 @@ export default function EvidenceReasoningModal({
       content: data.currentCourse,
       badge: "Catalog Link",
       color: "border-purple-500/40 bg-purple-950/30 text-purple-300",
-      icon: "📚"
+      icon: BookOpen
     },
     {
       step: "04",
@@ -68,7 +69,7 @@ export default function EvidenceReasoningModal({
       content: data.detectedGap,
       badge: "Deficit Alert",
       color: "border-rose-500/40 bg-rose-950/30 text-rose-300",
-      icon: "⚠️"
+      icon: AlertTriangle
     },
     {
       step: "05",
@@ -76,7 +77,7 @@ export default function EvidenceReasoningModal({
       content: data.recommendation,
       badge: "AI Syllabus Plan",
       color: "border-emerald-500/40 bg-emerald-950/30 text-emerald-300",
-      icon: "⚡"
+      icon: Zap
     },
     {
       step: "06",
@@ -84,7 +85,7 @@ export default function EvidenceReasoningModal({
       content: data.trainingImpact,
       badge: "Resource Planning",
       color: "border-cyan-500/40 bg-cyan-950/30 text-cyan-300",
-      icon: "👥"
+      icon: Users
     },
     {
       step: "07",
@@ -92,7 +93,7 @@ export default function EvidenceReasoningModal({
       content: data.expectedOutcome,
       badge: "ROI Projection",
       color: "border-amber-500/40 bg-amber-950/30 text-amber-300",
-      icon: "📈"
+      icon: TrendingUp
     }
   ];
 
@@ -102,9 +103,9 @@ export default function EvidenceReasoningModal({
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
-        >
-          ✕
+className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
+          >
+            <X className="w-4 h-4" />
         </button>
 
         {/* Header */}
@@ -119,7 +120,7 @@ export default function EvidenceReasoningModal({
             </span>
           </div>
           <h2 className="text-2xl font-black text-white">
-            Evidence ➔ Recommendation Reasoning Pipeline
+            Evidence → Recommendation Reasoning Pipeline
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             Visual breakdown demonstrating how raw labor signals translate through every layer into policy recommendations.
@@ -130,8 +131,8 @@ export default function EvidenceReasoningModal({
         <div className="space-y-3 relative before:absolute before:left-5 before:top-4 before:bottom-4 before:w-0.5 before:bg-slate-800">
           {chain.map((c, idx) => (
             <div key={idx} className="relative flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-slate-950 border border-slate-700 flex items-center justify-center text-lg flex-shrink-0 z-10 shadow-md">
-                {c.icon}
+              <div className="w-10 h-10 rounded-xl bg-slate-950 border border-slate-700 flex items-center justify-center flex-shrink-0 z-10 shadow-md">
+                <c.icon className="w-5 h-5" />
               </div>
 
               <div className={`flex-1 p-3.5 rounded-xl border ${c.color} space-y-1`}>

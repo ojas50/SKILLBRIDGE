@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { CheckCircle2, Check } from "lucide-react";
 
 interface Course {
   id: number;
@@ -139,7 +140,7 @@ export default function CourseModal({
         {/* Success Alert */}
         {updatedSuccess && (
           <div className="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs flex items-center gap-3">
-            <span className="text-xl">✅</span>
+            <CheckCircle2 className="w-5 h-5 shrink-0" />
             <div>
               <p className="font-bold text-emerald-200">Curriculum Modernization Authorized!</p>
               <p className="text-emerald-300/80">
@@ -232,7 +233,7 @@ export default function CourseModal({
                         : "bg-slate-800 text-slate-400 border border-slate-700 hover:text-white"
                     }`}
                   >
-                    <span>{isSelected ? "✓" : "+"}</span>
+                    <span className="inline-flex items-center">{isSelected ? <Check className="w-3.5 h-3.5" /> : "+"}</span>
                     <span>{skill}</span>
                   </button>
                 );

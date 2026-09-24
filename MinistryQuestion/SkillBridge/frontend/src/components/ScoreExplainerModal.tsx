@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { X } from "lucide-react";
 import { CourseData } from "@/lib/intelligenceData";
 
 interface ScoreExplainerModalProps {
@@ -74,9 +75,9 @@ export default function ScoreExplainerModal({ course, onClose }: ScoreExplainerM
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
-        >
-          ✕
+className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
+          >
+            <X className="w-4 h-4" />
         </button>
 
         {/* Header */}

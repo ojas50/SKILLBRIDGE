@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Check } from "lucide-react";
 
 export interface NewEmployerInput {
   name: string;
@@ -113,8 +114,8 @@ export default function EmployerModal({
 
         {submitted ? (
           <div className="p-6 text-center space-y-3">
-            <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-2xl">
-              ✓
+            <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
+              <Check className="w-6 h-6" />
             </div>
             <h4 className="text-base font-bold text-white">Demand Registered Successfully!</h4>
             <p className="text-xs text-slate-400">
