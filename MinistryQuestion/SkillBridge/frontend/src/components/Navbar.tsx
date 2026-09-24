@@ -7,6 +7,7 @@ import SihDemoModal from "@/components/SihDemoModal";
 import { Button } from "@/components/ui";
 import { useAuth } from "@/lib/AuthContext";
 import { useTheme } from "@/lib/ThemeContext";
+import { Rocket, Sun, Moon } from "lucide-react";
 
 const NAV_ITEMS = [
   { name: "Overview", href: "/" },
@@ -158,7 +159,9 @@ export default function Navbar() {
                 className="shadow-lg shadow-black/20"
                 onClick={() => setIsDemoModalOpen(true)}
               >
-                <span>🚀 Demo</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Rocket className="w-3.5 h-3.5" /> Demo
+                </span>
               </Button>
 
               {user ? (
@@ -243,7 +246,7 @@ export default function Navbar() {
                   setIsDemoModalOpen(true);
                 }}
               >
-                🚀 Launch Demo Mode
+                <Rocket className="w-3.5 h-3.5" /> Launch Demo Mode
               </Button>
 
               <Button
@@ -252,7 +255,15 @@ export default function Navbar() {
                 className="w-full min-h-[44px]"
                 onClick={toggleTheme}
               >
-                {theme === "dark" ? "☀️ Switch to Light Mode" : "🌙 Switch to Dark Mode"}
+                {theme === "dark" ? (
+                  <>
+                    <Sun className="w-3.5 h-3.5" /> Switch to Light Mode
+                  </>
+                ) : (
+                  <>
+                    <Moon className="w-3.5 h-3.5" /> Switch to Dark Mode
+                  </>
+                )}
               </Button>
 
               {user ? (

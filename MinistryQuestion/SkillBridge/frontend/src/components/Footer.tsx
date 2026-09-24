@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import DataSourcesModal from "@/components/DataSourcesModal";
 import { PROTOTYPE_DISCLAIMER_TEXT } from "@/lib/intelligenceData";
+import { ArrowRight } from "lucide-react";
 
 export default function Footer() {
   const [isSourcesModalOpen, setIsSourcesModalOpen] = useState(false);
@@ -134,7 +135,7 @@ export default function Footer() {
                   className="w-full text-left text-[11px] text-ink-muted hover:text-ink bg-line px-2.5 py-1.5 rounded-lg border border-line flex items-center justify-between transition-colors"
                 >
                   <span>Data Sources & Methodology</span>
-                  <span>➔</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
