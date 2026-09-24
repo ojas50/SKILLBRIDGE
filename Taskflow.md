@@ -65,7 +65,7 @@
 - [ ] Install `lucide-react` + `next/font` @inter (dependency commit, no visual change)
 
 #### Phase 0.5 — Site Hygiene & Detail Pass (ojas50 list, 2026-09-19) — do alongside Phase 0/1
-- [ ] 1. Remove ALL emojis from rendered UI (the sweep IS Phase 3's GATE — run it early, don't wait)
+- [x] 1. Remove ALL emojis from rendered UI: DONE 2026-09-19 — `lucide-react` installed; 186 emoji/dingbat chars across 27 files swept to lucide icons (9 commits); verification grep = 0 remaining (plain →/•/▲ glyphs kept as typography)
 - [x] 2. Find broken links: AUDITED 2026-09-19 — all 50 hrefs (incl. template + footer) resolve to real routes; no `href="#"`, no dead anchors (0 broken)
 - [x] 3. Mobile menu: polished 2026-09-19 — drawer grouped into Main/Explore/Admin sections, active states, 44px tap targets
 - [x] 4. Favicon: DONE `src/app/icon.svg` (bolt, sun-yellow→neon-orange) via PR #2
@@ -125,9 +125,8 @@ the only ones allowed for text/buttons on light** — this is what keeps the pal
       (AreaChart already tokenized)
 
 #### Phase 3 — Icons, Type & Brand (the "creative, not vibecoded" pass)
-- [ ] **GATE: sweep ALL emojis to lucide-react** (📊→BarChart3/LineChart, 🚀→Rocket/Sparkles, 🏛️→Landmark,
-      🎯→Target, ⚡→Zap, 📍→MapPin, 👥→Users, 🎓→GraduationCap, ⚠️→AlertTriangle, 📈→TrendingUp, 🏢→Building2,
-      ✅→CheckCircle2, ⛔→Ban, 🔒→Lock) — no emoji left in rendered UI
+- [x] **GATE: sweep ALL emojis to lucide-react** — DONE 2026-09-19 (contract mapping + sensible picks for city/data icons;
+      native `<option>` labels went text-only since options can't hold icon components; copy arrows normalized to plain →)
 - [ ] Load Inter via `next/font`; apply type scale (display/heading/body/caption/mono); sweep `text-xl/2xl/3xl` mishmash
 - [ ] Brand mark: SkillBridge bolt in a sun-yellow→neon-orange rounded square (only allowed gradient); wordmark charcoal
 - [ ] Focus-visible rings = cyan; selection color = sun-yellow/25; reduce motion respected (no autoplay animations)
