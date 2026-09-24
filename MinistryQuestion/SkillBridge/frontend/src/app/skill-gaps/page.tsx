@@ -5,6 +5,7 @@ import Link from "next/link";
 import SkillGapBar from "@/components/SkillGapBar";
 import CurriculumSimulator from "@/components/CurriculumSimulator";
 import { SKILL_INTELLIGENCE_DATA, type SkillItem } from "@/lib/intelligenceData";
+import { Zap, Target } from "lucide-react";
 
 export default function SkillGapsPage() {
   const [skills, setSkills] = useState<SkillItem[]>(SKILL_INTELLIGENCE_DATA);
@@ -82,7 +83,7 @@ export default function SkillGapsPage() {
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            ⚡ What-If Policy Simulator
+            <span className="inline-flex items-center gap-1.5"><Zap className="w-3.5 h-3.5" /> What-If Policy Simulator</span>
           </button>
           <button
             onClick={() => setActiveTab("radar")}
@@ -92,7 +93,7 @@ export default function SkillGapsPage() {
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            🎯 Deficit Radar List
+            <span className="inline-flex items-center gap-1.5"><Target className="w-3.5 h-3.5" /> Deficit Radar List</span>
           </button>
         </div>
       </div>

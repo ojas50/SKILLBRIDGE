@@ -5,6 +5,7 @@ import Link from "next/link";
 import FitonistKpiCard from "@/components/FitonistKpiCard";
 import AreaChart from "@/components/AreaChart";
 import SkillGapBar from "@/components/SkillGapBar";
+import { Landmark, Flame, GraduationCap, Map } from "lucide-react";
 import {
   SKILL_INTELLIGENCE_DATA,
   COURSES_CATALOG,
@@ -118,7 +119,7 @@ export default function Dashboard() {
             href="/policy-decisions"
             className="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-300 bg-slate-900/80 border border-slate-800 hover:border-slate-700 hover:text-white transition-all flex items-center gap-1.5"
           >
-            <span>🏛️ Policy Decision Center</span>
+            <span className="inline-flex items-center gap-1.5"><Landmark className="w-3.5 h-3.5" /> Policy Decision Center</span>
           </Link>
 
           <Link href="/curriculum-advisor" className="btn-fit text-xs">
@@ -233,7 +234,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <span>🔥</span> Top Competency Deficits Radar
+                <Flame className="w-4 h-4 text-crimson" /> Top Competency Deficits Radar
               </h2>
               <p className="text-xs text-slate-400">
                 Demand score vs trained supply capacity across core technological and manufacturing disciplines.
@@ -306,7 +307,7 @@ export default function Dashboard() {
                     <p className="text-[11px] opacity-85 line-clamp-2 leading-relaxed">{alert.recommendedAction}</p>
                     <div className="mt-2 pt-1 border-t border-slate-800/60 flex items-center justify-between text-[10px] font-mono">
                       <span>{alert.affectedDistricts.join(", ")}</span>
-                      <span className="underline">View Evidence ➔</span>
+                      <span className="underline">View Evidence →</span>
                     </div>
                   </div>
                 );
@@ -321,7 +322,7 @@ export default function Dashboard() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 border-b border-slate-800 pb-3">
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <span>🎓</span> Course Modernization & Alignment Overview
+              <GraduationCap className="w-4 h-4" /> Course Modernization & Alignment Overview
             </h2>
             <p className="text-xs text-slate-400">
               State vocational tracks evaluated against 6-factor industry criteria.
@@ -375,7 +376,7 @@ export default function Dashboard() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <span>🗺️</span> Regional District Training & Quota Matrix
+              <Map className="w-4 h-4" /> Regional District Training & Quota Matrix
             </h2>
             <p className="text-xs text-slate-400">
               Decentralized quotas across 8 core Maharashtra industrial corridors.
