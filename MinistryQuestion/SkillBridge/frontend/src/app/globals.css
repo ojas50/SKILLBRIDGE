@@ -17,14 +17,8 @@ body {
   --input-autofill-bg: var(--sb-surface);
   --input-autofill-text: var(--sb-ink);
   --chart-grid: var(--sb-hairline);
-  --chart-supply: var(--sb-cyan);
-  --chart-supply-soft: var(--sb-sun);
-  --primary: var(--sb-neon);
-  --primary-hover: var(--sb-neon-cta-dark);
-  --accent-cyan: var(--sb-cyan);
-  --accent-emerald: var(--sb-cyan);
-  --accent-amber: var(--sb-sun);
-  --accent-rose: var(--sb-crimson);
+  --primary: var(--sb-brand);
+  --primary-hover: var(--sb-brand-hover);
   --fit-gradient: var(--sb-fit-gradient);
 }
 
@@ -34,18 +28,12 @@ html[data-theme="light"] {
   --panel: var(--sb-surface);
   --panel-soft: var(--sb-surface-raised);
   --hairline: var(--sb-hairline);
-  --navbar: rgba(246, 246, 244, 0.94);
+  --navbar: rgba(248, 250, 252, 0.94);
   --input-autofill-bg: var(--sb-surface);
   --input-autofill-text: var(--sb-ink);
   --chart-grid: var(--sb-hairline);
-  --chart-supply: var(--sb-cyan-strong);
-  --chart-supply-soft: var(--sb-sun-strong);
-  --primary: var(--sb-neon-cta);
-  --primary-hover: var(--sb-neon-cta);
-  --accent-cyan: var(--sb-cyan-strong);
-  --accent-emerald: var(--sb-cyan-strong);
-  --accent-amber: var(--sb-sun-strong);
-  --accent-rose: var(--sb-crimson-strong);
+  --primary: var(--sb-brand);
+  --primary-hover: var(--sb-brand-hover);
   --fit-gradient: var(--sb-fit-gradient);
   color-scheme: light;
 }
@@ -57,7 +45,6 @@ html {
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   min-height: 100vh;
 }
 
@@ -71,7 +58,7 @@ body {
 }
 
 .glass-card:hover {
-  border-color: color-mix(in srgb, var(--sb-sun) 45%, var(--hairline));
+  border-color: color-mix(in srgb, var(--sb-brand) 45%, var(--hairline));
   box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.18);
 }
 
@@ -83,7 +70,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* Primary action button (neon-orange CTA per CONTRACT) */
+/* Primary action button (deep-teal CTA) */
 .btn-glow {
   background: var(--sb-cta-bg);
   color: var(--sb-cta-text);
@@ -120,7 +107,7 @@ body {
   border-color: color-mix(in srgb, var(--foreground) 30%, transparent);
 }
 
-/* Cyan-tinted accent button */
+/* Brand-accent gradient text */
 .text-fit-gradient {
   background: var(--sb-fit-gradient);
   -webkit-background-clip: text;
@@ -152,42 +139,84 @@ body {
 }
 
 .ring-fit {
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--sb-cyan) 22%, transparent), 0 10px 40px -12px color-mix(in srgb, var(--sb-cyan) 28%, transparent);
-}
-
-/* Status badges — spec §3: tinted text X-700 on X-700/12 bg, colored border X-600/30 */
-.badge-aligned {
-  background: color-mix(in srgb, var(--accent-cyan) 14%, transparent);
-  color: var(--sb-cyan-strong);
-  border: 1px solid color-mix(in srgb, var(--accent-cyan) 30%, transparent);
-}
-
-.badge-update {
-  background: color-mix(in srgb, var(--accent-amber) 14%, transparent);
-  color: var(--sb-sun-strong);
-  border: 1px solid color-mix(in srgb, var(--accent-amber) 30%, transparent);
-}
-
-.badge-critical {
-  background: color-mix(in srgb, var(--accent-rose) 14%, transparent);
-  color: var(--sb-crimson);
-  border: 1px solid color-mix(in srgb, var(--accent-rose) 30%, transparent);
-}
-
-.badge-oversupplied {
-  background: color-mix(in srgb, var(--foreground) 8%, transparent);
-  color: var(--sb-ink);
-  border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--sb-cta) 22%, transparent), 0 10px 40px -12px color-mix(in srgb, var(--sb-cta) 28%, transparent);
 }
 
 /* =========================================================
-   LIGHT MODE ("light theme") utility remaps.
-   Flips the app's fixed dark-neutral palette into light values,
-   so content surfaces, borders, and gray text adapt across all
-   pages without per-component edits. Branded grays like the
-   teal->lime fit accents, badges, and rose/amber alert chips are
-   intentionally left alone (they read well on both themes).
-   ========================================================= */
+     Status badges — Makeover_Spec Section 3a.
+     Charcoal text + 4px colored dot + tinted bg + colored border.
+     Neutral: no dot.
+     ========================================================= */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.status-badge .badge-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-healthy {
+  background: var(--status-healthy-bg);
+  color: var(--status-text);
+  border-color: var(--status-healthy-border);
+}
+.status-healthy .badge-dot {
+  background: var(--status-healthy-dot);
+}
+
+.status-warning {
+  background: var(--status-warning-bg);
+  color: var(--status-text);
+  border-color: var(--status-warning-border);
+}
+.status-warning .badge-dot {
+  background: var(--status-warning-dot);
+}
+
+.status-critical {
+  background: var(--status-critical-bg);
+  color: var(--status-text);
+  border-color: var(--status-critical-border);
+}
+.status-critical .badge-dot {
+  background: var(--status-critical-dot);
+}
+
+.status-neutral {
+  background: var(--status-neutral-bg);
+  color: var(--status-text);
+  border-color: var(--status-neutral-border);
+}
+.status-neutral .badge-dot {
+  display: none;
+}
+
+/* Legacy aliases — re-mapped to Section 3a roles */
+.badge-aligned     { composes: status-healthy; }
+.badge-update      { composes: status-warning; }
+.badge-critical    { composes: status-critical; }
+.badge-oversupplied { composes: status-neutral; }
+
+/* =========================================================
+    LIGHT MODE ("light theme") utility remaps.
+    Flips the app's fixed dark-neutral palette into light values,
+    so content surfaces, borders, and gray text adapt across all
+    pages without per-component edits. Branded grays like the
+    navy/teal fit accents, badges, and rose/amber alert chips are
+    intentionally left alone (they read well on both themes).
+    ========================================================= */
 html[data-theme="light"] .text-white,
 html[data-theme="light"] .hover\:text-white {
   color: #0f172a !important;
@@ -253,12 +282,12 @@ html[data-theme="light"] .bg-fit-surface\/80 {
 }
 
 /* =========================================================
-   LIGHT MODE: accent text + colored chip remaps (BUG-021).
-   300/400-level accent text flips to 700-level shades so it
-   clears contrast on light glass surfaces; the dark colored-
-   950/900 chip backgrounds become light tinted panels; the
-   bright Fitonist accents and gradient text darken too.
-   ========================================================= */
+    LIGHT MODE: accent text + colored chip remaps (BUG-021).
+    300/400-level accent text flips to 700-level shades so it
+    clears contrast on light glass surfaces; the dark colored-
+    950/900 chip backgrounds become light tinted panels; the
+    navy/teal accents and gradient text darken too.
+    ========================================================= */
 html[data-theme="light"] .text-amber-300,
 html[data-theme="light"] .text-amber-400,
 html[data-theme="light"] .text-yellow-400 { color: #b45309; }
@@ -293,8 +322,6 @@ html[data-theme="light"] [class*="bg-purple-950/"] { background-color: rgba(168,
 html[data-theme="light"] [class*="bg-rose-900"],
 html[data-theme="light"] [class*="bg-rose-950/"] { background-color: rgba(244, 63, 94, 0.12); }
 html[data-theme="light"] [class*="bg-yellow-950/"] { background-color: rgba(234, 179, 8, 0.14); }
-
-/* badges flip automatically via --accent-* tokens (dark + light shapes in tokens.css) */
 
 /* gradient brand text flips to a darker palette on light surfaces */
 html[data-theme="light"] .text-fit-gradient {

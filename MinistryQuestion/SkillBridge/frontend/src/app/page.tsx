@@ -94,8 +94,7 @@ export default function Home() {
             { name: "Data Analysis", growth: "+18%", hot: false },
             { name: "IoT & Embedded", growth: "+15%", hot: false },
           ].map((s) => (
-            <Tag key={s.name} tone={s.hot ? "rose" : "neutral"}>
-              {s.name}
+            <Tag key={s.name} tone={s.hot ? "rose" : "neutral"} label={s.name}>
               <span className={`font-mono ${s.hot ? "text-crimson" : "text-ink-faint"}`}>{s.growth}</span>
             </Tag>
           ))}

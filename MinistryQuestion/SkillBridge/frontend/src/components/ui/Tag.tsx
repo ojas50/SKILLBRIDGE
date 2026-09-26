@@ -1,12 +1,14 @@
 import React from "react";
 import Badge from "./Badge";
+import type { StatusRole } from "@/lib/status-label-registry";
 
 type TagTone = "neutral" | "cyan" | "amber" | "rose";
 
 interface TagProps {
-  children: React.ReactNode;
+  label: string;
   tone?: TagTone;
   className?: string;
+  children?: React.ReactNode;
 }
 
 const toneMap: Record<TagTone, "positive" | "warning" | "critical" | "info" | "neutral"> = {
@@ -17,12 +19,13 @@ const toneMap: Record<TagTone, "positive" | "warning" | "critical" | "info" | "n
 };
 
 export default function Tag({
-  children,
+  label,
   tone = "neutral",
   className,
+  children,
 }: TagProps) {
   return (
-    <Badge tone={toneMap[tone]} className={className}>
+    <Badge tone={toneMap[tone]} label={label} className={className}>
       {children}
     </Badge>
   );
