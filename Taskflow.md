@@ -132,6 +132,7 @@ the only ones allowed for text/buttons on light** — this is what keeps the pal
 - [ ] Load Inter via `next/font`; apply type scale (display/heading/body/caption/mono); sweep `text-xl/2xl/3xl` mishmash
 - [ ] Brand mark: SkillBridge bolt in a sun-yellow→neon-orange rounded square (only allowed gradient); wordmark charcoal
 - [ ] Focus-visible rings = cyan; selection color = sun-yellow/25; reduce motion respected (no autoplay animations)
+- [ ] D7 (typography): font-family updated to Geist Sans + Geist Mono via `geist` package (Inter retired); scale still pending. See Phase D D7.
 
 #### Phase C — Audience & Trust (homepage CRO audit, 2026-09-19) — ACTIVE, runs BEFORE Phase 4 resumes
 Source: markup audit of `/` + `/courses` `/dashboard` `/employers` `/login` `/curriculum-advisor` `/career-readiness`.
@@ -174,9 +175,9 @@ De-clutter & polish (palette-agnostic — safe to build on current tokens; reuse
 - [ ] D2. Footer slim: public footer → ~5 links (About, Contact, Privacy, Methodology, Status); move module directory to an in-app sidebar for logged-in users. Consolidate duplicate status badge ("Live Intelligence Active" vs "Prototype Intelligence Engine Active") into one canonical indicator.
 - [ ] D3. Skeleton loaders for all client-rendered destinations (especially /career-readiness, primary CTA) instead of blank shell; count-up animation on hero KPIs on scroll-into-view (600–800ms ease-out).
 - [ ] D4. Card polish: entire card is the click target (not an inner "Inspect" text link); card hover = border-tint + lift + shadow (200ms).
-- [ ] D5. Status-pill restructure: 4 semantic categories reused everywhere (Positive/Aligned, Needs attention, Critical, Informational) as tinted 10%-opacity backgrounds + dark text + 4px dot — NOT solid saturated fills; replaces the current badge-*/badge-oversupplied system and the 10 status vocabularies with 4.
+- [ ] D5. Status-pill restructure: 4 categories (Positive/Aligned, Needs attention, Critical, Informational) as tinted backgrounds + **strong-shade text** + 4px dot — re-aligns to Makeover_Spec §3 ("tinted text X-700 on X-700/12 bg, colored border X-600/30"), which was already defined; the deviation was ad-hoc solid fills bypassing `.badge-*`. Added `ui/Badge` (positive/warning/critical/info/neutral) + `ui/Tag` delegates to it; `.badge-*` text updated to `--sb-cyan-strong`/`--sb-sun-strong`/`--sb-crimson`/`--sb-ink`. Page ad-hoc solid fills convert via Badge as pages are swept.
 - [ ] D6. Tabs/filters animated sliding pill (150–200ms) instead of instant color swap; nav active state = 3px left-border accent + tinted background.
-- [ ] D7. Typography scale consistent across all pages: hero H1 / section H2 / card H3 / body 16px-1.6-400 / eyebrow 13px-600-uppercase+tracking / numeric data in a MONO face (matches surrounding size, 500). Eyebrow used as section label only — NOT repeated as a page-header prefix on every module.
+- [ ] D7 (font done 2026-09-22): font-family updated to Geist Sans + Geist Mono via `geist` package (Inter retired). Scale/eyebrow/mono-usage items remain as typography sweep.
 
 Palette/typography conflict (would re-do tokens.css + all token-driven classes + every styled page):
 - [ ] D8. **DECISION PROMPT**: adopt the audit's palette (navy #2A4B8D / deep-teal #0F766E / slate neutrals #F8FAFC→#0F172A) + **Geist Sans/Mono**, OR keep the locked Naukri palette (sun #FFC400 / neon #FF6D00 / cyan #00E5FF / crimson / charcoal / platinum) + Inter? If D8 = "adopt audit": tokens.css revalues + `--sb-*` semantics re-map + every Phase 4 page restyled. If D8 = "keep locked": D0–D7 still ship on the current palette (status pills, density, skeleton, count-up, card hover, typography scale all palette-agnostic), and only font-family (Inter→Geist) is optionally adoptable as a low-risk additive.

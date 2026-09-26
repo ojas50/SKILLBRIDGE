@@ -42,10 +42,10 @@ Supporting neutrals derived at build time (no extra "brand" colors):
 
 ## 4. Typography
 
-- Family: **Inter** (via `next/font`), fallback `-apple-system…`.
+- Family: **Geist Sans** + **Geist Mono** (via `geist` package, `next/font`) — Inter retired 2026-09-22 (font-now, palette-later decision).
 - Scale: display `text-3xl font-black`, page-title `text-2xl font-bold`, section `text-lg font-semibold`,
   body `text-sm`, caption/label `text-xs font-semibold uppercase tracking-wide`, data `font-mono text-sm`.
-- Mono reserved for KPI numbers + hex-class labels only.
+- Mono reserved for KPI numbers + hex-class labels only; Geist Mono via `var(--font-geist-mono)` through Tailwind `font-mono`.
 
 ## 5. Surfaces & shape
 
@@ -58,9 +58,11 @@ Supporting neutrals derived at build time (no extra "brand" colors):
 
 ## 6. Components to build (Phase 2 library)
 
-`ui/Button`, `ui/Card`, `ui/MetricTile`, `ui/StatusBadge`, `ui/Tag` (tinted chips),
-`ui/Modal`, `ui/Field` (input/select), `ui/TabBar`, `ui/SectionHeader`, `ui/TableRow`,
+`ui/Button`, `ui/Card`, `ui/Badge` (status pills), `ui/Tag` (tinted chips, delegates to Badge),
+`ui/MetricTile`, `ui/Modal`, `ui/Field` (input/select), `ui/TabBar`, `ui/SectionHeader`, `ui/TableRow`,
 `ui/EmptyState`, `ui/StatDelta`. Charts stay bespoke but consume the palette tokens.
+
+Status chips (§3): tinted text X-700 on X-700/12 bg, colored border X-600/30 — implemented via `.badge-aligned`/`.badge-update`/`.badge-critical`/`.badge-oversupplied`; do NOT use ad-hoc solid-fill Tailwind colors (e.g. `bg-rose-500/20 text-rose-400`).
 
 ## 7. Icons
 
