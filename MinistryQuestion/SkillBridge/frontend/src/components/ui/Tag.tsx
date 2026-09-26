@@ -1,4 +1,5 @@
 import React from "react";
+import Badge from "./Badge";
 
 type TagTone = "neutral" | "cyan" | "amber" | "rose";
 
@@ -8,11 +9,11 @@ interface TagProps {
   className?: string;
 }
 
-const tones: Record<TagTone, string> = {
-  neutral: "badge-oversupplied",
-  cyan: "badge-aligned",
-  amber: "badge-update",
-  rose: "badge-critical",
+const toneMap: Record<TagTone, "positive" | "warning" | "critical" | "info" | "neutral"> = {
+  neutral: "neutral",
+  cyan: "positive",
+  amber: "warning",
+  rose: "critical",
 };
 
 export default function Tag({
@@ -21,10 +22,8 @@ export default function Tag({
   className,
 }: TagProps) {
   return (
-    <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium ${tones[tone]} ${className ?? ""}`}
-    >
+    <Badge tone={toneMap[tone]} className={className}>
       {children}
-    </span>
+    </Badge>
   );
 }

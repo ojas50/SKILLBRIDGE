@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./tokens.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -8,7 +9,8 @@ import { SetPageTitle } from "@/components/SetPageTitle";
 import { AuthProvider } from "@/lib/AuthContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 
-const inter = Inter({ subsets: ["latin"] });
+const geistSans = GeistSans;
+const geistMono = GeistMono;
 
 export const metadata: Metadata = {
   title: "SkillBridge — Know Your Career Readiness",
@@ -24,11 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="dark" className="dark">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} data-theme="dark">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${inter.className} antialiased min-h-screen flex flex-col justify-between`}>
+      <body className={`antialiased min-h-screen flex flex-col justify-between`}>
         <ThemeProvider>
           <AuthProvider>
             <SetPageTitle />
