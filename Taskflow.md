@@ -34,6 +34,8 @@
 > Goal: kill the "vibecoded" look (every page restyle-able in ONE pass, consistent tokens, no Tailwind hacks).
 > DIRECTION LOCKED 2026-09-10 (ojas50) → Naukri-inspired + custom palette (sun-yellow/neon-orange/platinum/deep-red/charcoal/cyan). See `Makeover_Spec.md`.
 
+⚠️ **Palette conflict flagged 2026-09-22** — the design-system audit (below, "Phase D") prescribes a *different* palette (navy #2A4B8D / deep-teal #0F766E / slate neutrals) + Geist Sans/Mono instead of the locked sun/neon/cyan palette + Inter. **See the decision prompt at the end of Phase D.** Adding this as a separate phase so it can be evaluated without silently invalidating the work already built (tokens.css, all token-driven classes, 10 commits).
+
 #### Compass — "Simple & Professional" (check every change against these)
 1. **Clarity over decoration** — cards carry one primary message; one primary action per screen (neon-orange).
 2. **Whitespace is design** — consistent 24px gutter, 16-px radii, generous padding; no cramped panels.
@@ -156,12 +158,31 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       consolidate duplicate "Live Intelligence Active" badges (home chip vs footer status — keep one); "Admin" nav relabel
       (role-switcher wording; dropdown structure from PR #1 stays).
 - [ ] C5. OWNER DECISION (do NOT implement unilaterally): footer `mailto:ojaskhodaskar2026@gmail.com` → branded support
-      address (contacts added per hygiene 16/17; identity call is ojas50's).
-- [ ] Already covered — no new task, cross-ref only: status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
-      responsive tables/radar (checkpoints "tables scroll horizontally" + hygiene-18 device QA); sidebar app shell → DEFERRED
-      to Phase D backlog (large); schema.org + breadcrumbs + OG cards → Phase D backlog (small SEO batch).
+       address (contacts added per hygiene 16/17; identity call is ojas50's).
+- [ ] Cross-ref only (no new task): status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
+       responsive tables/radar (checkpoints "tables scroll horizontally" + hygiene-18 device QA);
+       sidebar app shell → DEFERRED to Phase D backlog (large);
+       schema.org + breadcrumbs + OG cards → Phase D backlog (small SEO batch).
 
-#### Phase 4 — One-Pass Page Apply (Naukri-ization) — PAUSED until C1–C3 land (no polish-before-restructure)
+#### Phase D — Design System v2 (designer audit, 2026-09-22) — PAUSED pending decision
+Source: complete design-system handoff (palette + typography + interactive CSS + before/after blueprint).
+**Palette conflict → see the DECISION PROMPT at the bottom of this section before treating this as a go.**
+
+De-clutter & polish (palette-agnostic — safe to build on current tokens; reuses Button/Card/Tag/SectionHeader primitives):
+- [ ] D0. Progressive disclosure on data cards (course/employer/dashboard): compact card (title + 2-3 stats + one status pill) by default → "View Details" expands syllabus tags, missing-skills, admin actions. Reuse existing Card primitive + state toggle.
+- [ ] D1. Homepage/KPI density: trim hero stat bar to 2 public numbers (Placement Rate, Partners); move full KPI set to admin cockpit; trim Hot Skills ticker to top 3, demote below fold.
+- [ ] D2. Footer slim: public footer → ~5 links (About, Contact, Privacy, Methodology, Status); move module directory to an in-app sidebar for logged-in users. Consolidate duplicate status badge ("Live Intelligence Active" vs "Prototype Intelligence Engine Active") into one canonical indicator.
+- [ ] D3. Skeleton loaders for all client-rendered destinations (especially /career-readiness, primary CTA) instead of blank shell; count-up animation on hero KPIs on scroll-into-view (600–800ms ease-out).
+- [ ] D4. Card polish: entire card is the click target (not an inner "Inspect" text link); card hover = border-tint + lift + shadow (200ms).
+- [ ] D5. Status-pill restructure: 4 semantic categories reused everywhere (Positive/Aligned, Needs attention, Critical, Informational) as tinted 10%-opacity backgrounds + dark text + 4px dot — NOT solid saturated fills; replaces the current badge-*/badge-oversupplied system and the 10 status vocabularies with 4.
+- [ ] D6. Tabs/filters animated sliding pill (150–200ms) instead of instant color swap; nav active state = 3px left-border accent + tinted background.
+- [ ] D7. Typography scale consistent across all pages: hero H1 / section H2 / card H3 / body 16px-1.6-400 / eyebrow 13px-600-uppercase+tracking / numeric data in a MONO face (matches surrounding size, 500). Eyebrow used as section label only — NOT repeated as a page-header prefix on every module.
+
+Palette/typography conflict (would re-do tokens.css + all token-driven classes + every styled page):
+- [ ] D8. **DECISION PROMPT**: adopt the audit's palette (navy #2A4B8D / deep-teal #0F766E / slate neutrals #F8FAFC→#0F172A) + **Geist Sans/Mono**, OR keep the locked Naukri palette (sun #FFC400 / neon #FF6D00 / cyan #00E5FF / crimson / charcoal / platinum) + Inter? If D8 = "adopt audit": tokens.css revalues + `--sb-*` semantics re-map + every Phase 4 page restyled. If D8 = "keep locked": D0–D7 still ship on the current palette (status pills, density, skeleton, count-up, card hover, typography scale all palette-agnostic), and only font-family (Inter→Geist) is optionally adoptable as a low-risk additive.
+- [ ] D9. (Follows D8) If adopted: rewrite tokens.css, globals.css token mappings, tailwind.config.ts token map, and re-apply palette to all 18 pages in the Phase 4 build order; keep D0–D7.
+
+#### Final gate — Acceptance (definition of "done")
 - [ ] Apply per page in build order: navbar → landing → dashboard (cockpit) → my-dashboard → skill-matrix →
       skill-gaps → career-pathways → career-readiness → courses → curriculum-advisor → district-plans →
       employers → capacity-planner → placement-analytics → policy-decisions → wishlist → auth (login/register/forgot)
