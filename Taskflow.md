@@ -131,7 +131,37 @@ the only ones allowed for text/buttons on light** — this is what keeps the pal
 - [ ] Brand mark: SkillBridge bolt in a sun-yellow→neon-orange rounded square (only allowed gradient); wordmark charcoal
 - [ ] Focus-visible rings = cyan; selection color = sun-yellow/25; reduce motion respected (no autoplay animations)
 
-#### Phase 4 — One-Pass Page Apply (Naukri-ization)
+#### Phase C — Audience & Trust (homepage CRO audit, 2026-09-19) — ACTIVE, runs BEFORE Phase 4 resumes
+Source: markup audit of `/` + `/courses` `/dashboard` `/employers` `/login` `/curriculum-advisor` `/career-readiness`.
+Premise note: auditor assumed a learner↔mentor marketplace; we are an SIH-2026 state labour-market / curriculum /
+policy prototype (already reflected in this plan) — the NEW insight is the 3-audience triage problem.
+Alignment verdict: COMPLEMENTARY to the makeover (content/IA layer vs visual-system layer), but sequenced FIRST —
+C1–C3 restructure landing/courses, so Phase 4 must not polish those pages beforehand. Phase 1–3 output
+(tokens, ui-primitives, lucide) is reused directly by C.
+
+- [ ] C0. Readiness first-paint: CORRECTED — `/career-readiness` + `/my-dashboard` are `"use client"` + `<AuthGate>`-wrapped;
+      a markup-only fetch (no JS) trivially returns shell-only. Real browsers hydrate; logged-out users get the sign-in
+      prompt, not blank. Residual: OWNER-VERIFY with Lighthouse/incognito slow-3G; add skeleton ONLY if genuinely blank.
+- [ ] C1. Homepage 3-path triage (HIGH): Student / Government / Employer entry cards as first-scroll module under hero
+      (Card + Button + SectionHeader primitives; GraduationCap/Landmark/Building2 icons); one-line value props + CTAs to
+      existing routes (/career-readiness, /dashboard, /employers). Default: keep single student hero; per-audience hero
+      variants stay optional (dynamic hero = bigger, reversible later).
+- [ ] C2. Employer proof strip on homepage (HIGH): condensed strip from EMPLOYER_PARTNERS_DATA (check shape first) —
+      6–8 names + open-roles total + recruiter-satisfaction + partner count, under the hero stat bar.
+- [ ] C3. Course catalog lens split (HIGH, medium size): student lens (Duration / Placement / Skills You'll Learn / readiness CTA)
+      vs admin lens (Alignment / Missing Modules / Action directives) — toggle or separate route; do BEFORE Phase-4 courses pass.
+- [ ] C4. Copy/polish singles (each one commit): CTA labels ("Get My Free Readiness Score" only if "free" is true; course cards
+      link "See if I'm Ready" → readiness, NO dead "Enroll" unless an enroll flow exists); inline "Demo data (SIH 2026)" Tag badge
+      near stats (shortens footer disclaimer, same honesty); stat-bar wording ("389 Skill Gaps" → contextualized or admin-only);
+      consolidate duplicate "Live Intelligence Active" badges (home chip vs footer status — keep one); "Admin" nav relabel
+      (role-switcher wording; dropdown structure from PR #1 stays).
+- [ ] C5. OWNER DECISION (do NOT implement unilaterally): footer `mailto:ojaskhodaskar2026@gmail.com` → branded support
+      address (contacts added per hygiene 16/17; identity call is ojas50's).
+- [ ] Already covered — no new task, cross-ref only: status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
+      responsive tables/radar (checkpoints "tables scroll horizontally" + hygiene-18 device QA); sidebar app shell → DEFERRED
+      to Phase D backlog (large); schema.org + breadcrumbs + OG cards → Phase D backlog (small SEO batch).
+
+#### Phase 4 — One-Pass Page Apply (Naukri-ization) — PAUSED until C1–C3 land (no polish-before-restructure)
 - [ ] Apply per page in build order: navbar → landing → dashboard (cockpit) → my-dashboard → skill-matrix →
       skill-gaps → career-pathways → career-readiness → courses → curriculum-advisor → district-plans →
       employers → capacity-planner → placement-analytics → policy-decisions → wishlist → auth (login/register/forgot)
