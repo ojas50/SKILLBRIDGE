@@ -5,8 +5,6 @@
 
 ### Labour-Market Intelligence & Continuous Curriculum-Alignment Platform
 
-**Smart India Hackathon 2026 — Final Round Prototype**
-
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed-Vercel-000?logo=vercel&logoColor=white)](https://skillbridge-navy-five.vercel.app)
 [![Built with Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178c6?logo=typescript)](https://www.typescriptlang.org)
