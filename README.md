@@ -87,12 +87,27 @@ SkillBridge operates as a closed-loop system:
 
 ### Run Locally
 
+```bash
 git clone https://github.com/ojas50/SKILLBRIDGE.git
 cd "Skill Bridge/MinistryQuestion/SkillBridge/frontend"
 npm install
 npm run dev
+```
 
-### Project Structure
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## Project Structure
+
+```
 frontend/
 ├── src/
 │   ├── app/
@@ -135,3 +150,12 @@ frontend/
 ├── tailwind.config.ts
 ├── package.json
 └── tsconfig.json
+```
+
+---
+
+## Team
+
+Built and maintained solo — originally a Smart India Hackathon 2026 submission.
+
+- **ojas50** — [GitHub](https://github.com/ojas50)
