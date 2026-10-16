@@ -93,31 +93,31 @@ npm install
 npm run dev
 
 ### Project Structure
-
 frontend/
 ├── src/
-│   ├── app/                      # Next.js App Router pages
-│   │   ├── page.tsx              # Landing / Overview
-│   │   ├── dashboard/            # Executive Labour Cockpit
-│   │   ├── skill-matrix/         # Demand vs Supply heatmap
-│   │   ├── courses/              # Course Modernization Scores
-│   │   ├── curriculum-advisor/   # AI Syllabus Auditor
-│   │   ├── skill-gaps/           # What-If Policy Simulator
-│   │   ├── policy-decisions/     # Government Decision Center
-│   │   ├── employers/            # Employer Validation Network
-│   │   ├── career-pathways/      # Career Roadmaps
-│   │   ├── career-readiness/     # Student Readiness Checker
-│   │   ├── my-dashboard/         # Student Personal Dashboard
-│   │   ├── wishlist/             # Student Course Wishlist
-│   │   ├── district-plans/       # District Training Plans
-│   │   ├── capacity-planner/     # Trainer & Equipment Planner
-│   │   ├── placement-analytics/  # Placement Outcome Analytics
-│   │   ├── login/ register/      # Auth pages
-│   │   ├── api/                  # Route handlers
-│   │   ├── tokens.css            # Design tokens (both themes)
-│   │   └── globals.css           # Global styles
+│   ├── app/
+│   │   ├── page.tsx
+│   │   ├── dashboard/
+│   │   ├── skill-matrix/
+│   │   ├── courses/
+│   │   ├── curriculum-advisor/
+│   │   ├── skill-gaps/
+│   │   ├── policy-decisions/
+│   │   ├── employers/
+│   │   ├── career-pathways/
+│   │   ├── career-readiness/
+│   │   ├── my-dashboard/
+│   │   ├── wishlist/
+│   │   ├── district-plans/
+│   │   ├── capacity-planner/
+│   │   ├── placement-analytics/
+│   │   ├── login/
+│   │   ├── register/
+│   │   ├── api/
+│   │   ├── tokens.css
+│   │   └── globals.css
 │   ├── components/
-│   │   ├── ui/                   # Design system primitives
+│   │   ├── ui/
 │   │   │   ├── Button.tsx
 │   │   │   ├── Card.tsx
 │   │   │   ├── StatusBadge.tsx
@@ -129,9 +129,9 @@ frontend/
 │   │   ├── AuthGate.tsx
 │   │   └── AreaChart.tsx
 │   └── lib/
-│       ├── intelligenceData.ts   # Typed static data catalog
-│       ├── status-label-registry.ts # Status label → role mapping
-│       └── live-data.ts          # Remotive-powered live engine
+│       ├── intelligenceData.ts
+│       ├── status-label-registry.ts
+│       └── live-data.ts
 ├── tailwind.config.ts
 ├── package.json
 └── tsconfig.json
