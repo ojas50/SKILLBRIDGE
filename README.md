@@ -5,6 +5,8 @@
 
 ### Labour-Market Intelligence & Continuous Curriculum-Alignment Platform
 
+**Smart India Hackathon 2026 — Final Round Prototype**
+
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed-Vercel-000?logo=vercel&logoColor=white)](https://skillbridge-navy-five.vercel.app)
 [![Built with Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178c6?logo=typescript)](https://www.typescriptlang.org)
@@ -69,43 +71,24 @@ SkillBridge operates as a closed-loop system:
 | Framework | Next.js 14 (App Router) |
 | Language | TypeScript 5.4 |
 | Styling | Tailwind CSS 3.4 + custom CSS variables |
-| Deployment | Vercel (ISR, 7-day revalidation) |
+| Fonts | Geist Sans + Geist Mono |
+| Icons | Lucide React |
+| Deployment | Vercel (auto-deploy on push to main) |
 | Data Source | Remotive API + curated static intelligence catalog |
-| UI | Glassmorphism dark theme, fully responsive |
 
 ---
+
 ## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Run Locally
 
 ```bash
 git clone https://github.com/ojas50/SKILLBRIDGE.git
 cd "Skill Bridge/MinistryQuestion/SkillBridge/frontend"
 npm install
 npm run dev
-frontend/
-├── src/
-│   ├── app/                    # Next.js App Router pages
-│   │   ├── page.tsx            # Landing page
-│   │   ├── dashboard/          # Executive Labour Cockpit
-│   │   ├── skill-matrix/       # Demand vs Supply heatmap
-│   │   ├── courses/            # Course Modernization Scores
-│   │   ├── curriculum-advisor/ # AI Syllabus Auditor
-│   │   ├── skill-gaps/         # What-If Policy Simulator
-│   │   ├── policy-decisions/   # Government Decision Center
-│   │   ├── employers/          # Employer Validation Network
-│   │   ├── career-pathways/    # Career Roadmaps
-│   │   ├── district-plans/     # District Training Plans
-│   │   ├── capacity-planner/   # Trainer & Equipment Planner
-│   │   ├── placement-analytics/# Placement Outcome Analytics
-│   │   └── api/                # ISR route handlers (5 endpoints)
-│   ├── components/             # 12 reusable UI components
-│   └── lib/
-│       ├── intelligenceData.ts # 1705-line typed static catalog
-│       ├── live-data.ts        # Remotive-powered live engine
-│       ├── use-hydrate.ts      # Shared hydration hook
-│       └── use-live-data.ts    # Live data hook
-├── public/
-└── package.json
-Team
-Built and maintained solo — originally a Smart India Hackathon 2026 submission
-
-## Architecture
