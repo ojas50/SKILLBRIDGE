@@ -1,0 +1,119 @@
+================================================================================
+   SKILLBRIDGE -- WEBSITE SHOWCASE SPEECH (Team Syntax Squad, SIH 2026)
+================================================================================
+
+Duration: ~4 minutes (~600 words)
+Team Name: Syntax Squad
+Problem Statement ID: 26134
+Theme: Smart Education / Skilling & Labour-Market Intelligence
+Live Production URL: https://skillbridge-navy-five.vercel.app
+
+NOTE: This is the website-showcase speech. The official SIH idea-submission
+pitch remains in Presentation_Speech.txt (do not modify that file).
+
+--------------------------------------------------------------------------------
+[0:00 - 0:45] HOOK / INTRODUCTION
+--------------------------------------------------------------------------------
+(Walk to centre. Pause. Let the live site load on screen.)
+
+Respected judges, mentors, and evaluators.
+
+Every year, millions of young Indians walk out of polytechnics and vocational
+institutes holding a degree -- and no job.
+
+At that very same moment, another headline runs: "India faces a crippling
+shortage of Cloud engineers, AI specialists, and cybersecurity analysts."
+
+[pause]
+
+Two truths. Same country. Same year.
+
+And that contradiction is not a failure of talent. It is a failure of timing.
+Our syllabus takes three to five years to change. The industry changes every
+six months. By the time we finish teaching what WAS relevant, the market has
+already moved on.
+
+We are Team Syntax Squad, and we built SKILLBRIDGE to collapse that gap --
+from years, to seconds.
+
+--------------------------------------------------------------------------------
+[0:45 - 1:45] CORE VISION -- THE 12-STAGE LOOP
+--------------------------------------------------------------------------------
+(gesture to screen)
+
+SkillBridge is an AI-powered labour-market intelligence and curriculum-
+alignment platform. At its core runs a continuous twelve-stage intelligence
+loop: it ingests live employer hiring signals, extracts the skills industry
+is ACTUALLY asking for, compares them against what our students are being
+taught -- and closes the circle by feeding the result straight back into
+curriculum design.
+
+But a loop is only useful if someone can act on it. So the platform speaks
+to three people directly.
+
+--------------------------------------------------------------------------------
+[1:45 - 3:00] KEY FEATURES -- THREE AUDIENCES
+--------------------------------------------------------------------------------
+(step forward)
+
+For a STUDENT, SkillBridge answers one brutally practical question: "am I
+ready?" Name the job you want, and the Career Readiness checker shows
+exactly which skills you have, which you're missing, and which course closes
+the distance -- with live demand figures like GenAI at plus forty-two percent
+and Cloud & DevOps at plus thirty-four percent staring back at you.
+
+For a GOVERNMENT DIRECTOR, it is the Executive Labour Cockpit: twelve hundred
+courses, nearly four hundred detected skill gaps, district-wise placement
+health -- and a What-If Simulator that models real decisions before a rupee
+is spent. "What happens to placement if we move five hundred seats from a
+declining course into Cloud DevOps?" The answer, calculated mathematically,
+in seconds.
+
+For an EMPLOYER, it is a validated partner network where curriculum is
+checked against genuine hiring demand -- so the graduate who walks in already
+knows the stack.
+
+--------------------------------------------------------------------------------
+[3:00 - 3:30] IMPACT / VALUE PROPOSITION
+--------------------------------------------------------------------------------
+[pause]
+
+The impact is not theoretical.
+
+That three-to-five-year committee cycle for syllabus review? Under sixty
+seconds.
+
+Placement rates improve by fifteen to twenty-two percent when students train
+on production-grade tools.
+
+And public skilling money stops flowing into courses nobody is hiring from.
+
+(look up)
+
+Most importantly, this democratizes opportunity. A student in a Tier-3 town
+gets the same market intelligence, the same roadmap, and the same chance as
+someone in a metro -- because the data doesn't care where you studied.
+
+--------------------------------------------------------------------------------
+[3:30 - 4:15] CREDIBILITY + CONCLUSION / CALL TO ACTION
+--------------------------------------------------------------------------------
+We benchmarked against NEP 2020, NSDC skill-gap reports, NASSCOM FutureSkills,
+and the World Economic Forum's Future of Jobs research. And what you see
+behind me is not a mockup.
+
+(turn to the live site)
+
+It is live. Built on Next.js and TypeScript, deployed on Vercel -- and every
+number on this screen is real.
+
+Twelve stages. Three audiences. One loop that never stops learning what the
+market needs, so our classrooms never stop teaching it.
+
+SkillBridge doesn't just close the skills gap.
+
+[pause]
+
+It closes it IN TIME.
+
+Thank you -- we'd be happy to take your questions.
+================================================================================
