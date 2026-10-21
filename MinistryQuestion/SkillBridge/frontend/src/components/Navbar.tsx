@@ -50,7 +50,7 @@ function AdminDropdown({ pathname }: { pathname: string }) {
             : "text-ink-muted hover:text-ink hover:bg-line"
         }`}
       >
-        Admin
+        Government
         <svg
           className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`}
           fill="none"
@@ -210,7 +210,7 @@ export default function Navbar() {
               {[
                 { label: "Main", items: NAV_ITEMS },
                 { label: "Explore", items: EXPLORE_ITEMS },
-                { label: "Admin", items: ADMIN_NAV_ITEMS },
+                { label: "Government", items: ADMIN_NAV_ITEMS },
               ].map((group) => (
                 <div key={group.label}>
                   <p className="text-[10px] font-mono font-semibold uppercase tracking-wider text-ink-faint px-1 mb-1">
