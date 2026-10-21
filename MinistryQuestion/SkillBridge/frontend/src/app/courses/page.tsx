@@ -5,10 +5,14 @@ import Link from "next/link";
 import { COURSES_CATALOG, CourseData } from "@/lib/intelligenceData";
 import ScoreExplainerModal from "@/components/ScoreExplainerModal";
 import CourseModal from "@/components/CourseModal";
+import { Button } from "@/components/ui";
 import { Search, AlertTriangle, Info, ArrowRight } from "lucide-react";
+
+type Lens = "student" | "admin";
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<CourseData[]>(COURSES_CATALOG);
+  const [lens, setLens] = useState<Lens>("student");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [explainingCourse, setExplainingCourse] = useState<CourseData | null>(null);
@@ -62,27 +66,59 @@ export default function CoursesPage() {
             <span className="text-xs text-slate-400">{courses.length} Accredited Programs</span>
           </div>
           <h1 className="text-3xl font-black text-white mt-1">
-            Course Modernization & Alignment Tracker
+            {lens === "student" ? "Explore Courses" : "Course Modernization & Alignment Tracker"}
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
-            Audit 6-factor Course Modernization Scores (0–100), inspect missing industry modules, and execute policy decisions.
+            {lens === "student"
+              ? "See what each course teaches, how long it runs, and how well its graduates get placed."
+              : "Audit 6-factor Course Modernization Scores (0–100), inspect missing industry modules, and execute policy decisions."}
           </p>
         </div>
 
-        {/* Status Counters */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="badge-aligned px-3 py-1 rounded-full text-xs font-bold">
-            {alignedCount} Aligned
-          </span>
-          <span className="badge-update px-3 py-1 rounded-full text-xs font-bold">
-            {updateCount} Update Needed
-          </span>
-          <span className="badge-critical px-3 py-1 rounded-full text-xs font-bold">
-            {oversuppliedCount} Oversupplied
-          </span>
-          <span className="bg-purple-500/20 text-purple-300 border border-purple-500/40 px-3 py-1 rounded-full text-xs font-bold">
-            {emergingCount} Emerging
-          </span>
+        <div className="flex flex-col items-start sm:items-end gap-2">
+          {/* Lens Toggle: student vs admin view of the same catalog */}
+          <div
+            className="inline-flex p-1 rounded-xl bg-raised border border-line"
+            role="tablist"
+            aria-label="Catalog view"
+          >
+            {([
+              { key: "student", label: "Student" },
+              { key: "admin", label: "Administrator" },
+            ] as const).map((opt) => (
+              <button
+                key={opt.key}
+                role="tab"
+                aria-selected={lens === opt.key}
+                onClick={() => setLens(opt.key)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  lens === opt.key
+                    ? "bg-cta text-charcoal shadow-sm"
+                    : "text-ink-muted hover:text-ink"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Status Counters — admin lens only (policy vocabulary) */}
+          {lens === "admin" && (
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="badge-aligned px-3 py-1 rounded-full text-xs font-bold">
+                {alignedCount} Aligned
+              </span>
+              <span className="badge-update px-3 py-1 rounded-full text-xs font-bold">
+                {updateCount} Update Needed
+              </span>
+              <span className="badge-critical px-3 py-1 rounded-full text-xs font-bold">
+                {oversuppliedCount} Oversupplied
+              </span>
+              <span className="bg-purple-500/20 text-purple-300 border border-purple-500/40 px-3 py-1 rounded-full text-xs font-bold">
+                {emergingCount} Emerging
+              </span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -105,22 +141,24 @@ export default function CoursesPage() {
           </div>
         </div>
 
-        {/* Status Filter Tabs */}
-        <div className="flex items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
-          {["All", "Aligned", "Update Needed", "Oversupplied", "Emerging"].map((st) => (
-            <button
-              key={st}
-              onClick={() => setSelectedStatus(st)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
-                selectedStatus === st
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "bg-slate-900 text-slate-400 border border-slate-800 hover:text-white"
-              }`}
-            >
-              {st}
-            </button>
-          ))}
-        </div>
+        {/* Status Filter Tabs — admin lens only (decision-status vocabulary) */}
+        {lens === "admin" && (
+          <div className="flex items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+            {["All", "Aligned", "Update Needed", "Oversupplied", "Emerging"].map((st) => (
+              <button
+                key={st}
+                onClick={() => setSelectedStatus(st)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+                  selectedStatus === st
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-slate-900 text-slate-400 border border-slate-800 hover:text-white"
+                }`}
+              >
+                {st}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Courses List */}
@@ -128,7 +166,11 @@ export default function CoursesPage() {
         {filteredCourses.length === 0 ? (
           <div className="glass-card p-12 text-center text-slate-400">
             <p className="text-lg font-bold text-white mb-1">No matching courses found</p>
-            <p className="text-xs">Try adjusting your search terms or filter selection.</p>
+            <p className="text-xs">
+              {lens === "student"
+                ? "Try adjusting your search terms."
+                : "Try adjusting your search terms or filter selection."}
+            </p>
           </div>
         ) : (
           filteredCourses.map((c) => {
@@ -136,6 +178,69 @@ export default function CoursesPage() {
             const isUpdateNeeded = c.decisionStatus === "UPDATE REQUIRED";
             const isOversupplied = c.decisionStatus === "OBSOLETE / OVERSUPPLIED";
             const isEmerging = c.decisionStatus === "EMERGING / HIGH PRIORITY";
+
+            /* Student lens: Duration / Placement / Skills You'll Learn / readiness CTA.
+               No alignment scores, missing-modules flags, or policy directives — those
+               are administrator vocabulary (C3 lens split). */
+            if (lens === "student") {
+              return (
+                <div key={c.id} className="glass-card p-5 space-y-4 transition-all hover:border-line">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2.5 flex-wrap mb-1.5">
+                        <h3 className="text-base font-bold text-ink tracking-tight">{c.name}</h3>
+                        <span className="text-[10px] text-ink-faint font-mono">
+                          {c.code} • {c.duration}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-ink-muted">
+                        <span>
+                          Graduates placed:{" "}
+                          <strong className="text-ink font-mono">
+                            {c.placed}/{c.enrolled}
+                          </strong>{" "}
+                          <span className="text-ink-faint">({c.placementRate}%)</span>
+                        </span>
+                        <span>
+                          Annual intake:{" "}
+                          <strong className="text-ink font-mono">{c.annualIntake}</strong>{" "}
+                          <span className="text-ink-faint">seats</span>
+                        </span>
+                      </div>
+
+                      <div className="mt-3">
+                        <span className="text-[10px] font-bold text-ink-faint uppercase tracking-wider">
+                          Skills you&apos;ll learn
+                        </span>
+                        <div className="flex gap-1.5 flex-wrap items-center mt-1.5">
+                          {c.activeSkills.map((skill) => (
+                            <span
+                              key={skill}
+                              className="bg-raised text-ink-muted border border-line px-2 py-0.5 rounded text-[11px] font-medium"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col items-stretch gap-2 flex-shrink-0">
+                      <div className="text-center sm:text-right">
+                        <span className="text-2xl font-black text-cta block leading-none">
+                          {c.placementRate}%
+                        </span>
+                        <span className="text-[10px] text-ink-faint">placement rate</span>
+                      </div>
+                      <Button variant="primary" size="sm" href="/career-readiness">
+                        See if I&apos;m Ready
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <div
