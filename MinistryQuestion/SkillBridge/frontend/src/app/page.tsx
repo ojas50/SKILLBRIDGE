@@ -107,7 +107,7 @@ export default function Home() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
           {[
             { icon: BookOpen, value: "1,247", label: "Courses", color: "text-sun-strong" },
-            { icon: Zap, value: "389", label: "Skill Gaps", color: "text-crimson" },
+            { icon: Zap, value: "389", label: "Gaps Tracked", color: "text-crimson" },
             { icon: Target, value: "67.4%", label: "Placement", color: "text-cta" },
             { icon: Building2, value: "856", label: "Partners", color: "text-ink" },
           ].map((s) => (
