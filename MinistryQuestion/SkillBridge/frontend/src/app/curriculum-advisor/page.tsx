@@ -445,7 +445,7 @@ export default function CurriculumAdvisorPage() {
           {/* Section 2: Detected Gaps Table */}
           <div className="glass-card p-6">
             <h3 className="text-base font-bold text-white flex items-center gap-2 mb-4 border-b border-slate-800 pb-3">
-              <AlertTriangle className="w-4 h-4 text-crimson" /> Stage 3: Detected Curriculum Deficits
+              <AlertTriangle className="w-4 h-4 text-critical" /> Stage 3: Detected Curriculum Deficits
             </h3>
 
             <div className="space-y-3">

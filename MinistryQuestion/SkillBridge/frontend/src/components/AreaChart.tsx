@@ -28,12 +28,12 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
     <>
       <defs>
         <linearGradient id="fitArea" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="var(--sb-cyan)" stopOpacity="0.16" />
-          <stop offset="100%" stopColor="var(--sb-cyan)" stopOpacity="0.04" />
+          <stop offset="0%" stopColor="var(--sb-cta)" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="var(--sb-cta)" stopOpacity="0.04" />
         </linearGradient>
         <linearGradient id="supplyArea" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="var(--sb-sun)" stopOpacity="0.12" />
-          <stop offset="100%" stopColor="var(--sb-sun)" stopOpacity="0.03" />
+          <stop offset="0%" stopColor="var(--sb-warning)" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="var(--sb-warning)" stopOpacity="0.03" />
         </linearGradient>
       </defs>
     </>
@@ -73,7 +73,7 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
         <polyline
           points={pts(supply)}
           fill="none"
-          stroke="var(--sb-sun)"
+          stroke="var(--sb-warning)"
           strokeWidth="2"
           strokeDasharray="5 5"
         />
@@ -85,7 +85,7 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
         <polyline
           points={pts(demand)}
           fill="none"
-          stroke="var(--sb-cyan)"
+          stroke="var(--sb-cta)"
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -97,7 +97,7 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
             cx={x(i)}
             cy={y(d)}
             r={i === demand.length - 1 ? 4.5 : 2.5}
-            fill="var(--sb-cyan)"
+            fill="var(--sb-cta)"
             opacity={i === demand.length - 1 ? 1 : 0.55}
           />
         ))}
@@ -112,10 +112,10 @@ export default function AreaChart({ labels, demand, supply }: AreaChartProps) {
       </div>
       <div className="mt-4 flex items-center gap-5 text-[11px] text-ink-muted">
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1 w-5 rounded-full bg-cyan-accent" /> Demand Score
+          <span className="h-1 w-5 rounded-full bg-cta" /> Demand Score
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1 w-5 rounded-full bg-sun" /> Trained Supply
+          <span className="h-1 w-5 rounded-full bg-warning" /> Trained Supply
         </span>
       </div>
     </div>

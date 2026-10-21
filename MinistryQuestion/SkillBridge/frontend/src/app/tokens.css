@@ -64,6 +64,17 @@
   --sb-fit-gradient: linear-gradient(135deg, var(--sb-cta) 0%, var(--sb-brand) 100%);
   --sb-focus-ring: rgba(6, 182, 212, 0.5);
   --sb-halo: color-mix(in srgb, var(--sb-cta) 12%, transparent);
+
+  /* --- semantic accent tokens (dark defaults; wire tailwind positive/
+       warning/critical/info families — were mapped but never defined) --- */
+  --sb-positive: #00e5ff;
+  --sb-positive-tint: rgba(0, 229, 255, 0.12);
+  --sb-warning: #ffc400;
+  --sb-warning-tint: rgba(255, 196, 0, 0.12);
+  --sb-critical: #dc2626; /* red-500 for contrast on #141414 */
+  --sb-critical-tint: rgba(220, 38, 38, 0.15);
+  --sb-info: #00e5ff;
+  --sb-info-tint: rgba(0, 229, 255, 0.12);
 }
 
 html[data-theme="light"] {
@@ -76,6 +87,15 @@ html[data-theme="light"] {
   --sb-ink-faint: #64748b;
   --sb-focus-ring: rgba(6, 182, 212, 0.45);
   --sb-halo: color-mix(in srgb, var(--sb-cta) 10%, transparent);
+  /* light-theme semantic accents (AA on #f8fafc/#fff) */
+  --sb-positive: #0e7490;
+  --sb-positive-tint: rgba(14, 116, 144, 0.10);
+  --sb-warning: #b45309;
+  --sb-warning-tint: rgba(180, 83, 9, 0.10);
+  --sb-critical: #b71c1c;
+  --sb-critical-tint: rgba(183, 28, 28, 0.10);
+  --sb-info: #0e7490;
+  --sb-info-tint: rgba(14, 116, 144, 0.10);
   color-scheme: light;
 }
 

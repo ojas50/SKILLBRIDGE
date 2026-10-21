@@ -26,6 +26,8 @@ const config: Config = {
         surface: "var(--sb-surface)",
         raised: "var(--sb-surface-raised)",
         line: "var(--sb-hairline)",
+        /* fixed palette color (does NOT flip with theme — use for text on CTA) */
+        charcoal: "var(--color-charcoal)",
         brand: {
           50: "#e4eaf6",
           100: "#c7d9f0",

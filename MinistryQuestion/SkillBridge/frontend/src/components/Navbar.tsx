@@ -46,7 +46,7 @@ function AdminDropdown({ pathname }: { pathname: string }) {
         aria-expanded={open}
         className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-1 ${
           active
-            ? "bg-sun text-charcoal shadow-sm"
+            ? "bg-cta text-charcoal shadow-sm"
             : "text-ink-muted hover:text-ink hover:bg-line"
         }`}
       >
@@ -68,8 +68,8 @@ function AdminDropdown({ pathname }: { pathname: string }) {
               href={item.href}
               onClick={() => setOpen(false)}
               className={`block px-3 py-2 text-xs font-semibold transition-colors ${
-                pathname === item.href
-                  ? "text-charcoal bg-sun"
+                  pathname === item.href
+                    ? "text-charcoal bg-cta"
                   : "text-ink-muted hover:text-ink hover:bg-line"
               }`}
             >
@@ -97,16 +97,16 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Brand Logo */}
             <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0" aria-label="SkillBridge home">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sun to-neon p-[1px] shadow-lg shadow-black/20">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 p-[1px] shadow-lg shadow-black/20">
                 <div className="w-full h-full bg-canvas rounded-[10px] flex items-center justify-center">
-                  <svg className="w-4 h-4 text-charcoal group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 text-cta group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
               </div>
               <div>
-                <span className="text-base font-black tracking-tight text-ink group-hover:text-neon transition-colors">
-                  Skill<span className="text-neon">Bridge</span>
+                <span className="text-base font-black tracking-tight text-ink group-hover:text-cta transition-colors">
+                  Skill<span className="text-cta">Bridge</span>
                 </span>
               </div>
             </Link>
@@ -121,7 +121,7 @@ export default function Navbar() {
                     href={item.href}
                     className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
                       isActive
-                        ? "bg-sun text-charcoal shadow-sm"
+                        ? "bg-cta text-charcoal shadow-sm"
                         : "text-ink-muted hover:text-ink hover:bg-line"
                     }`}
                   >
@@ -138,7 +138,7 @@ export default function Navbar() {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle light or dark theme"
-                className="p-2 rounded-xl bg-transparent border border-line text-ink-muted hover:text-ink hover:border-platinum/40 transition-colors"
+                className="p-2 rounded-xl bg-transparent border border-line text-ink-muted hover:text-ink hover:border-line transition-colors"
                 title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (
@@ -167,14 +167,14 @@ export default function Navbar() {
               {user ? (
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-raised border border-line">
-                    <div className="w-6 h-6 rounded-full bg-sun border border-platinum/30 flex items-center justify-center text-[10px] font-bold text-charcoal">
+                    <div className="w-6 h-6 rounded-full bg-brand-500 border border-line flex items-center justify-center text-[10px] font-bold text-white">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
                     <span className="text-xs font-medium text-ink max-w-[100px] truncate">{user.name}</span>
                   </div>
                   <button
                     onClick={logout}
-                    className="text-xs text-crimson hover:opacity-80 transition-opacity px-2 py-1.5"
+                    className="text-xs text-critical hover:opacity-80 transition-opacity px-2 py-1.5"
                   >
                     Logout
                   </button>
@@ -224,7 +224,7 @@ export default function Navbar() {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center min-h-[44px] px-3 py-2 rounded-md text-xs font-medium ${
                           pathname === item.href
-                            ? "bg-sun text-charcoal"
+                            ? "bg-cta text-charcoal"
                             : "text-ink-muted hover:bg-line"
                         }`}
                       >
@@ -269,14 +269,14 @@ export default function Navbar() {
               {user ? (
                 <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-raised border border-line min-h-[44px]">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-sun border border-platinum/30 flex items-center justify-center text-xs font-bold text-charcoal">
+                    <div className="w-7 h-7 rounded-full bg-brand-500 border border-line flex items-center justify-center text-xs font-bold text-white">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
                     <span className="text-xs font-medium text-ink">{user.name}</span>
                   </div>
                   <button
                     onClick={() => { logout(); setIsMobileMenuOpen(false); }}
-                    className="text-xs text-crimson hover:opacity-80"
+                    className="text-xs text-critical hover:opacity-80"
                   >
                     Logout
                   </button>

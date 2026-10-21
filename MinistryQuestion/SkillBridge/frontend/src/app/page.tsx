@@ -106,8 +106,8 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
           {[
-            { icon: BookOpen, value: "1,247", label: "Courses", color: "text-sun-strong" },
-            { icon: Zap, value: "389", label: "Gaps Tracked", color: "text-crimson" },
+            { icon: BookOpen, value: "1,247", label: "Courses", color: "text-warning" },
+            { icon: Zap, value: "389", label: "Gaps Tracked", color: "text-critical" },
             { icon: Target, value: "67.4%", label: "Placement", color: "text-cta" },
             { icon: Building2, value: "856", label: "Partners", color: "text-ink" },
           ].map((s) => (
@@ -157,7 +157,7 @@ export default function Home() {
       {/* Hot Skills */}
       <section className="glass-card p-4">
         <div className="flex items-center gap-2 mb-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-crimson animate-pulse"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-critical animate-pulse"></span>
           <span className="text-[11px] font-bold text-ink uppercase tracking-wider">Hot Skills</span>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -170,7 +170,7 @@ export default function Home() {
             { name: "IoT & Embedded", growth: "+15%", hot: false },
           ].map((s) => (
             <Tag key={s.name} tone={s.hot ? "rose" : "neutral"} label={s.name}>
-              <span className={`font-mono ${s.hot ? "text-crimson" : "text-ink-faint"}`}>{s.growth}</span>
+              <span className={`font-mono ${s.hot ? "text-critical" : "text-ink-faint"}`}>{s.growth}</span>
             </Tag>
           ))}
         </div>
@@ -191,8 +191,8 @@ export default function Home() {
               href={m.href}
               className={`glass-card glass-card-interactive p-3.5 block group ${m.hot ? "ring-fit" : ""}`}
             >
-              <m.icon className="w-5 h-5 block mb-1 text-ink-muted group-hover:text-neon transition-colors" />
-              <h3 className={`text-xs font-bold transition-colors ${m.hot ? "text-cta" : "text-ink group-hover:text-neon"}`}>{m.name}</h3>
+              <m.icon className="w-5 h-5 block mb-1 text-ink-muted group-hover:text-cta transition-colors" />
+              <h3 className={`text-xs font-bold transition-colors ${m.hot ? "text-cta" : "text-ink group-hover:text-cta"}`}>{m.name}</h3>
               <p className="text-[11px] text-ink-faint mt-0.5">{m.desc}</p>
             </Link>
           ))}
@@ -212,8 +212,8 @@ export default function Home() {
             { name: "Placement", href: "/placement-analytics", icon: TrendingUp },
           ].map((m) => (
             <Link key={m.href} href={m.href} className="glass-card glass-card-interactive p-3 text-center group">
-              <m.icon className="w-5 h-5 mx-auto block text-ink-muted group-hover:text-neon transition-colors" />
-              <span className="text-[11px] font-bold text-ink-muted group-hover:text-neon transition-colors">{m.name}</span>
+              <m.icon className="w-5 h-5 mx-auto block text-ink-muted group-hover:text-cta transition-colors" />
+              <span className="text-[11px] font-bold text-ink-muted group-hover:text-cta transition-colors">{m.name}</span>
             </Link>
           ))}
         </div>

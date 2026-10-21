@@ -19,7 +19,7 @@ const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
     "bg-[var(--sb-cta-bg)] text-[var(--sb-cta-text)] hover:bg-[var(--sb-cta-bg-hover)]",
   default: "border border-line text-ink bg-raised hover:bg-line",
   ghost: "text-ink-muted hover:text-ink",
-  danger: "text-crimson hover:bg-line",
+  danger: "text-critical hover:bg-line",
 };
 
 const sizes: Record<NonNullable<ButtonProps["size"]>, string> = {

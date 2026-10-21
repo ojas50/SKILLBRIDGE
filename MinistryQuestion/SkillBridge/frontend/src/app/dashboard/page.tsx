@@ -234,7 +234,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <Flame className="w-4 h-4 text-crimson" /> Top Competency Deficits Radar
+                <Flame className="w-4 h-4 text-critical" /> Top Competency Deficits Radar
               </h2>
               <p className="text-xs text-slate-400">
                 Demand score vs trained supply capacity across core technological and manufacturing disciplines.
