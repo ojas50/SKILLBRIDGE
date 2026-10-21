@@ -156,11 +156,22 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       (not hardcoded — stays in sync with data edits); partner count omitted from strip (hero stat bar already shows 856 Partners).
 - [ ] C3. Course catalog lens split (HIGH, medium size): student lens (Duration / Placement / Skills You'll Learn / readiness CTA)
       vs admin lens (Alignment / Missing Modules / Action directives) — toggle or separate route; do BEFORE Phase-4 courses pass.
-- [ ] C4. Copy/polish singles (each one commit): CTA labels ("Get My Free Readiness Score" only if "free" is true; course cards
+- [x] C4. Copy/polish singles (each one commit): CTA labels ("Get My Free Readiness Score" only if "free" is true; course cards
       link "See if I'm Ready" → readiness, NO dead "Enroll" unless an enroll flow exists); inline "Demo data (SIH 2026)" Tag badge
       near stats (shortens footer disclaimer, same honesty); stat-bar wording ("389 Skill Gaps" → contextualized or admin-only);
       consolidate duplicate "Live Intelligence Active" badges (home chip vs footer status — keep one); "Admin" nav relabel
-      (role-switcher wording; dropdown structure from PR #1 stays).
+      (role-switcher wording; dropdown structure from PR #1 stays). DONE 2026-10-21, four singles:
+      C4a demo-data Tag near stat bar (a34ca0d); C4b removed footer duplicate status chip, home chip kept (806299c);
+      C4c "Skill Gaps" → "Gaps Tracked" (e0a7f81); C4d nav "Admin" → "Government" desktop+mobile (8f80953).
+      Verified: no dead "Enroll" CTA exists on /courses (Inspect + AI Upgrade → /curriculum-advisor are both valid).
+- [ ] C6. NEW — undefined-legacy-class no-op sweep (FOUND 2026-10-21 during C4b): tailwind.config.ts + globals.css define NO
+      `sun`/`neon`/`crimson`/`charcoal`/`platinum`/`sun-strong`/`cyan-accent` classes — every `bg-sun`/`text-neon`/`text-crimson`/
+      `text-charcoal`/`border-platinum`/`from-sun to-neon`/`bg-cyan-accent` is a NO-OP. Confirmed effect: Navbar active-nav state
+      (`bg-sun text-charcoal`) renders unstyled (no active highlight); user-avatar circle unstyled; `group-hover:text-neon` hovers
+      dead on home module cards. Footer already fixed (1a98cc5: logo gradient invisible in dark mode → brand-500→700; 14×
+      `hover:text-neon`→`hover:text-cta`; `text-neon`→`text-cta`). Remaining: Navbar (active states ×4 + avatar + hover-neon),
+      home module-card `group-hover:text-neon`, curriculum-advisor + dashboard `text-crimson`. All are one-token swaps
+      (sun→cta/brand, neon→cta, crimson→critical, charcoal→ink, platinum→line) — do as a single sweep commit before Phase 4.
 - [ ] C5. OWNER DECISION (do NOT implement unilaterally): footer `mailto:ojaskhodaskar2026@gmail.com` → branded support
        address (contacts added per hygiene 16/17; identity call is ojas50's).
 - [ ] Cross-ref only (no new task): status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
