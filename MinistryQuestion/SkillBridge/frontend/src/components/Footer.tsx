@@ -18,7 +18,7 @@ export default function Footer() {
             {/* Col 1: Brand & Status */}
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-sun to-neon flex items-center justify-center text-charcoal font-bold text-xs">
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white font-bold text-xs">
                   SB
                 </div>
                 <span className="text-sm font-bold text-ink tracking-wide">
@@ -31,13 +31,13 @@ export default function Footer() {
               <div className="pt-1 space-y-1.5 text-[11px]">
                 <a
                   href="tel:+918530951108"
-                  className="block font-mono text-ink-muted hover:text-neon transition-colors"
+                  className="block font-mono text-ink-muted hover:text-cta transition-colors"
                 >
                   +91 85309 51108
                 </a>
                 <a
                   href="mailto:ojaskhodaskar2026@gmail.com"
-                  className="block font-mono text-ink-muted hover:text-neon transition-colors break-all"
+                  className="block font-mono text-ink-muted hover:text-cta transition-colors break-all"
                 >
                   ojaskhodaskar2026@gmail.com
                 </a>
@@ -51,27 +51,27 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <Link href="/dashboard" className="hover:text-neon transition-colors">
+                  <Link href="/dashboard" className="hover:text-cta transition-colors">
                     Executive Labour Dashboard
                   </Link>
                 </li>
                 <li>
-                  <Link href="/skill-matrix" className="hover:text-neon transition-colors">
+                  <Link href="/skill-matrix" className="hover:text-cta transition-colors">
                     Skill Intelligence Matrix
                   </Link>
                 </li>
                 <li>
-                  <Link href="/courses" className="hover:text-neon transition-colors">
+                  <Link href="/courses" className="hover:text-cta transition-colors">
                     Course Modernization Scores
                   </Link>
                 </li>
                 <li>
-                  <Link href="/curriculum-advisor" className="hover:text-neon transition-colors">
+                  <Link href="/curriculum-advisor" className="hover:text-cta transition-colors">
                     AI Curriculum Advisor
                   </Link>
                 </li>
                 <li>
-                  <Link href="/skill-gaps" className="hover:text-neon transition-colors">
+                  <Link href="/skill-gaps" className="hover:text-cta transition-colors">
                     What-If Policy Simulator
                   </Link>
                 </li>
@@ -85,32 +85,32 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <Link href="/policy-decisions" className="hover:text-neon transition-colors">
+                  <Link href="/policy-decisions" className="hover:text-cta transition-colors">
                     Policy Decision Center
                   </Link>
                 </li>
                 <li>
-                  <Link href="/employers" className="hover:text-neon transition-colors">
+                  <Link href="/employers" className="hover:text-cta transition-colors">
                     Employer Validation Network
                   </Link>
                 </li>
                 <li>
-                  <Link href="/career-pathways" className="hover:text-neon transition-colors">
+                  <Link href="/career-pathways" className="hover:text-cta transition-colors">
                     Career Pathways & Learning Paths
                   </Link>
                 </li>
                 <li>
-                  <Link href="/district-plans" className="hover:text-neon transition-colors">
+                  <Link href="/district-plans" className="hover:text-cta transition-colors">
                     District Training Plans
                   </Link>
                 </li>
                 <li>
-                  <Link href="/capacity-planner" className="hover:text-neon transition-colors">
+                  <Link href="/capacity-planner" className="hover:text-cta transition-colors">
                     Trainer & Equipment Planner
                   </Link>
                 </li>
                 <li>
-                  <Link href="/placement-analytics" className="hover:text-neon transition-colors">
+                  <Link href="/placement-analytics" className="hover:text-cta transition-colors">
                     Placement Outcome Analytics
                   </Link>
                 </li>
@@ -124,7 +124,7 @@ export default function Footer() {
               </h4>
               <div className="bg-raised border border-line rounded-xl p-3.5 space-y-2">
                 <p className="text-ink font-semibold text-xs">SkillBridge Decision Support Cell</p>
-                <p className="text-[11px] text-neon font-mono">SIH 2026 Prototype Engine</p>
+                <p className="text-[11px] text-cta font-mono">SIH 2026 Prototype Engine</p>
                 <button
                   type="button"
                   onClick={() => setIsSourcesModalOpen(true)}
