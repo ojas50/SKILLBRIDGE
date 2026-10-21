@@ -28,10 +28,6 @@ export default function Footer() {
               <p className="text-ink-muted text-xs leading-relaxed">
                 Automated labour-market intelligence, real-time curriculum alignment, and district capacity planning platform for SIH.
               </p>
-              <div className="flex items-center gap-2 text-[11px] text-ink-faint font-mono">
-                <span>Status: Prototype Intelligence Engine Active</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-accent"></span>
-              </div>
               <div className="pt-1 space-y-1.5 text-[11px]">
                 <a
                   href="tel:+918530951108"
