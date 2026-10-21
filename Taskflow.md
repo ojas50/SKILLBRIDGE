@@ -154,8 +154,14 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       6–8 names + open-roles total + recruiter-satisfaction + partner count, under the hero stat bar. DONE 2026-10-21 (728f0ee):
       all 8 named partners + open-roles total (1,575) + avg satisfaction (83%) computed at render from EMPLOYER_PARTNERS_DATA
       (not hardcoded — stays in sync with data edits); partner count omitted from strip (hero stat bar already shows 856 Partners).
-- [ ] C3. Course catalog lens split (HIGH, medium size): student lens (Duration / Placement / Skills You'll Learn / readiness CTA)
+- [x] C3. Course catalog lens split (HIGH, medium size): student lens (Duration / Placement / Skills You'll Learn / readiness CTA)
       vs admin lens (Alignment / Missing Modules / Action directives) — toggle or separate route; do BEFORE Phase-4 courses pass.
+      DONE 2026-10-21 (ec6b507): Student | Administrator toggle in page header (default student — nav "Courses" is student-facing).
+      Student lens card: name + code + duration, graduates placed (placed/enrolled + %), annual intake, "Skills you'll learn"
+      (activeSkills chips), big placement-rate number, primary CTA "See if I'm Ready" → /career-readiness. Admin vocabulary
+      (alignment score, missing-modules, status counters, decision-filter tabs, policy action bar) all hidden in student lens;
+      admin lens unchanged. Header title/subtitle + empty-state copy switch per lens. (NOTE: admin lens still carries legacy
+      blue-*/emerald-*/rose-*/purple-*/slate-* palette classes — Phase 4 sweep target, not touched here per C3 sequencing.)
 - [x] C4. Copy/polish singles (each one commit): CTA labels ("Get My Free Readiness Score" only if "free" is true; course cards
       link "See if I'm Ready" → readiness, NO dead "Enroll" unless an enroll flow exists); inline "Demo data (SIH 2026)" Tag badge
       near stats (shortens footer disclaimer, same honesty); stat-bar wording ("389 Skill Gaps" → contextualized or admin-only);
