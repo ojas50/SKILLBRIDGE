@@ -100,21 +100,26 @@ export default function Home() {
       </section>
 
       {/* Stats + Hot Skills inline */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-        {[
-          { icon: BookOpen, value: "1,247", label: "Courses", color: "text-sun-strong" },
-          { icon: Zap, value: "389", label: "Skill Gaps", color: "text-crimson" },
-          { icon: Target, value: "67.4%", label: "Placement", color: "text-cta" },
-          { icon: Building2, value: "856", label: "Partners", color: "text-ink" },
-        ].map((s) => (
-          <div key={s.label} className="glass-card px-3 py-3 flex items-center gap-3">
-            <s.icon className="w-5 h-5 text-ink-muted shrink-0" />
-            <div>
-              <span className={`text-lg font-black ${s.color} block leading-tight`}>{s.value}</span>
-              <span className="text-[10px] text-ink-faint">{s.label}</span>
+      <section>
+        <div className="flex justify-end mb-1.5">
+          <Tag label="Demo data (SIH 2026)" tone="neutral" />
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+          {[
+            { icon: BookOpen, value: "1,247", label: "Courses", color: "text-sun-strong" },
+            { icon: Zap, value: "389", label: "Skill Gaps", color: "text-crimson" },
+            { icon: Target, value: "67.4%", label: "Placement", color: "text-cta" },
+            { icon: Building2, value: "856", label: "Partners", color: "text-ink" },
+          ].map((s) => (
+            <div key={s.label} className="glass-card px-3 py-3 flex items-center gap-3">
+              <s.icon className="w-5 h-5 text-ink-muted shrink-0" />
+              <div>
+                <span className={`text-lg font-black ${s.color} block leading-tight`}>{s.value}</span>
+                <span className="text-[10px] text-ink-faint">{s.label}</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
 
       {/* Employer Proof Strip */}
