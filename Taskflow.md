@@ -164,7 +164,7 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       C4a demo-data Tag near stat bar (a34ca0d); C4b removed footer duplicate status chip, home chip kept (806299c);
       C4c "Skill Gaps" → "Gaps Tracked" (e0a7f81); C4d nav "Admin" → "Government" desktop+mobile (8f80953).
       Verified: no dead "Enroll" CTA exists on /courses (Inspect + AI Upgrade → /curriculum-advisor are both valid).
-- [ ] C6. NEW — undefined-legacy-class no-op sweep (FOUND 2026-10-21 during C4b): tailwind.config.ts + globals.css define NO
+- [x] C6. NEW — undefined-legacy-class no-op sweep (FOUND 2026-10-21 during C4b): tailwind.config.ts + globals.css define NO
       `sun`/`neon`/`crimson`/`charcoal`/`platinum`/`sun-strong`/`cyan-accent` classes — every `bg-sun`/`text-neon`/`text-crimson`/
       `text-charcoal`/`border-platinum`/`from-sun to-neon`/`bg-cyan-accent` is a NO-OP. Confirmed effect: Navbar active-nav state
       (`bg-sun text-charcoal`) renders unstyled (no active highlight); user-avatar circle unstyled; `group-hover:text-neon` hovers
@@ -172,6 +172,18 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       `hover:text-neon`→`hover:text-cta`; `text-neon`→`text-cta`). Remaining: Navbar (active states ×4 + avatar + hover-neon),
       home module-card `group-hover:text-neon`, curriculum-advisor + dashboard `text-crimson`. All are one-token swaps
       (sun→cta/brand, neon→cta, crimson→critical, charcoal→ink, platinum→line) — do as a single sweep commit before Phase 4.
+      DONE 2026-10-21 (7fe6bf4), single sweep across 6 files. Root-cause fix, not just swaps: tailwind.config.ts already mapped
+      positive/warning/critical/info → var(--sb-*) BUT those vars were never defined in tokens.css (so text-critical would ALSO
+      have been a no-op) — defined all 4 (+tint) for both themes, plus added `charcoal` to the config (fixed palette color,
+      needed for text-on-CTA since `ink` flips with theme and would fail contrast on cyan). Then swept: Navbar (4× active-nav
+      bg-sun→bg-cta, logo gradient from-sun/to-neon→brand-500/700, 2× avatar bg-sun/platinum→brand-500/line + white text,
+      2× logout text-crimson→text-critical, hover:text-neon→hover:text-cta, hover:border-platinum→hover:border-line);
+      page.tsx (stat colors text-sun-strong→text-warning / text-crimson→text-critical, hot-skills bg-crimson dot→bg-critical,
+      growth % →text-critical, 4× group-hover:text-neon→group-hover:text-cta); AreaChart (var(--sb-cyan)→var(--sb-cta) ×4,
+      var(--sb-sun)→var(--sb-warning) ×3 — chart polylines/legend swatches were INVISIBLE, legend bg-cyan-accent→bg-cta +
+      bg-sun→bg-warning); ui/Button danger text-crimson→text-critical; dashboard Flame + curriculum-advisor AlertTriangle
+      text-crimson→text-critical. Verified zero undefined classes remain. Build green. (1df81f2: also removed 2 stray empty
+      package-lock.json stubs that a wrong-dir npm run generated and 7fe6bf4 accidentally committed via `git add -A`.)
 - [ ] C5. OWNER DECISION (do NOT implement unilaterally): footer `mailto:ojaskhodaskar2026@gmail.com` → branded support
        address (contacts added per hygiene 16/17; identity call is ojas50's).
 - [ ] Cross-ref only (no new task): status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
