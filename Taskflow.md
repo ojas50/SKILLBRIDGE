@@ -142,15 +142,18 @@ Alignment verdict: COMPLEMENTARY to the makeover (content/IA layer vs visual-sys
 C1–C3 restructure landing/courses, so Phase 4 must not polish those pages beforehand. Phase 1–3 output
 (tokens, ui-primitives, lucide) is reused directly by C.
 
-- [ ] C0. Readiness first-paint: CORRECTED — `/career-readiness` + `/my-dashboard` are `"use client"` + `<AuthGate>`-wrapped;
+- [x] C0. Readiness first-paint: CORRECTED — `/career-readiness` + `/my-dashboard` are `"use client"` + `<AuthGate>`-wrapped;
       a markup-only fetch (no JS) trivially returns shell-only. Real browsers hydrate; logged-out users get the sign-in
-      prompt, not blank. Residual: OWNER-VERIFY with Lighthouse/incognito slow-3G; add skeleton ONLY if genuinely blank.
-- [ ] C1. Homepage 3-path triage (HIGH): Student / Government / Employer entry cards as first-scroll module under hero
+      prompt, not blank. DONE 2026-10-21 (50fc812): verified both routes hydrate + render AuthGate, not blank. Also fixed
+      undefined `cyan-accent` → `cta` token in AuthGate spinner/lock icon. OWNER-VERIFY Lighthouse still optional.
+- [x] C1. Homepage 3-path triage (HIGH): Student / Government / Employer entry cards as first-scroll module under hero
       (Card + Button + SectionHeader primitives; GraduationCap/Landmark/Building2 icons); one-line value props + CTAs to
-      existing routes (/career-readiness, /dashboard, /employers). Default: keep single student hero; per-audience hero
+      existing routes (/career-readiness, /dashboard, /employers). DONE 2026-10-21 (b6bc936). Default: keep single student hero; per-audience hero
       variants stay optional (dynamic hero = bigger, reversible later).
-- [ ] C2. Employer proof strip on homepage (HIGH): condensed strip from EMPLOYER_PARTNERS_DATA (check shape first) —
-      6–8 names + open-roles total + recruiter-satisfaction + partner count, under the hero stat bar.
+- [x] C2. Employer proof strip on homepage (HIGH): condensed strip from EMPLOYER_PARTNERS_DATA (check shape first) —
+      6–8 names + open-roles total + recruiter-satisfaction + partner count, under the hero stat bar. DONE 2026-10-21 (728f0ee):
+      all 8 named partners + open-roles total (1,575) + avg satisfaction (83%) computed at render from EMPLOYER_PARTNERS_DATA
+      (not hardcoded — stays in sync with data edits); partner count omitted from strip (hero stat bar already shows 856 Partners).
 - [ ] C3. Course catalog lens split (HIGH, medium size): student lens (Duration / Placement / Skills You'll Learn / readiness CTA)
       vs admin lens (Alignment / Missing Modules / Action directives) — toggle or separate route; do BEFORE Phase-4 courses pass.
 - [ ] C4. Copy/polish singles (each one commit): CTA labels ("Get My Free Readiness Score" only if "free" is true; course cards
