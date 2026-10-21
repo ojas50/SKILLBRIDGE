@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import SihDemoModal from "@/components/SihDemoModal";
 import { Button, Tag, SectionHeader, Card } from "@/components/ui";
+import { EMPLOYER_PARTNERS_DATA } from "@/lib/intelligenceData";
 import {
   Rocket,
   BookOpen,
@@ -114,6 +115,38 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </section>
+
+      {/* Employer Proof Strip */}
+      <section className="glass-card px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-ink-faint shrink-0">
+          Hiring Partners
+        </span>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 min-w-0">
+          {EMPLOYER_PARTNERS_DATA.map((e) => (
+            <span key={e.id} className="text-xs font-semibold text-ink whitespace-nowrap">
+              {e.name}
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center gap-4 sm:ml-auto shrink-0">
+          <div className="text-right">
+            <span className="text-sm font-black text-cta block leading-tight">
+              {EMPLOYER_PARTNERS_DATA.reduce((sum, e) => sum + e.openings, 0).toLocaleString()}
+            </span>
+            <span className="text-[10px] text-ink-faint">Open roles</span>
+          </div>
+          <div className="text-right">
+            <span className="text-sm font-black text-cta block leading-tight">
+              {Math.round(
+                EMPLOYER_PARTNERS_DATA.reduce((sum, e) => sum + e.satisfactionRate, 0) /
+                  EMPLOYER_PARTNERS_DATA.length
+              )}
+              %
+            </span>
+            <span className="text-[10px] text-ink-faint">Avg satisfaction</span>
+          </div>
+        </div>
       </section>
 
       {/* Hot Skills */}
