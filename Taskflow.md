@@ -207,6 +207,16 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       `surface`, so `bg-surface` would make nested panels invisible. Small nested chips/rows use `bg-raised` where elevation reads.
       Zero-match verified (`blue|emerald|rose|purple|amber|slate|\btext-white|hex`) in both files; build green after each commit.
       `/courses` admin lens legacy classes remain intentionally deferred (Phase 4).
+      VERIFIED 2026-11-16 in dev (`npm run dev`) with a seeded student profile, both themes, via computed-style + WCAG ratio audit of
+      every text node: light mode resolves to light surfaces/borders/ink (`#f1f5f9` card, `#e2e8f0` line, `#0f172a` ink), ring track =
+      ink@12%, ring arc + history bars = live role vars (`#b45309` warning when 48–78%). Follow-ups: `f99cdf7` removed a no-op
+      `border-info` on the results card (`.glass-card`'s border wins at equal specificity since it sits after the utilities layer);
+      `a35aed8` fixed BUG-025 (AuthGate infinite spinner after reload with a stored session) — found by this manual check.
+      Known token-level contrast gaps left for Phase 4/D (NOT page bugs): dark `--sb-ink-faint` #64748b ≈ 2.3–3.1:1 on dark
+      surfaces, dark `--sb-critical` #dc2626 ≈ 2.8:1 on critical-tint, light `--sb-ink-faint` 4.34:1 (just under 4.5). The old
+      `text-rose-300` chips were brighter in dark mode; role-token values are the documented C6 contract, so chips were not
+      re-tinted ad hoc. Consider the design-system's `.status-badge` pattern (charcoal text + dot on tint) if AA for chip labels is
+      required.
 - [ ] C5. OWNER DECISION (do NOT implement unilaterally): footer `mailto:ojaskhodaskar2026@gmail.com` → branded support
        address (contacts added per hygiene 16/17; identity call is ojas50's).
 - [ ] Cross-ref only (no new task): status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
