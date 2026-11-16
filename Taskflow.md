@@ -190,6 +190,23 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       bg-sun→bg-warning); ui/Button danger text-crimson→text-critical; dashboard Flame + curriculum-advisor AlertTriangle
       text-crimson→text-critical. Verified zero undefined classes remain. Build green. (1df81f2: also removed 2 stray empty
       package-lock.json stubs that a wrong-dir npm run generated and 7fe6bf4 accidentally committed via `git add -A`.)
+- [x] C7. Light-mode legacy palette sweep — FINAL Phase C item (2026-11-16). `/career-readiness` (42 unique legacy tokens) and
+      `/my-dashboard` (22 unique) still hardcoded dark-theme Tailwind palette colors; they appeared to "work" only because the
+      BUG-021 remap block in globals.css patched most of them. Swept both pages onto real design tokens so tokens are the single
+      source of truth again. DONE in two single commits: `359bffd` (/career-readiness), `78aa782` (/my-dashboard).
+      Mapping: slate-300/400→ink-muted, slate-500/600→ink-faint, white→ink, slate-900/800→canvas, slate-700/800→line,
+      emerald→positive, rose→critical, amber→warning, blue→info, purple→info. Chart chrome re-derived: ReadinessRing hex stops +
+      `#1e293b` track → `--sb-positive/warning/critical` + ink@12%, my-dashboard history bars hex → same role vars.
+      Deliberate deltas from the handoff table (documented so nobody "fixes" them back):
+      (1) `bg-cta/15`-style alpha modifiers are a NO-OP on var()-mapped colors in Tailwind 3.4 (verified with a local CLI probe) —
+      tinted backgrounds use the existing `*-tint` vars instead; all status borders use full-strength `border-<role>` because no
+      soft-border token exists.
+      (2) Blue/purple accents map to `info`, not `cta`: `--sb-cta` does NOT flip in light mode (#06b6d4 both themes) so `text-cta`
+      would fail AA on white; `--sb-info` flips to #0e7490. `cta` stays reserved for solid primary buttons (`.btn-glow`).
+      (3) Recessed sub-panels inside `glass-card` map to `bg-canvas`, not the table's `bg-surface` — glass-card already *is*
+      `surface`, so `bg-surface` would make nested panels invisible. Small nested chips/rows use `bg-raised` where elevation reads.
+      Zero-match verified (`blue|emerald|rose|purple|amber|slate|\btext-white|hex`) in both files; build green after each commit.
+      `/courses` admin lens legacy classes remain intentionally deferred (Phase 4).
 - [ ] C5. OWNER DECISION (do NOT implement unilaterally): footer `mailto:ojaskhodaskar2026@gmail.com` → branded support
        address (contacts added per hygiene 16/17; identity call is ojas50's).
 - [ ] Cross-ref only (no new task): status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
