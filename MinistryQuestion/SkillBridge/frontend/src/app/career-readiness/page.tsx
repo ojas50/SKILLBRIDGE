@@ -113,12 +113,17 @@ function ReadinessRing({ percent }: { percent: number }) {
   const radius = 54;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percent / 100) * circumference;
-  const color = percent >= 70 ? "#10b981" : percent >= 40 ? "#f59e0b" : "#f43f5e";
+  const color =
+    percent >= 70
+      ? "var(--sb-positive)"
+      : percent >= 40
+        ? "var(--sb-warning)"
+        : "var(--sb-critical)";
 
   return (
     <div className="relative w-36 h-36">
       <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r={radius} fill="none" stroke="#1e293b" strokeWidth="10" />
+        <circle cx="60" cy="60" r={radius} fill="none" stroke="var(--sb-ink)" strokeOpacity={0.12} strokeWidth="10" />
         <circle
           cx="60" cy="60" r={radius} fill="none"
           stroke={color} strokeWidth="10"
@@ -130,7 +135,7 @@ function ReadinessRing({ percent }: { percent: number }) {
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="text-3xl font-black" style={{ color }}>{percent}%</span>
-        <span className="text-[10px] text-slate-500 uppercase tracking-wider">Ready</span>
+        <span className="text-[10px] text-ink-faint uppercase tracking-wider">Ready</span>
       </div>
     </div>
   );
@@ -264,13 +269,13 @@ function CareerReadinessInner() {
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header */}
       <div className="text-center space-y-3">
-        <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 uppercase tracking-widest">
+        <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-positive-tint text-positive border border-positive uppercase tracking-widest">
           Student Dashboard
         </span>
-        <h1 className="text-3xl sm:text-4xl font-black text-white">
+        <h1 className="text-3xl sm:text-4xl font-black text-ink">
           How Ready Are You?
         </h1>
-        <p className="text-sm text-slate-400 max-w-2xl mx-auto">
+        <p className="text-sm text-ink-muted max-w-2xl mx-auto">
           Pick your target region, choose companies you want to join, select skills you already have — and see your real-time job readiness score.
         </p>
       </div>
@@ -278,10 +283,10 @@ function CareerReadinessInner() {
       {/* Step 1: Region */}
       <section className="glass-card p-6 space-y-4">
         <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-sm font-bold text-blue-400">1</span>
+          <span className="w-8 h-8 rounded-lg bg-info-tint border border-info flex items-center justify-center text-sm font-bold text-info">1</span>
           <div>
-            <h2 className="text-lg font-bold text-white">Choose Your Region</h2>
-            <p className="text-xs text-slate-400">Where do you want to work?</p>
+            <h2 className="text-lg font-bold text-ink">Choose Your Region</h2>
+            <p className="text-xs text-ink-muted">Where do you want to work?</p>
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -291,13 +296,13 @@ function CareerReadinessInner() {
               onClick={() => { setSelectedRegion(r.id); setSelectedCompanies(new Set()); }}
               className={`p-4 rounded-xl border text-center transition-all ${
                 selectedRegion === r.id
-                  ? "bg-blue-600/20 border-blue-500/50 shadow-lg shadow-blue-500/10"
-                  : "bg-slate-900/50 border-slate-800 hover:border-slate-700 hover:bg-slate-800/50"
+                  ? "bg-info-tint border-info shadow-lg"
+                  : "bg-canvas border-line hover:border-info hover:bg-raised"
               }`}
             >
               <r.icon className="w-6 h-6 block mx-auto mb-1" />
-              <span className={`text-sm font-bold ${selectedRegion === r.id ? "text-blue-300" : "text-white"}`}>{r.name}</span>
-              <span className="block text-[10px] text-slate-500 mt-0.5">{r.companies.length} companies</span>
+              <span className={`text-sm font-bold ${selectedRegion === r.id ? "text-info" : "text-ink"}`}>{r.name}</span>
+              <span className="block text-[10px] text-ink-faint mt-0.5">{r.companies.length} companies</span>
             </button>
           ))}
         </div>
@@ -307,10 +312,10 @@ function CareerReadinessInner() {
       {region && (
         <section className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-3">
-            <span className="w-8 h-8 rounded-lg bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-sm font-bold text-purple-400">2</span>
+            <span className="w-8 h-8 rounded-lg bg-info-tint border border-info flex items-center justify-center text-sm font-bold text-info">2</span>
             <div>
-              <h2 className="text-lg font-bold text-white">Pick Companies in {region.name}</h2>
-              <p className="text-xs text-slate-400">Select the companies you&apos;re targeting (or skip to see all)</p>
+              <h2 className="text-lg font-bold text-ink">Pick Companies in {region.name}</h2>
+              <p className="text-xs text-ink-muted">Select the companies you&apos;re targeting (or skip to see all)</p>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -327,22 +332,22 @@ function CareerReadinessInner() {
                   }}
                   className={`p-4 rounded-xl border text-left transition-all ${
                     isSelected
-                      ? "bg-purple-600/15 border-purple-500/40 shadow-lg shadow-purple-500/10"
-                      : "bg-slate-900/50 border-slate-800 hover:border-slate-700"
+                      ? "bg-info-tint border-info shadow-lg"
+                      : "bg-canvas border-line hover:border-info"
                   }`}
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h3 className={`text-sm font-bold ${isSelected ? "text-purple-200" : "text-white"}`}>{c.name}</h3>
-                      <p className="text-[11px] text-slate-500">{c.industry}</p>
+                      <h3 className={`text-sm font-bold ${isSelected ? "text-info" : "text-ink"}`}>{c.name}</h3>
+                      <p className="text-[11px] text-ink-faint">{c.industry}</p>
                     </div>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                      c.tier === "Top MNC" ? "bg-amber-500/15 text-amber-300 border-amber-500/30"
-                        : c.tier === "Mid-Tier" ? "bg-blue-500/15 text-blue-300 border-blue-500/30"
-                        : "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+                      c.tier === "Top MNC" ? "bg-warning-tint text-warning border-warning"
+                        : c.tier === "Mid-Tier" ? "bg-info-tint text-info border-info"
+                        : "bg-positive-tint text-positive border-positive"
                     }`}>{c.tier}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-[11px] text-slate-400">
+                  <div className="flex items-center gap-3 text-[11px] text-ink-muted">
                     <span>{c.openings} openings</span>
                     <span>•</span>
                     <span>{c.avgSalary}</span>
@@ -351,12 +356,12 @@ function CareerReadinessInner() {
                     {c.skillsRequired.slice(0, 3).map((s) => (
                       <span key={s} className={`text-[10px] px-1.5 py-0.5 rounded border ${
                         mySkills.has(s)
-                          ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
-                          : "bg-slate-800 text-slate-400 border-slate-700"
+                          ? "bg-positive-tint text-positive border-positive"
+                          : "bg-raised text-ink-muted border-line"
                       }`}>{s}</span>
                     ))}
                     {c.skillsRequired.length > 3 && (
-                      <span className="text-[10px] text-slate-600">+{c.skillsRequired.length - 3}</span>
+                      <span className="text-[10px] text-ink-faint">+{c.skillsRequired.length - 3}</span>
                     )}
                   </div>
                 </button>
@@ -370,20 +375,20 @@ function CareerReadinessInner() {
       {region && (
         <section className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-3">
-            <span className="w-8 h-8 rounded-lg bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-sm font-bold text-emerald-400">3</span>
+            <span className="w-8 h-8 rounded-lg bg-positive-tint border border-positive flex items-center justify-center text-sm font-bold text-positive">3</span>
             <div>
-              <h2 className="text-lg font-bold text-white">What Skills Do You Have?</h2>
-              <p className="text-xs text-slate-400">Tap to add skills you&apos;re confident in</p>
+              <h2 className="text-lg font-bold text-ink">What Skills Do You Have?</h2>
+              <p className="text-xs text-ink-muted">Tap to add skills you&apos;re confident in</p>
             </div>
           </div>
 
           {mySkills.size > 0 && (
-            <div className="flex flex-wrap gap-2 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div className="flex flex-wrap gap-2 p-3 rounded-xl bg-canvas border border-line">
               {Array.from(mySkills).map((s) => (
                 <button
                   key={s}
                   onClick={() => { const next = new Set(mySkills); next.delete(s); setMySkills(next); }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-medium hover:bg-emerald-500/25 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-positive-tint border border-positive text-positive text-xs font-medium hover:opacity-80 transition-opacity"
                 >
                   {s}
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -393,7 +398,7 @@ function CareerReadinessInner() {
           )}
 
           <div>
-            <label htmlFor="skill-add" className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            <label htmlFor="skill-add" className="block text-[11px] font-semibold text-ink-muted uppercase tracking-wider mb-1.5">
               Add Skills
             </label>
             <input
@@ -401,7 +406,7 @@ function CareerReadinessInner() {
               type="text"
               value={skillSearch}
               onChange={(e) => setSkillSearch(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-canvas border border-line text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-info focus:ring-1 focus:ring-info transition-all"
             />
           </div>
 
@@ -410,7 +415,7 @@ function CareerReadinessInner() {
               <button
                 key={s}
                 onClick={() => { const next = new Set(mySkills); next.add(s); setMySkills(next); setSkillSearch(""); }}
-                className="px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-800 text-xs font-medium text-slate-300 hover:bg-slate-800 hover:text-white hover:border-slate-700 transition-all text-left"
+                className="px-3 py-2 rounded-lg bg-canvas border border-line text-xs font-medium text-ink-muted hover:bg-raised hover:text-ink hover:border-info transition-all text-left"
               >
                 + {s}
               </button>
@@ -421,10 +426,10 @@ function CareerReadinessInner() {
 
       {/* Results */}
       {region && filteredCompanies.length > 0 && (
-        <section className="glass-card p-6 sm:p-8 space-y-6 border-blue-500/20">
+        <section className="glass-card p-6 sm:p-8 space-y-6 border-info">
           <div className="text-center space-y-2">
-            <h2 className="text-2xl font-black text-white">Your Readiness Score</h2>
-            <p className="text-xs text-slate-400">
+            <h2 className="text-2xl font-black text-ink">Your Readiness Score</h2>
+            <p className="text-xs text-ink-muted">
               Based on {filteredCompanies.length} target {filteredCompanies.length === 1 ? "company" : "companies"} in {region.name}
             </p>
           </div>
@@ -433,18 +438,18 @@ function CareerReadinessInner() {
             <ReadinessRing percent={readiness} />
             <div className="text-center sm:text-left space-y-3">
               <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <span className="text-2xl font-black text-emerald-400">{matchedSkills.matched.length}</span>
-                  <p className="text-[10px] text-slate-500 uppercase">Skills Matched</p>
+                <div className="text-center p-3 rounded-xl bg-canvas border border-line">
+                  <span className="text-2xl font-black text-positive">{matchedSkills.matched.length}</span>
+                  <p className="text-[10px] text-ink-faint uppercase">Skills Matched</p>
                 </div>
-                <div className="text-center p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <span className="text-2xl font-black text-rose-400">{matchedSkills.missing.length}</span>
-                  <p className="text-[10px] text-slate-500 uppercase">Skills Missing</p>
+                <div className="text-center p-3 rounded-xl bg-canvas border border-line">
+                  <span className="text-2xl font-black text-critical">{matchedSkills.missing.length}</span>
+                  <p className="text-[10px] text-ink-faint uppercase">Skills Missing</p>
                 </div>
               </div>
-              <div className="text-center p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                <span className="text-lg font-black text-blue-400">{filteredCompanies.reduce((a, c) => a + c.openings, 0)}</span>
-                <p className="text-[10px] text-slate-500 uppercase">Total Openings Across Targets</p>
+              <div className="text-center p-3 rounded-xl bg-canvas border border-line">
+                <span className="text-lg font-black text-info">{filteredCompanies.reduce((a, c) => a + c.openings, 0)}</span>
+                <p className="text-[10px] text-ink-faint uppercase">Total Openings Across Targets</p>
               </div>
             </div>
           </div>
@@ -452,13 +457,13 @@ function CareerReadinessInner() {
           {/* Matched Skills */}
           {matchedSkills.matched.length > 0 && (
             <div className="space-y-2">
-              <h3 className="text-sm font-bold text-emerald-400 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-positive flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                 Skills You Have
               </h3>
               <div className="flex flex-wrap gap-2">
                 {matchedSkills.matched.map((s) => (
-                  <span key={s} className="px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
+                  <span key={s} className="px-3 py-1.5 rounded-lg bg-positive-tint border border-positive text-positive text-xs font-medium">
                     {s}
                   </span>
                 ))}
@@ -469,13 +474,13 @@ function CareerReadinessInner() {
           {/* Missing Skills */}
           {matchedSkills.missing.length > 0 && (
             <div className="space-y-2">
-              <h3 className="text-sm font-bold text-rose-400 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-critical flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
                 Skills to Learn
               </h3>
               <div className="flex flex-wrap gap-2">
                 {matchedSkills.missing.map((s) => (
-                  <span key={s} className="px-3 py-1.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-medium">
+                  <span key={s} className="px-3 py-1.5 rounded-lg bg-critical-tint border border-critical text-critical text-xs font-medium">
                     {s}
                   </span>
                 ))}
@@ -486,19 +491,19 @@ function CareerReadinessInner() {
           {/* Suggested Courses */}
           {suggestedCourses.length > 0 && (
             <div className="space-y-3">
-              <h3 className="text-sm font-bold text-blue-400 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-info flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                 Recommended Courses to Close the Gap
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {suggestedCourses.map(({ skill, course }) => (
-                  <div key={skill} className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                    <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-xs font-bold text-blue-400 flex-shrink-0">
+                  <div key={skill} className="flex items-center gap-3 p-3 rounded-xl bg-canvas border border-line">
+                    <div className="w-8 h-8 rounded-lg bg-info-tint border border-info flex items-center justify-center text-xs font-bold text-info flex-shrink-0">
                       {skill.charAt(0)}
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs font-semibold text-white truncate">{course}</p>
-                      <p className="text-[10px] text-slate-500">Covers: {skill}</p>
+                      <p className="text-xs font-semibold text-ink truncate">{course}</p>
+                      <p className="text-[10px] text-ink-faint">Covers: {skill}</p>
                     </div>
                   </div>
                 ))}
@@ -509,7 +514,7 @@ function CareerReadinessInner() {
           <div className="flex items-center justify-center gap-3 pt-4">
             <button onClick={persistProfile} className={`text-sm py-3 px-6 rounded-xl font-semibold transition-all ${
               saved
-                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                ? "bg-positive-tint text-positive border border-positive"
                 : "btn-secondary"
             }`}>
               {saved ? (
@@ -531,7 +536,7 @@ function CareerReadinessInner() {
       {!region && (
         <div className="text-center py-16 space-y-3">
           <MousePointerClick className="w-12 h-12 mx-auto text-ink-faint" />
-          <p className="text-sm text-slate-400">Select a region above to get started</p>
+          <p className="text-sm text-ink-muted">Select a region above to get started</p>
         </div>
       )}
     </main>
