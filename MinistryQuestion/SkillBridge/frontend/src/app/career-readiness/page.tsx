@@ -426,7 +426,7 @@ function CareerReadinessInner() {
 
       {/* Results */}
       {region && filteredCompanies.length > 0 && (
-        <section className="glass-card p-6 sm:p-8 space-y-6 border-info">
+        <section className="glass-card p-6 sm:p-8 space-y-6">
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-black text-ink">Your Readiness Score</h2>
             <p className="text-xs text-ink-muted">
