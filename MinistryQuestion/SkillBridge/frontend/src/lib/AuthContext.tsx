@@ -80,6 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const parsed: unknown = JSON.parse(raw);
         if (parsed && typeof parsed === "object" && typeof (parsed as User).email === "string") {
           setUser(parsed as User);
+          setIsLoading(false);
           return;
         }
       }
