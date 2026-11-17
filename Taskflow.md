@@ -212,11 +212,13 @@ C1–C3 restructure landing/courses, so Phase 4 must not polish those pages befo
       ink@12%, ring arc + history bars = live role vars (`#b45309` warning when 48–78%). Follow-ups: `f99cdf7` removed a no-op
       `border-info` on the results card (`.glass-card`'s border wins at equal specificity since it sits after the utilities layer);
       `a35aed8` fixed BUG-025 (AuthGate infinite spinner after reload with a stored session) — found by this manual check.
-      Known token-level contrast gaps left for Phase 4/D (NOT page bugs): dark `--sb-ink-faint` #64748b ≈ 2.3–3.1:1 on dark
-      surfaces, dark `--sb-critical` #dc2626 ≈ 2.8:1 on critical-tint, light `--sb-ink-faint` 4.34:1 (just under 4.5). The old
-      `text-rose-300` chips were brighter in dark mode; role-token values are the documented C6 contract, so chips were not
-      re-tinted ad hoc. Consider the design-system's `.status-badge` pattern (charcoal text + dot on tint) if AA for chip labels is
-      required.
+      Token-level contrast gaps found during this audit are CLOSED in C8 / BUG-026 (2026-11-17) — see below.
+- [x] C8. Token contrast pass (2026-11-17) — AA-safe text + critical values before the Phase 4 sweep, `tokens.css` only. Dark:
+      `--sb-ink-muted` #94a3b8→#cbd5e1 and `--sb-ink-faint` #64748b→#aab7c8 (preserves ink > muted > faint hierarchy; ≥5.09:1
+      even on `bg-raised` #334155), `--sb-critical` #dc2626→#fca5a5 (5.31:1 on critical-tint over raised, was 2.79:1 on tint
+      over surface). Light: `--sb-ink-faint` #64748b→#58677c (5.26:1 on `bg-surface`, 4.77:1 on brand-50). Tints, role names,
+      Tailwind map and all JSX untouched; ratios computed against the actual navy surfaces, not the #141414 handoff value.
+      Build green. Logged as BUG-026.
 - [ ] C5. OWNER DECISION (do NOT implement unilaterally): footer `mailto:ojaskhodaskar2026@gmail.com` → branded support
        address (contacts added per hygiene 16/17; identity call is ojas50's).
 - [ ] Cross-ref only (no new task): status-badge contrast (CONTRACT + Phase-4 QA "contrast spot-check");
