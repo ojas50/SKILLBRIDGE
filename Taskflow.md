@@ -248,6 +248,13 @@ Palette/typography conflict (would re-do tokens.css + all token-driven classes +
 - [ ] Apply per page in build order: navbar → landing → dashboard (cockpit) → my-dashboard → skill-matrix →
       skill-gaps → career-pathways → career-readiness → courses → curriculum-advisor → district-plans →
       employers → capacity-planner → placement-analytics → policy-decisions → wishlist → auth (login/register/forgot)
+- [x] P4.1. `/courses` admin lens swept (2026-11-17, after C8's AA token pass). Same C7 mapping: slate→ink/ink-faint/
+      ink-muted/canvas/line; blue/purple→info, emerald→positive, amber→warning, rose→critical; alpha chip classes →
+      `*-tint` + full-strength `border-<role>`; recessed policy row → `bg-canvas` with `bg-raised` action chip.
+      Selected filter + AI Upgrade hover use fixed `bg-brand-500 text-brand-50` (6.99:1) because no single text color
+      is AA on `info` in both themes (dark cyan / light #0e7490). Zero-match verified for all legacy palette classes,
+      `text-white`, hex literals and emojis. Build green. Note: `.badge-*` aliases were already token-free before this
+      sweep and are tracked separately as BUG-027 (Open) — not introduced here.
 - [ ] Each page ticks the FULL "Naukri-alignment checkpoints" list (see Compass section) in its commit
 - [ ] Auth pages: white card on platinum canvas, calm 2-col form, neon-orange CTA — drop the dark-glass login look
 - [ ] QA sweep: dark + light, all 18 routes, mobile (≤390px), keyboard nav, contrast spot-check, no console errors
